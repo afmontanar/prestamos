@@ -193,7 +193,7 @@ public class Cliente extends javax.swing.JDialog {
 
     private boolean existeU() {
         try {
-            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM  `cliente` WHERE  `numeroId` LIKE  '"+this.NumeroId.getText()+"'");
+            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM  `cliente` WHERE  `idcliente` LIKE  '"+this.NumeroId.getText()+"'");
             if(MysqlConsulta.next()){
                 JOptionPane.showMessageDialog(this, "Este cliente ya existe");
                 return false;

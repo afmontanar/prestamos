@@ -10,7 +10,7 @@ package prestamos;
  * @author andres
  */
 public class Prestamos {
-    static utilities.Connetion o = new utilities.Connetion("localhost", "mecanics", "root", "admin");
+    static utilities.Connetion o = new utilities.Connetion("localhost", "prestamos", "root", "admin");
     
     /**
      * @param args the command line arguments
