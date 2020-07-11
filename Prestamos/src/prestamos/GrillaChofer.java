@@ -127,9 +127,9 @@ public class GrillaChofer extends javax.swing.JDialog {
     private void llenarTabla() {
          this.modelot.vaciarTabla();
         try {
-            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `chofer`");
+            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `cliente`");
             while(MysqlConsulta.next()){
-                String d[]={MysqlConsulta.getString("Identificacion"), MysqlConsulta.getString("Nombres"),MysqlConsulta.getString("Apellidos"),MysqlConsulta.getString("Direccion"),MysqlConsulta.getString("Celular"),  MysqlConsulta.getString("Detalle")};
+                String d[]={MysqlConsulta.getString("tipoid"), MysqlConsulta.getString("idcliente"),MysqlConsulta.getString("nombre"),MysqlConsulta.getString("apellido"),MysqlConsulta.getString("apodo"),  MysqlConsulta.getString("direccion")};
                 this.modelot.ingresarUsuarioM(d);
             }
         this.modelot.reload();
