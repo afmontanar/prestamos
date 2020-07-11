@@ -411,28 +411,28 @@ public class BusquedaHv extends javax.swing.JDialog {
     }
 
    void llenarTabla() {
-        this.modelot.vaciarTabla();
-        String i = ((javax.swing.JTextField) fechai.getDateEditor().getUiComponent()).getText();
-        ResultSet MysqlConsulta = null;
-        try {
-            MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `historiavehiculo`");
-            while (MysqlConsulta.next()) {
-                try {
-                    String a[] = {MysqlConsulta.getString("indice"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("placa"), MysqlConsulta.getString("dueno"), MysqlConsulta.getString("chofer"), MysqlConsulta.getString("fecha"), MysqlConsulta.getString("valorTotal"), MysqlConsulta.getString("valorTotalConDescuento")};
-                    this.modelot.ingresarUsuario(a);
-                } catch (SQLException ex) {
-                    try {
-                        String a[] = {MysqlConsulta.getString("indice"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("placa"), MysqlConsulta.getString("dueno"), MysqlConsulta.getString("chofer"), "0000-00-00 00:00:00", MysqlConsulta.getString("valorTotal"), MysqlConsulta.getString("valorTotalConDescuento")};
-                        this.modelot.ingresarUsuario(a);
-                    } catch (SQLException ex1) {
-                        JOptionPane.showMessageDialog(rootPane, "A ocurrido un error inexperado");
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(BusquedaHv.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.modelot.reload();
+//        this.modelot.vaciarTabla();
+//        String i = ((javax.swing.JTextField) fechai.getDateEditor().getUiComponent()).getText();
+//        ResultSet MysqlConsulta = null;
+//        try {
+//            MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `historiavehiculo`");
+//            while (MysqlConsulta.next()) {
+//                try {
+//                    String a[] = {MysqlConsulta.getString("indice"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("placa"), MysqlConsulta.getString("dueno"), MysqlConsulta.getString("chofer"), MysqlConsulta.getString("fecha"), MysqlConsulta.getString("valorTotal"), MysqlConsulta.getString("valorTotalConDescuento")};
+//                    this.modelot.ingresarUsuario(a);
+//                } catch (SQLException ex) {
+//                    try {
+//                        String a[] = {MysqlConsulta.getString("indice"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("placa"), MysqlConsulta.getString("dueno"), MysqlConsulta.getString("chofer"), "0000-00-00 00:00:00", MysqlConsulta.getString("valorTotal"), MysqlConsulta.getString("valorTotalConDescuento")};
+//                        this.modelot.ingresarUsuario(a);
+//                    } catch (SQLException ex1) {
+//                        JOptionPane.showMessageDialog(rootPane, "A ocurrido un error inexperado");
+//                    }
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(BusquedaHv.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        this.modelot.reload();
     }
 
     void setCliente(Object nombre, Object identificacion) {
