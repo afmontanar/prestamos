@@ -168,7 +168,7 @@ public class Cliente extends javax.swing.JDialog {
 
     private void guardarC() {      
         try {
-            Prestamos.o.EjecutarMysql("INSERT INTO `mecanics`.`cliente` (`TipoIdentificacion`, `primeroNombre`, `segunNombre`, `primeroApellido`, `segundoApellido`, `numeroId`, `direccion`, `celular`, `detalles`) VALUES ('"+this.tidentificacion.getSelectedItem()+"', '"+this.nombre1.getText()+"', '"+this.nombre2.getText()+"', '"+this.apellido1.getText()+"', '', '"+this.NumeroId.getText()+"', '"+this.direccion.getText()+"', '"+this.Celular.getText()+"', '"+this.detalles.getText()+"')");            
+            Prestamos.o.EjecutarMysql("INSERT INTO `prestamos`.`cliente` (`tipoid`, `idcliente`, `nombre`, `apellido`, `apodo`, `direccion`, `detalles`, `celular`, `celular`) VALUES ('"+this.tidentificacion.getSelectedItem()+"', '"+this.NumeroId.getText()+"', '"+this.nombre1.getText()+"', '"+this.nombre2.getText()+"', '', '"+this.apellido1.getText()+"', '"+this.direccion.getText()+"', '"+this.detalles.getText()+"', '"+this.Celular.getText()+"')");            
         } catch (SQLException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
