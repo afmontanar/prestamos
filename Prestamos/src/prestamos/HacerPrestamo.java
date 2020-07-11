@@ -72,11 +72,6 @@ public class HacerPrestamo extends javax.swing.JDialog {
 
         Apodo.setBorder(javax.swing.BorderFactory.createTitledBorder("Apodo"));
         Apodo.setName("Apodo");
-        Apodo.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                ApodoCaretUpdate(evt);
-            }
-        });
         jPanel1.add(Apodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, 180, 40));
 
         dueno.setBorder(javax.swing.BorderFactory.createTitledBorder("IdCliente"));
@@ -95,11 +90,6 @@ public class HacerPrestamo extends javax.swing.JDialog {
         jPanel1.add(Fecha_limete_Pago, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 180, 40));
 
         jButton3.setText("Guardar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, -1, -1));
 
         Total.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -162,19 +152,10 @@ public class HacerPrestamo extends javax.swing.JDialog {
         r.setGrillaClienteVisibility(true,0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
 
     }//GEN-LAST:event_formWindowClosing
-
-    private void ApodoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_ApodoCaretUpdate
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ApodoCaretUpdate
     
      void setCliente(Object nombre, Object identificacion) {
         this.dueno.setText(nombre + "");
