@@ -6,6 +6,10 @@
 package prestamos;
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import utilities.ValidarCamposVacios;
 
@@ -164,7 +168,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
     
     private boolean validarG() {
         if(objectv.validacionCamposNulosB()){
-            if(this.existeU()){
+            if(this.tienePrestamosVigentes()){
                 return true;
             }  
             return false;
@@ -209,6 +213,20 @@ public class HacerPrestamo extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nombre1;
     // End of variables declaration//GEN-END:variables
+
+    private boolean tienePrestamosVigentes() {
+        try {
+            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `prestamo` WHERE `idcliente`='"+dueno.getText()+"' and `cancelado`=1");
+            while(MysqlConsulta.next()){
+                return true;
+                
+            }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(GrillaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
 
    
