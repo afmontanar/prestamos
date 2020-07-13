@@ -6,6 +6,7 @@
 package prestamos;
 
 
+import javax.swing.JOptionPane;
 import utilities.ValidarCamposVacios;
 
 /**
@@ -59,11 +60,6 @@ public class HacerPrestamo extends javax.swing.JDialog {
         Monto_Diario_Pago1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -90,6 +86,11 @@ public class HacerPrestamo extends javax.swing.JDialog {
         jPanel1.add(Fecha_limete_Pago, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 180, 40));
 
         jButton3.setText("Guardar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, -1, -1));
 
         Total.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -152,11 +153,25 @@ public class HacerPrestamo extends javax.swing.JDialog {
         r.setGrillaClienteVisibility(true,0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-
-    }//GEN-LAST:event_formWindowClosing
+         if(this.validarG()){
+            this.guardar();
+            this.limpiar();
+            JOptionPane.showMessageDialog(this, "Se a guardado con exito");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
     
+    private boolean validarG() {
+        if(objectv.validacionCamposNulosB()){
+            if(this.existeU()){
+                return true;
+            }  
+            return false;
+        }else{
+            return false;
+        }
+    }
      void setCliente(Object nombre, Object identificacion) {
         this.dueno.setText(nombre + "");
         this.idCliente = identificacion;
