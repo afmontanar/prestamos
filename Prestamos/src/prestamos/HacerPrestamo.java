@@ -218,14 +218,14 @@ public class HacerPrestamo extends javax.swing.JDialog {
         try {
             ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `prestamo` WHERE `idcliente`='"+dueno.getText()+"' and `cancelado`=1");
             while(MysqlConsulta.next()){
-                return true;
-                
+                 return (JOptionPane.showConfirmDialog(this, "Ya tiene un prestamo, deseas hacerle otro?")==0);
+                      
             }
         
         } catch (SQLException ex) {
             Logger.getLogger(GrillaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return true;
     }
 
 
