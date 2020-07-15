@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import utilities.ValidarCamposVacios;
+import utilities.OperacionesFechas;
 
 /**
  *
@@ -230,8 +231,9 @@ public class HacerPrestamo extends javax.swing.JDialog {
 
     private void guardar() {
         try {
+            OperacionesFechas f = new OperacionesFechas(fecha1, Fecha_limete_Pago, null, null);
             int cantidadconintereses=(((Integer.parseInt(Cantidad1.getText()))*(Integer.parseInt(Intereses1.getText())))/100)+Integer.parseInt(Cantidad1.getText());
-            int montopagodiario=fe
+            int montopagodiario=f.diasHabiles();
             Prestamos.o.EjecutarMysql("INSERT INTO `prestamo`(`idcliente`, `nombre`, `apodo`, `fecha`, `cantidad`, `interes`, `cantidadcobrar`, `montodiariodepago`, `fechalimetepago`, `detalles`, `numeroprestamo`, `cancelado`) VALUES ('"+dueno.getText()+"','"+nombre1.getText()+"','"+Apodo.getText()+"','"+fecha1.getDateFormatString()+"','"+Cantidad1.getText()+"','"+Intereses1.getText()+"','"+cantidadconintereses+"',[value-8],[value-9],[value-10],[value-11],[value-12])");            
         } catch (SQLException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
