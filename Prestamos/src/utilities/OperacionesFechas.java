@@ -36,7 +36,7 @@ public class OperacionesFechas {
         return i;
     }
     
-    private String[] obtenerFechaFormatStringB(){
+    public String[] obtenerFechaFormatStringB(){
          String z[]= new String[1];
          z[0] = ((JTextField)a.getDateEditor().getUiComponent()).getText();
          z[1] = ((JTextField)b.getDateEditor().getUiComponent()).getText();

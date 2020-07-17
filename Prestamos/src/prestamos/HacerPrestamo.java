@@ -162,7 +162,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
         // TODO add your handling code here:
          if(this.validarG()){
             this.guardar();
-            this.limpiar();
+//            this.limpiar();
             JOptionPane.showMessageDialog(this, "Se a guardado con exito");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -233,8 +233,9 @@ public class HacerPrestamo extends javax.swing.JDialog {
         try {
             OperacionesFechas f = new OperacionesFechas(fecha1, Fecha_limete_Pago, null, null);
             int cantidadconintereses=(((Integer.parseInt(Cantidad1.getText()))*(Integer.parseInt(Intereses1.getText())))/100)+Integer.parseInt(Cantidad1.getText());
-            int montopagodiario=f.diasHabiles();
-            Prestamos.o.EjecutarMysql("INSERT INTO `prestamo`(`idcliente`, `nombre`, `apodo`, `fecha`, `cantidad`, `interes`, `cantidadcobrar`, `montodiariodepago`, `fechalimetepago`, `detalles`, `numeroprestamo`, `cancelado`) VALUES ('"+dueno.getText()+"','"+nombre1.getText()+"','"+Apodo.getText()+"','"+fecha1.getDateFormatString()+"','"+Cantidad1.getText()+"','"+Intereses1.getText()+"','"+cantidadconintereses+"',[value-8],[value-9],[value-10],[value-11],[value-12])");            
+            int montopagodiario=cantidadconintereses/f.diasHabiles();
+            String d[]=f.obtenerFechaFormatStringB();
+            Prestamos.o.EjecutarMysql("INSERT INTO `prestamo`(`idcliente`, `nombre`, `apodo`, `fecha`, `cantidad`, `interes`, `cantidadcobrar`, `montodiariodepago`, `fechalimetepago`, `detalles`, `numeroprestamo`, `cancelado`) VALUES ('"+dueno.getText()+"','"+nombre1.getText()+"','"+Apodo.getText()+"','"+d[0]+"','"+Cantidad1.getText()+"','"+Intereses1.getText()+"','"+cantidadconintereses+"','"+montopagodiario+"','"+d[1]+"','"+detalles.getText()+"',[value-11],[value-12])");            
         } catch (SQLException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
