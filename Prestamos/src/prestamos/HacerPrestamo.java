@@ -173,7 +173,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
         // TODO add your handling code here:
          if(this.validarG()){
             this.guardar();
-//            this.limpiar();
+            this.limpiar();
             JOptionPane.showMessageDialog(this, "Se a guardado con exito");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -264,6 +264,17 @@ public class HacerPrestamo extends javax.swing.JDialog {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    private void limpiar() {
+            try {
+            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT max(numeroprestamo) FROM `prestamo`"); 
+                while(MysqlConsulta.next()){
+                this.numeroPrestamo.setText(""+MysqlConsulta.getInt("max(numeroprestamo)"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
 
 
    
