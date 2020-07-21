@@ -65,6 +65,11 @@ public class HacerPrestamo extends javax.swing.JDialog {
         Monto_Diario_Pago1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -166,6 +171,16 @@ public class HacerPrestamo extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Se a guardado con exito");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        try {
+            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT max(numeroprestamo) FROM `prestamo`"); 
+             while(MysqlConsulta.next()){}
+        } catch (SQLException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowOpened
     
     private boolean validarG() {
         if(objectv.validacionCamposNulosB()){
