@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import jdk.nashorn.internal.codegen.types.NumericType;
 import utilities.ValidarCamposVacios;
 import utilities.OperacionesFechas;
 
@@ -62,7 +63,8 @@ public class HacerPrestamo extends javax.swing.JDialog {
         fecha1 = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         detalles = new javax.swing.JTextArea();
-        Monto_Diario_Pago1 = new javax.swing.JTextField();
+        numeroPrestamo = new javax.swing.JTextField();
+        Monto_Diario_Pago2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -139,9 +141,13 @@ public class HacerPrestamo extends javax.swing.JDialog {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 180, 90));
 
-        Monto_Diario_Pago1.setBorder(javax.swing.BorderFactory.createTitledBorder("Monto_Diario_Pago"));
-        Monto_Diario_Pago1.setName("Monto_Diario_Pago"); // NOI18N
-        jPanel1.add(Monto_Diario_Pago1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 180, 40));
+        numeroPrestamo.setBorder(javax.swing.BorderFactory.createTitledBorder("Monto_Diario_Pago"));
+        numeroPrestamo.setName("Monto_Diario_Pago"); // NOI18N
+        jPanel1.add(numeroPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 180, 40));
+
+        Monto_Diario_Pago2.setBorder(javax.swing.BorderFactory.createTitledBorder("Monto_Diario_Pago"));
+        Monto_Diario_Pago2.setName("Monto_Diario_Pago"); // NOI18N
+        jPanel1.add(Monto_Diario_Pago2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 180, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,7 +182,9 @@ public class HacerPrestamo extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT max(numeroprestamo) FROM `prestamo`"); 
-             while(MysqlConsulta.next()){}
+             while(MysqlConsulta.next()){
+                this.numeroPrestamo.setText(""+MysqlConsulta.getInt("max(numeroprestamo)"));
+             }
         } catch (SQLException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -216,7 +224,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
     private javax.swing.JTextField Cantidad_cobrar1;
     private com.toedter.calendar.JDateChooser Fecha_limete_Pago;
     private javax.swing.JTextField Intereses1;
-    private javax.swing.JTextField Monto_Diario_Pago1;
+    private javax.swing.JTextField Monto_Diario_Pago2;
     private javax.swing.JLabel Total;
     private javax.swing.JLabel Totaldes;
     private javax.swing.JTextArea detalles;
@@ -228,6 +236,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nombre1;
+    private javax.swing.JTextField numeroPrestamo;
     // End of variables declaration//GEN-END:variables
 
     private boolean tienePrestamosVigentes() {
