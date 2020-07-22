@@ -6,12 +6,12 @@
 package prestamos;
 
 
+import java.awt.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import jdk.nashorn.internal.codegen.types.NumericType;
 import utilities.ValidarCamposVacios;
 import utilities.OperacionesFechas;
 
@@ -33,8 +33,10 @@ public class HacerPrestamo extends javax.swing.JDialog {
     public HacerPrestamo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(null);
-        
+        Component[] components = {NumeroId,nombre1,apellido1,apellido2,Celular,direccion};
+        Component[] componentst = {NumeroId,nombre1,nombre2,apellido1,apellido2,Celular,direccion,detalles};
+        this.objectv = new utilities.ValidarCamposVacios(components,componentst);
+        setLocationRelativeTo(null); 
     }
 
     
