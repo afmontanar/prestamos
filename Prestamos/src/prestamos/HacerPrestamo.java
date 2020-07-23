@@ -33,9 +33,8 @@ public class HacerPrestamo extends javax.swing.JDialog {
     public HacerPrestamo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        Component[] components = {NumeroId,nombre1,apellido1,apellido2,Celular,direccion};
-        Component[] componentst = {NumeroId,nombre1,nombre2,apellido1,apellido2,Celular,direccion,detalles};
-        this.objectv = new utilities.ValidarCamposVacios(components,componentst);
+        Component[] components = {dueno,nombre1,Apodo,fecha1,Cantidad1,Intereses1,Cantidad_cobrar1,Monto_Diario_Pago2,Fecha_limete_Pago,detalles,numeroPrestamo};
+        this.objectv = new utilities.ValidarCamposVacios(components);
         setLocationRelativeTo(null); 
     }
 
@@ -268,6 +267,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
     }
 
     private void limpiar() {
+        this.objectv.reiniciarFormularior();
             try {
             ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT max(numeroprestamo) FROM `prestamo`"); 
                 while(MysqlConsulta.next()){

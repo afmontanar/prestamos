@@ -21,7 +21,7 @@ public class ValidarCamposVacios {
         this.j = components;
     }
 
-      public ValidarCamposVacios(Component[] components,Component[] componentsr) {
+    public ValidarCamposVacios(Component[] components,Component[] componentsr) {
         this.r = componentsr;
         this.j = components;
     }
