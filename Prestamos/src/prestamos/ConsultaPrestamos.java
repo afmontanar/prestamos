@@ -64,8 +64,6 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         placa = new javax.swing.JTextField();
         nombre = new javax.swing.JTextField();
-        chofer = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         dueno = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         fecha = new com.toedter.calendar.JDateChooser();
@@ -77,9 +75,12 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
         Total = new javax.swing.JLabel();
         agreregistro = new javax.swing.JToggleButton();
         Totaldes = new javax.swing.JLabel();
-        horai = new javax.swing.JComboBox();
-        minutoi = new javax.swing.JComboBox();
-        segundoi = new javax.swing.JComboBox();
+        fecha1 = new com.toedter.calendar.JDateChooser();
+        placa1 = new javax.swing.JTextField();
+        placa2 = new javax.swing.JTextField();
+        placa3 = new javax.swing.JTextField();
+        placa4 = new javax.swing.JTextField();
+        placa5 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -93,29 +94,18 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
         jLabel1.setText("Consulta de prestamos");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
 
-        placa.setBorder(javax.swing.BorderFactory.createTitledBorder("Apodo"));
-        placa.setName("Apodo");
+        placa.setBorder(javax.swing.BorderFactory.createTitledBorder("Orden de ruta f"));
+        placa.setName("Orden de ruta f");
         placa.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 placaCaretUpdate(evt);
             }
         });
-        jPanel1.add(placa, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 180, 40));
+        jPanel1.add(placa, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 110, 180, 40));
 
         nombre.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
         nombre.setName("nombre"); // NOI18N
         jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 180, 40));
-
-        chofer.setBorder(javax.swing.BorderFactory.createTitledBorder("Chofer"));
-        jPanel1.add(chofer, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 50, 180, 50));
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 60, 30, 40));
 
         dueno.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
         jPanel1.add(dueno, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 180, 50));
@@ -128,9 +118,9 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, 30, 40));
 
-        fecha.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha"));
+        fecha.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha Inicial"));
         fecha.setDateFormatString("yyyy/MM/dd");
-        jPanel1.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 60, 180, 40));
+        jPanel1.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, 180, 40));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -177,17 +167,54 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
         Totaldes.setBorder(javax.swing.BorderFactory.createTitledBorder("Total con descuento"));
         jPanel1.add(Totaldes, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 590, 240, 50));
 
-        horai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "" }));
-        horai.setBorder(javax.swing.BorderFactory.createTitledBorder("Hora"));
-        jPanel1.add(horai, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 80, 70));
+        fecha1.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha final"));
+        fecha1.setDateFormatString("yyyy/MM/dd");
+        jPanel1.add(fecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 60, 180, 40));
 
-        minutoi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60" }));
-        minutoi.setBorder(javax.swing.BorderFactory.createTitledBorder("Minuto"));
-        jPanel1.add(minutoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 80, 70));
+        placa.setBorder(javax.swing.BorderFactory.createTitledBorder("Apodo"));
+        placa1.setName("Apodo");
+        placa1.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                placa1CaretUpdate(evt);
+            }
+        });
+        jPanel1.add(placa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 180, 40));
 
-        segundoi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60" }));
-        segundoi.setBorder(javax.swing.BorderFactory.createTitledBorder("Segundo"));
-        jPanel1.add(segundoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 80, 70));
+        placa.setBorder(javax.swing.BorderFactory.createTitledBorder("Cantidad prestada"));
+        placa2.setName("Cantidad prestada");
+        placa2.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                placa2CaretUpdate(evt);
+            }
+        });
+        jPanel1.add(placa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 180, 40));
+
+        placa.setBorder(javax.swing.BorderFactory.createTitledBorder("Interes"));
+        placa3.setName("Interes");
+        placa3.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                placa3CaretUpdate(evt);
+            }
+        });
+        jPanel1.add(placa3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 180, 40));
+
+        placa.setBorder(javax.swing.BorderFactory.createTitledBorder("Deuda"));
+        placa4.setName("Deuda");
+        placa4.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                placa4CaretUpdate(evt);
+            }
+        });
+        jPanel1.add(placa4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 180, 40));
+
+        placa.setBorder(javax.swing.BorderFactory.createTitledBorder("Orden de ruta i"));
+        placa5.setName("Orden de ruta i");
+        placa5.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                placa5CaretUpdate(evt);
+            }
+        });
+        jPanel1.add(placa5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 180, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -213,16 +240,6 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
         r.setGrillaClienteVisibility(true,0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if (null != this.idCliente) {
-            Principal r = (Principal) super.getParent();
-            r.getGrillaChofer(this.idCliente.toString(),0);
-        } else {
-            JOptionPane.showMessageDialog(this, "No a seleccionado dueno");
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void agreregistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agreregistroActionPerformed
         // TODO add your handling code here:
         Object[] a = {"", "", "", "", "", "", "", ""};
@@ -246,6 +263,26 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
         this.reiniciarformulario();
     }//GEN-LAST:event_formWindowClosing
 
+    private void placa1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_placa1CaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_placa1CaretUpdate
+
+    private void placa2CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_placa2CaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_placa2CaretUpdate
+
+    private void placa3CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_placa3CaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_placa3CaretUpdate
+
+    private void placa4CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_placa4CaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_placa4CaretUpdate
+
+    private void placa5CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_placa5CaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_placa5CaretUpdate
+
 //     public void sumaDes(int suplemento){
     public void sumaDes() {
         int sumTot = 0;
@@ -268,11 +305,9 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
     private javax.swing.JLabel Total;
     private javax.swing.JLabel Totaldes;
     private javax.swing.JToggleButton agreregistro;
-    private javax.swing.JLabel chofer;
     private javax.swing.JLabel dueno;
     private com.toedter.calendar.JDateChooser fecha;
-    private javax.swing.JComboBox horai;
-    private javax.swing.JButton jButton1;
+    private com.toedter.calendar.JDateChooser fecha1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -281,10 +316,13 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox minutoi;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField placa;
-    private javax.swing.JComboBox segundoi;
+    private javax.swing.JTextField placa1;
+    private javax.swing.JTextField placa2;
+    private javax.swing.JTextField placa3;
+    private javax.swing.JTextField placa4;
+    private javax.swing.JTextField placa5;
     // End of variables declaration//GEN-END:variables
 
     void setCliente(Object nombre, Object identificacion) {

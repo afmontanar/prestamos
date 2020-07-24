@@ -66,6 +66,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
         detalles = new javax.swing.JTextArea();
         numeroPrestamo = new javax.swing.JTextField();
         Monto_Diario_Pago2 = new javax.swing.JTextField();
+        numeroPrestamo1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -104,7 +105,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, -1, -1));
 
         Total.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         Total.setBorder(javax.swing.BorderFactory.createTitledBorder("Total"));
@@ -142,13 +143,17 @@ public class HacerPrestamo extends javax.swing.JDialog {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 180, 90));
 
-        numeroPrestamo.setBorder(javax.swing.BorderFactory.createTitledBorder("Monto_Diario_Pago"));
-        numeroPrestamo.setName("Monto_Diario_Pago"); // NOI18N
-        jPanel1.add(numeroPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 180, 40));
+        numeroPrestamo.setBorder(javax.swing.BorderFactory.createTitledBorder("Orden de ruta"));
+        numeroPrestamo.setName("Orden de ruta");
+        jPanel1.add(numeroPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 180, 40));
 
         Monto_Diario_Pago2.setBorder(javax.swing.BorderFactory.createTitledBorder("Monto_Diario_Pago"));
         Monto_Diario_Pago2.setName("Monto_Diario_Pago"); // NOI18N
         jPanel1.add(Monto_Diario_Pago2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 180, 40));
+
+        numeroPrestamo1.setBorder(javax.swing.BorderFactory.createTitledBorder("Monto_Diario_Pago"));
+        numeroPrestamo1.setName("Monto_Diario_Pago"); // NOI18N
+        jPanel1.add(numeroPrestamo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 180, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -238,6 +243,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nombre1;
     private javax.swing.JTextField numeroPrestamo;
+    private javax.swing.JTextField numeroPrestamo1;
     // End of variables declaration//GEN-END:variables
 
     private boolean tienePrestamosVigentes() {
