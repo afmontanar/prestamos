@@ -90,11 +90,11 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Historia de vehiculos");
+        jLabel1.setText("Consulta de prestamos");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
 
-        placa.setBorder(javax.swing.BorderFactory.createTitledBorder("Placa"));
-        placa.setName("Nombre"); // NOI18N
+        placa.setBorder(javax.swing.BorderFactory.createTitledBorder("Apodo"));
+        placa.setName("Apodo");
         placa.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 placaCaretUpdate(evt);
@@ -117,7 +117,7 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 60, 30, 40));
 
-        dueno.setBorder(javax.swing.BorderFactory.createTitledBorder("Dueño"));
+        dueno.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
         jPanel1.add(dueno, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 180, 50));
 
         jButton2.setText("jButton1");
