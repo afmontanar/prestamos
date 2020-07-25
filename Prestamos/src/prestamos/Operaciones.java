@@ -311,12 +311,12 @@ public class Operaciones extends javax.swing.JDialog {
     private void guardar() {
         String i = ((javax.swing.JTextField) fecha.getDateEditor().getUiComponent()).getText();
         try {
-            NewMain.o.EjecutarMysql("INSERT INTO `mecanics`.`historiavehiculo` (`nombre`, `placa`, `dueno`, `chofer`, `fecha`, `valorTotal`, `valorTotalConDescuento`, `indice`) VALUES ('" + this.nombre.getText() + "', '" + this.placa.getText() + "', '" + this.idCliente + "', '" + this.idChofer + "', '" + i + " "+this.horai.getSelectedItem()+":"+this.minutoi.getSelectedItem()+":"+this.segundoi.getSelectedItem()+"', '" + this.Total.getText() + "', '" + this.Totaldes.getText() + "','"+this.obtenerUingresado()+"')");
+            Prestamos.o.EjecutarMysql("INSERT INTO `mecanics`.`historiavehiculo` (`nombre`, `placa`, `dueno`, `chofer`, `fecha`, `valorTotal`, `valorTotalConDescuento`, `indice`) VALUES ('" + this.nombre.getText() + "', '" + this.placa.getText() + "', '" + this.idCliente + "', '" + this.idChofer + "', '" + i + " "+this.horai.getSelectedItem()+":"+this.minutoi.getSelectedItem()+":"+this.segundoi.getSelectedItem()+"', '" + this.Total.getText() + "', '" + this.Totaldes.getText() + "','"+this.obtenerUingresado()+"')");
             this.guardarDetalles();
             JOptionPane.showMessageDialog(this, "Guardado con exito");
             this.reiniciarformulario();
         } catch (SQLException ex) {
-            Logger.getLogger(HistoriaVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaPrestamos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -374,36 +374,36 @@ public class Operaciones extends javax.swing.JDialog {
     private void guardarDetalles() {
         for (int i=0;i<this.modelot.getRowCount();i++){
         try {
-            NewMain.o.EjecutarMysql("INSERT INTO `mecanics`.`detallehistoriavehiculo` (`codhistori`, `cantidad`, `Marca`, `Referencia`, `Detalle`, `Rueda`, `Valorunitario`, `valorTotal`, `Valordescuento`) VALUES ('"+this.obtenerUingresado1()+"', '"+jTable1.getValueAt(i, 0)+"', '"+jTable1.getValueAt(i, 1)+"', '"+jTable1.getValueAt(i, 2)+"', '"+jTable1.getValueAt(i, 3)+"', '"+jTable1.getValueAt(i, 4)+"', '"+jTable1.getValueAt(i, 5)+"', '"+jTable1.getValueAt(i, 6)+"', '"+jTable1.getValueAt(i, 7)+"')");         
+            Prestamos.o.EjecutarMysql("INSERT INTO `mecanics`.`detallehistoriavehiculo` (`codhistori`, `cantidad`, `Marca`, `Referencia`, `Detalle`, `Rueda`, `Valorunitario`, `valorTotal`, `Valordescuento`) VALUES ('"+this.obtenerUingresado1()+"', '"+jTable1.getValueAt(i, 0)+"', '"+jTable1.getValueAt(i, 1)+"', '"+jTable1.getValueAt(i, 2)+"', '"+jTable1.getValueAt(i, 3)+"', '"+jTable1.getValueAt(i, 4)+"', '"+jTable1.getValueAt(i, 5)+"', '"+jTable1.getValueAt(i, 6)+"', '"+jTable1.getValueAt(i, 7)+"')");         
         } catch (SQLException ex) {
-            Logger.getLogger(HistoriaVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaPrestamos.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
     }
 
     private int obtenerUingresado() {
         try {
-            ResultSet MysqlConsulta = NewMain.o.MysqlConsulta("SELECT indice FROM `historiavehiculo` WHERE `indice`=(SELECT MAX(indice) from `historiavehiculo`) ");
+            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT indice FROM `historiavehiculo` WHERE `indice`=(SELECT MAX(indice) from `historiavehiculo`) ");
             if(MysqlConsulta.next()){
                 int aInt = MysqlConsulta.getInt("indice");
                return (aInt+1);
             }
         
         } catch (SQLException ex) {
-            Logger.getLogger(HistoriaVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaPrestamos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
     }
 
      private String obtenerUingresado1() {
         try {
-            ResultSet MysqlConsulta = NewMain.o.MysqlConsulta("SELECT indice FROM `historiavehiculo` WHERE `indice`=(SELECT MAX(indice) from `historiavehiculo`) ");
+            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT indice FROM `historiavehiculo` WHERE `indice`=(SELECT MAX(indice) from `historiavehiculo`) ");
             if(MysqlConsulta.next()){               
                return MysqlConsulta.getString("indice");
             }
         
         } catch (SQLException ex) {
-            Logger.getLogger(HistoriaVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaPrestamos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
     }
@@ -441,7 +441,7 @@ public class Operaciones extends javax.swing.JDialog {
     private void alimentarGrilla(String indice) {
         this.modelotS.vaciarTabla();
         try {
-            ResultSet MysqlConsulta = NewMain.o.MysqlConsulta("SELECT * FROM `detallehistoriavehiculo` WHERE `codhistori` LIKE '"+indice+"'");
+            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `detallehistoriavehiculo` WHERE `codhistori` LIKE '"+indice+"'");
             while(MysqlConsulta.next()){
                 //MysqlConsulta.getString("codhistori"),
                 String d[]={ MysqlConsulta.getString("cantidad"),MysqlConsulta.getString("Marca"),MysqlConsulta.getString("Referencia"),MysqlConsulta.getString("Detalle"), MysqlConsulta.getString("Rueda"), MysqlConsulta.getString("Valorunitario"),MysqlConsulta.getString("valorTotal"),MysqlConsulta.getString("Valordescuento")};

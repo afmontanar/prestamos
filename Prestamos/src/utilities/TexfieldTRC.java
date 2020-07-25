@@ -5,6 +5,7 @@
  */
 package utilities;
 
+import javax.swing.JDialog;
 import javax.swing.JTextField;
 import javax.swing.event.CaretEvent;
 import prestamos.ConsultaPrestamos;
@@ -16,9 +17,9 @@ import prestamos.ConsultaPrestamos;
 public class TexfieldTRC extends JTextField {
 
     private boolean salto;
-    private final ConsultaPrestamos r;
+    private final JDialog r;
 
-    public TexfieldTRC(ConsultaPrestamos r) {
+    public TexfieldTRC(JDialog r) {
         super();
         this.r=r;
 //        this.addFocusListener(new java.awt.event.FocusAdapter() {

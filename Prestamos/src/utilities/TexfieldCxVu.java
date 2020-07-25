@@ -5,8 +5,9 @@
  */
 package utilities;
 
+import javax.swing.JDialog;
 import javax.swing.JTextField;
-import prestamos.ConsultaPrestamos;
+
 
 /**
  *
@@ -15,9 +16,9 @@ import prestamos.ConsultaPrestamos;
 public class TexfieldCxVu extends JTextField {
 
     private boolean salto;
-    private final ConsultaPrestamos r;
+    private final JDialog r;
 
-    public TexfieldCxVu(ConsultaPrestamos r) {
+    public TexfieldCxVu(JDialog r) {
         super();
         this.r=r;
         this.addCaretListener((javax.swing.event.CaretEvent evt) -> {
