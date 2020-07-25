@@ -6,8 +6,7 @@
 package utilities;
 
 import javax.swing.JTextField;
-import javax.swing.event.CaretEvent;
-import prestamos.HacerPrestamo;
+import prestamos.ConsultaPrestamos;
 
 /**
  *
@@ -16,15 +15,13 @@ import prestamos.HacerPrestamo;
 public class TexfieldCxVu extends JTextField {
 
     private boolean salto;
-    private HacerPrestamo r;
+    private final ConsultaPrestamos r;
 
-    public TexfieldCxVu(HacerPrestamo r) {
+    public TexfieldCxVu(ConsultaPrestamos r) {
         super();
         this.r=r;
-        this.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                //NumeroIdCaretUpdate(evt);
-            }
+        this.addCaretListener((javax.swing.event.CaretEvent evt) -> {
+            //NumeroIdCaretUpdate(evt);
         });
     }
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mecanics;
+package prestamos;
 
 import java.util.Date;
 import java.sql.ResultSet;
@@ -22,7 +22,7 @@ import utilities.ValidarCamposVacios;
  *
  * @author afmontanar
  */
-public class HistoriaVehiculos extends javax.swing.JDialog {
+public class Operaciones extends javax.swing.JDialog {
 
     /**
      * Creates new form HistoriaVehiculos
@@ -33,7 +33,7 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
     private String idChofer;
     private utilities.ModelosTabla modelotS;
 
-    public HistoriaVehiculos(java.awt.Frame parent, boolean modal) {
+    public Operaciones(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);

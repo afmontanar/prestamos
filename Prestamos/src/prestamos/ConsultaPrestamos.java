@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mecanics;
+package prestamos;
 
 import java.util.Date;
 import java.sql.ResultSet;
@@ -22,7 +22,7 @@ import utilities.ValidarCamposVacios;
  *
  * @author afmontanar
  */
-public class HistoriaVehiculos extends javax.swing.JDialog {
+public class ConsultaPrestamos extends javax.swing.JDialog {
 
     /**
      * Creates new form HistoriaVehiculos
@@ -33,7 +33,7 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
     private String idChofer;
     private utilities.ModelosTabla modelotS;
 
-    public HistoriaVehiculos(java.awt.Frame parent, boolean modal) {
+    public ConsultaPrestamos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -73,7 +73,6 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         Total = new javax.swing.JLabel();
-        agreregistro = new javax.swing.JToggleButton();
         Totaldes = new javax.swing.JLabel();
         fecha1 = new com.toedter.calendar.JDateChooser();
         placa1 = new javax.swing.JTextField();
@@ -143,25 +142,17 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 1200, 400));
 
-        jButton3.setText("Guardar");
+        jButton3.setText("Consultar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 70, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 120, -1, -1));
 
         Total.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         Total.setBorder(javax.swing.BorderFactory.createTitledBorder("Total"));
         jPanel1.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 590, 240, 50));
-
-        agreregistro.setText("Agregar registro");
-        agreregistro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agreregistroActionPerformed(evt);
-            }
-        });
-        jPanel1.add(agreregistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, -1, -1));
 
         Totaldes.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         Totaldes.setBorder(javax.swing.BorderFactory.createTitledBorder("Total con descuento"));
@@ -240,14 +231,6 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
         r.setGrillaClienteVisibility(true,0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void agreregistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agreregistroActionPerformed
-        // TODO add your handling code here:
-        Object[] a = {"", "", "", "", "", "", "", ""};
-        this.modelot.ingresarUsuario(a);
-//        this.sumaDes();
-        this.modelot.fireTableCellUpdated(0, 6);
-    }//GEN-LAST:event_agreregistroActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         this.guardar();
@@ -304,7 +287,6 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Total;
     private javax.swing.JLabel Totaldes;
-    private javax.swing.JToggleButton agreregistro;
     private javax.swing.JLabel dueno;
     private com.toedter.calendar.JDateChooser fecha;
     private com.toedter.calendar.JDateChooser fecha1;
@@ -331,7 +313,7 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
     }
 
     void obtenerDChofer(String identificacion, String nombres) {
-        this.chofer.setText(nombres);
+//        this.chofer.setText(nombres);
         this.idChofer = identificacion;
     }
 
@@ -348,14 +330,14 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
 
     private void guardar() {
         String i = ((javax.swing.JTextField) fecha.getDateEditor().getUiComponent()).getText();
-        try {
-            NewMain.o.EjecutarMysql("INSERT INTO `mecanics`.`historiavehiculo` (`nombre`, `placa`, `dueno`, `chofer`, `fecha`, `valorTotal`, `valorTotalConDescuento`, `indice`) VALUES ('" + this.nombre.getText() + "', '" + this.placa.getText() + "', '" + this.idCliente + "', '" + this.idChofer + "', '" + i + " "+this.horai.getSelectedItem()+":"+this.minutoi.getSelectedItem()+":"+this.segundoi.getSelectedItem()+"', '" + this.Total.getText() + "', '" + this.Totaldes.getText() + "','"+this.obtenerUingresado()+"')");
-            this.guardarDetalles();
-            JOptionPane.showMessageDialog(this, "Guardado con exito");
-            this.reiniciarformulario();
-        } catch (SQLException ex) {
-            Logger.getLogger(HistoriaVehiculos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+////            NewMain.o.EjecutarMysql("INSERT INTO `mecanics`.`historiavehiculo` (`nombre`, `placa`, `dueno`, `chofer`, `fecha`, `valorTotal`, `valorTotalConDescuento`, `indice`) VALUES ('" + this.nombre.getText() + "', '" + this.placa.getText() + "', '" + this.idCliente + "', '" + this.idChofer + "', '" + i + " "+this.horai.getSelectedItem()+":"+this.minutoi.getSelectedItem()+":"+this.segundoi.getSelectedItem()+"', '" + this.Total.getText() + "', '" + this.Totaldes.getText() + "','"+this.obtenerUingresado()+"')");
+//            this.guardarDetalles();
+//            JOptionPane.showMessageDialog(this, "Guardado con exito");
+//            this.reiniciarformulario();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(HistoriaVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     public void sumatot() {
@@ -382,7 +364,7 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
     private void reiniciarformulario() {
         Total.setText("");
         Totaldes.setText("");
-        chofer.setText("");
+//        chofer.setText("");
         dueno.setText("");
         fecha.setDate(null);
         this.modelot.vaciarTabla();
@@ -391,57 +373,58 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
         this.nombre.setEnabled(true);
         this.placa.setEnabled(true);
         this.dueno.setEnabled(true);
-        this.chofer.setEnabled(true);
-        this.fecha.setEnabled(true);
-        this.horai.setEnabled(true);
-        this.minutoi.setEnabled(true);
-        this.segundoi.setEnabled(true);
-        this.jButton3.setEnabled(true);
-        this.agreregistro.setEnabled(true);
-        this.jButton2.setEnabled(true);
-        this.jButton1.setEnabled(true);
-        this.horai.setSelectedItem("00");
-        this.minutoi.setSelectedItem("00");
-        this.segundoi.setSelectedItem("00");
-        TableColumn column = this.jTable1.getColumnModel().getColumn(7);
-        column.setCellEditor(new DefaultCellEditor(new utilities.TexfieldTRC(this)));
-        TableColumn column1 = this.jTable1.getColumnModel().getColumn(5);
-        column1.setCellEditor(new DefaultCellEditor(new utilities.TexfieldCxVu(this)));
+//        this.chofer.setEnabled(true);
+//        this.fecha.setEnabled(true);
+//        this.horai.setEnabled(true);
+//        this.minutoi.setEnabled(true);
+//        this.segundoi.setEnabled(true);
+//        this.jButton3.setEnabled(true);
+//        this.agreregistro.setEnabled(true);
+//        this.jButton2.setEnabled(true);
+//        this.jButton1.setEnabled(true);
+//        this.horai.setSelectedItem("00");
+//        this.minutoi.setSelectedItem("00");
+//        this.segundoi.setSelectedItem("00");
+//        TableColumn column = this.jTable1.getColumnModel().getColumn(7);
+//        column.setCellEditor(new DefaultCellEditor(new utilities.TexfieldTRC(this)));
+//        TableColumn column1 = this.jTable1.getColumnModel().getColumn(5);
+//        column1.setCellEditor(new DefaultCellEditor(new utilities.TexfieldCxVu(this)));
         }
 
     private void guardarDetalles() {
         for (int i=0;i<this.modelot.getRowCount();i++){
         try {
-            NewMain.o.EjecutarMysql("INSERT INTO `mecanics`.`detallehistoriavehiculo` (`codhistori`, `cantidad`, `Marca`, `Referencia`, `Detalle`, `Rueda`, `Valorunitario`, `valorTotal`, `Valordescuento`) VALUES ('"+this.obtenerUingresado1()+"', '"+jTable1.getValueAt(i, 0)+"', '"+jTable1.getValueAt(i, 1)+"', '"+jTable1.getValueAt(i, 2)+"', '"+jTable1.getValueAt(i, 3)+"', '"+jTable1.getValueAt(i, 4)+"', '"+jTable1.getValueAt(i, 5)+"', '"+jTable1.getValueAt(i, 6)+"', '"+jTable1.getValueAt(i, 7)+"')");         
+            Prestamos.o.EjecutarMysql("INSERT INTO `mecanics`.`detallehistoriavehiculo` (`codhistori`, `cantidad`, `Marca`, `Referencia`, `Detalle`, `Rueda`, `Valorunitario`, `valorTotal`, `Valordescuento`) VALUES ('"+this.obtenerUingresado1()+"', '"+jTable1.getValueAt(i, 0)+"', '"+jTable1.getValueAt(i, 1)+"', '"+jTable1.getValueAt(i, 2)+"', '"+jTable1.getValueAt(i, 3)+"', '"+jTable1.getValueAt(i, 4)+"', '"+jTable1.getValueAt(i, 5)+"', '"+jTable1.getValueAt(i, 6)+"', '"+jTable1.getValueAt(i, 7)+"')");         
         } catch (SQLException ex) {
-            Logger.getLogger(HistoriaVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaPrestamos.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
     }
 
     private int obtenerUingresado() {
-        try {
-            ResultSet MysqlConsulta = NewMain.o.MysqlConsulta("SELECT indice FROM `historiavehiculo` WHERE `indice`=(SELECT MAX(indice) from `historiavehiculo`) ");
-            if(MysqlConsulta.next()){
-                int aInt = MysqlConsulta.getInt("indice");
-               return (aInt+1);
-            }
-        
-        } catch (SQLException ex) {
-            Logger.getLogger(HistoriaVehiculos.class.getName()).log(Level.SEVERE, null, ex);
-        }
         return 0;
+//        try {
+////            ResultSet MysqlConsulta = NewMain.o.MysqlConsulta("SELECT indice FROM `historiavehiculo` WHERE `indice`=(SELECT MAX(indice) from `historiavehiculo`) ");
+//            if(MysqlConsulta.next()){
+//                int aInt = MysqlConsulta.getInt("indice");
+//               return (aInt+1);
+//            }
+//        
+//        } catch (SQLException ex) {
+//            Logger.getLogger(HistoriaVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return 0;
     }
 
      private String obtenerUingresado1() {
         try {
-            ResultSet MysqlConsulta = NewMain.o.MysqlConsulta("SELECT indice FROM `historiavehiculo` WHERE `indice`=(SELECT MAX(indice) from `historiavehiculo`) ");
+            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT indice FROM `historiavehiculo` WHERE `indice`=(SELECT MAX(indice) from `historiavehiculo`) ");
             if(MysqlConsulta.next()){               
                return MysqlConsulta.getString("indice");
             }
         
         } catch (SQLException ex) {
-            Logger.getLogger(HistoriaVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConsultaPrestamos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
     }
@@ -451,7 +434,7 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
         this.nombre.setText(nombre);
         this.placa.setText(placa);
         this.dueno.setText(dueno);
-        this.chofer.setText(chofer);
+//        this.chofer.setText(chofer);
         this.ajustarFecha(fecha);
         this.Total.setText(valorTotal);
         this.Totaldes.setText(valortotaldescuento);
@@ -462,15 +445,15 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
         this.nombre.setEnabled(false);
         this.placa.setEnabled(false);
         this.dueno.setEnabled(false);
-        this.chofer.setEnabled(false);
+//        this.chofer.setEnabled(false);
         this.fecha.setEnabled(false);
-        this.horai.setEnabled(false);
-        this.minutoi.setEnabled(false);
-        this.segundoi.setEnabled(false);
+//        this.horai.setEnabled(false);
+//        this.minutoi.setEnabled(false);
+//        this.segundoi.setEnabled(false);
         this.jButton3.setEnabled(false);
-        this.agreregistro.setEnabled(false);
+//        this.agreregistro.setEnabled(false);
         this.jButton2.setEnabled(false);
-        this.jButton1.setEnabled(false);
+//        this.jButton1.setEnabled(false);
         String n[] = {"Cantidad", "Marca", "Referencia", "Detalle", "Rueda", "Valor unitario", "Valor total", "Valor con descuento"};
         this.modelotS = new utilities.ModelosTabla(n, jTable1);
         this.jTable1.setModel(this.modelotS);
@@ -479,7 +462,7 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
     private void alimentarGrilla(String indice) {
         this.modelotS.vaciarTabla();
         try {
-            ResultSet MysqlConsulta = NewMain.o.MysqlConsulta("SELECT * FROM `detallehistoriavehiculo` WHERE `codhistori` LIKE '"+indice+"'");
+            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `detallehistoriavehiculo` WHERE `codhistori` LIKE '"+indice+"'");
             while(MysqlConsulta.next()){
                 //MysqlConsulta.getString("codhistori"),
                 String d[]={ MysqlConsulta.getString("cantidad"),MysqlConsulta.getString("Marca"),MysqlConsulta.getString("Referencia"),MysqlConsulta.getString("Detalle"), MysqlConsulta.getString("Rueda"), MysqlConsulta.getString("Valorunitario"),MysqlConsulta.getString("valorTotal"),MysqlConsulta.getString("Valordescuento")};
@@ -499,9 +482,9 @@ public class HistoriaVehiculos extends javax.swing.JDialog {
             dato = formatoDelTexto.parse(substring); 
         } catch (ParseException ex) { ex.printStackTrace(); } 
         this.fecha.setDate(dato);
-        this.horai.setSelectedItem(fecha.substring(11, 13));
-        this.minutoi.setSelectedItem(fecha.substring(14, 16));
-        this.segundoi.setSelectedItem(fecha.substring(17, 19));
+//        this.horai.setSelectedItem(fecha.substring(11, 13));
+//        this.minutoi.setSelectedItem(fecha.substring(14, 16));
+//        this.segundoi.setSelectedItem(fecha.substring(17, 19));
     }
 
    
