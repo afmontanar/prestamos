@@ -75,7 +75,7 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         Total = new javax.swing.JLabel();
         Totaldes = new javax.swing.JLabel();
         fecha1 = new com.toedter.calendar.JDateChooser();
-        placa1 = new javax.swing.JTextField();
+        apodo = new javax.swing.JTextField();
         placa2 = new javax.swing.JTextField();
         placa3 = new javax.swing.JTextField();
         placa4 = new javax.swing.JTextField();
@@ -162,16 +162,16 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         fecha1.setDateFormatString("yyyy/MM/dd");
         jPanel1.add(fecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 60, 180, 40));
 
-        placa.setBorder(javax.swing.BorderFactory.createTitledBorder("Apodo"));
-        placa1.setName("Apodo");
-        placa1.addCaretListener(new javax.swing.event.CaretListener() {
+        apodo.setBorder(javax.swing.BorderFactory.createTitledBorder("Apodo"));
+        apodo.setName("Apodo");
+        apodo.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                placa1CaretUpdate(evt);
+                apodoCaretUpdate(evt);
             }
         });
-        jPanel1.add(placa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 180, 40));
+        jPanel1.add(apodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 180, 40));
 
-        placa.setBorder(javax.swing.BorderFactory.createTitledBorder("Cantidad prestada"));
+        placa2.setBorder(javax.swing.BorderFactory.createTitledBorder("Cantidad prestada"));
         placa2.setName("Cantidad prestada");
         placa2.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -180,7 +180,7 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         });
         jPanel1.add(placa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 180, 40));
 
-        placa.setBorder(javax.swing.BorderFactory.createTitledBorder("Interes"));
+        placa3.setBorder(javax.swing.BorderFactory.createTitledBorder("Interes"));
         placa3.setName("Interes");
         placa3.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -189,7 +189,7 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         });
         jPanel1.add(placa3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 180, 40));
 
-        placa.setBorder(javax.swing.BorderFactory.createTitledBorder("Deuda"));
+        placa4.setBorder(javax.swing.BorderFactory.createTitledBorder("Deuda"));
         placa4.setName("Deuda");
         placa4.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -198,7 +198,7 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         });
         jPanel1.add(placa4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 180, 40));
 
-        placa.setBorder(javax.swing.BorderFactory.createTitledBorder("Orden de ruta i"));
+        placa5.setBorder(javax.swing.BorderFactory.createTitledBorder("Orden de ruta i"));
         placa5.setName("Orden de ruta i");
         placa5.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -246,9 +246,9 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         this.reiniciarformulario();
     }//GEN-LAST:event_formWindowClosing
 
-    private void placa1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_placa1CaretUpdate
+    private void apodoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_apodoCaretUpdate
         // TODO add your handling code here:
-    }//GEN-LAST:event_placa1CaretUpdate
+    }//GEN-LAST:event_apodoCaretUpdate
 
     private void placa2CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_placa2CaretUpdate
         // TODO add your handling code here:
@@ -287,6 +287,7 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Total;
     private javax.swing.JLabel Totaldes;
+    private javax.swing.JTextField apodo;
     private javax.swing.JLabel dueno;
     private com.toedter.calendar.JDateChooser fecha;
     private com.toedter.calendar.JDateChooser fecha1;
@@ -300,7 +301,6 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField placa;
-    private javax.swing.JTextField placa1;
     private javax.swing.JTextField placa2;
     private javax.swing.JTextField placa3;
     private javax.swing.JTextField placa4;
