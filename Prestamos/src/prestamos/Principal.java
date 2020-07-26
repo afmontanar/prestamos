@@ -18,6 +18,7 @@ public class Principal extends javax.swing.JFrame {
     private final GrillaCliente gcliente;
     private final GrillaChofer gchofer;
     private final BusquedaHv BusqHv;
+    private final ConsultaPrestamos consultas;
     /**
      * Creates new form Principal
      */
@@ -29,6 +30,7 @@ public class Principal extends javax.swing.JFrame {
         this.gcliente = new GrillaCliente(this, true);
         this.gchofer = new GrillaChofer(this, true);
         this.BusqHv = new BusquedaHv(this, true);
+        this.consultas= new ConsultaPrestamos(this, true);
     }
 
    
@@ -52,6 +54,8 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         BusquedaHv = new javax.swing.JMenuItem();
+        BusquedaHv1 = new javax.swing.JMenuItem();
+        BusquedaHv2 = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -100,6 +104,22 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu4.add(BusquedaHv);
+
+        BusquedaHv1.setText("Consultas");
+        BusquedaHv1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BusquedaHv1ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(BusquedaHv1);
+
+        BusquedaHv2.setText("Operaciones");
+        BusquedaHv2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BusquedaHv2ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(BusquedaHv2);
 
         jMenuBar2.add(jMenu4);
 
@@ -150,6 +170,16 @@ public class Principal extends javax.swing.JFrame {
         this.BusqHv.llenarTabla();
     }//GEN-LAST:event_BusquedaHvActionPerformed
 
+    private void BusquedaHv1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaHv1ActionPerformed
+        // TODO add your handling code here:
+        this.poder = this.consultas;
+        this.consultas.setVisible(true);
+    }//GEN-LAST:event_BusquedaHv1ActionPerformed
+
+    private void BusquedaHv2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaHv2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BusquedaHv2ActionPerformed
+
 //    protected void setHistoriaVehiculosVisibility(boolean prendido){
 //        this.cliente.setVisible(prendido);
 //    }
@@ -157,6 +187,8 @@ public class Principal extends javax.swing.JFrame {
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem BusquedaHv;
+    private javax.swing.JMenuItem BusquedaHv1;
+    private javax.swing.JMenuItem BusquedaHv2;
     public static javax.swing.JComboBox jComboBox1;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel2;
