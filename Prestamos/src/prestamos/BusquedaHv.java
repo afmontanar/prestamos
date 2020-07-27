@@ -7,8 +7,6 @@ package prestamos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -48,16 +46,11 @@ public class BusquedaHv extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        valdesc = new javax.swing.JTextField();
-        placa = new javax.swing.JTextField();
-        dueno = new javax.swing.JLabel();
+        rutaf = new javax.swing.JTextField();
+        Deuda = new javax.swing.JTextField();
+        cliente = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        chofer = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         fechai = new com.toedter.calendar.JDateChooser();
-        horai = new javax.swing.JComboBox();
-        minutoi = new javax.swing.JComboBox();
-        segundoi = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -65,13 +58,13 @@ public class BusquedaHv extends javax.swing.JDialog {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         nombre = new javax.swing.JTextField();
-        valtotal = new javax.swing.JTextField();
+        cantidadPrestada = new javax.swing.JTextField();
         fechaf = new com.toedter.calendar.JDateChooser();
-        horaf = new javax.swing.JComboBox();
-        minutof = new javax.swing.JComboBox();
-        segundof = new javax.swing.JComboBox();
         jCheckBox1 = new javax.swing.JCheckBox();
         jButton3 = new javax.swing.JButton();
+        apodo1 = new javax.swing.JTextField();
+        interes1 = new javax.swing.JTextField();
+        rutai1 = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,26 +83,26 @@ public class BusquedaHv extends javax.swing.JDialog {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        valdesc.setBorder(javax.swing.BorderFactory.createTitledBorder("Valor con descuento"));
-        valdesc.setName("valdesc"); // NOI18N
-        valdesc.addCaretListener(new javax.swing.event.CaretListener() {
+        rutaf.setBorder(javax.swing.BorderFactory.createTitledBorder("Orden ruta f"));
+        rutaf.setName("rutaf"); // NOI18N
+        rutaf.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                valdescCaretUpdate(evt);
+                rutafCaretUpdate(evt);
             }
         });
-        jPanel1.add(valdesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, 180, 40));
+        jPanel1.add(rutaf, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 120, 180, 40));
 
-        placa.setBorder(javax.swing.BorderFactory.createTitledBorder("Placa"));
-        placa.setName("Nombre"); // NOI18N
-        placa.addCaretListener(new javax.swing.event.CaretListener() {
+        Deuda.setBorder(javax.swing.BorderFactory.createTitledBorder("Deuda"));
+        Deuda.setName("Deuda");
+        Deuda.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                placaCaretUpdate(evt);
+                DeudaCaretUpdate(evt);
             }
         });
-        jPanel1.add(placa, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 180, 40));
+        jPanel1.add(Deuda, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 180, 40));
 
-        dueno.setBorder(javax.swing.BorderFactory.createTitledBorder("Dueño"));
-        jPanel1.add(dueno, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 180, 50));
+        cliente.setBorder(javax.swing.BorderFactory.createTitledBorder("IdCliente"));
+        jPanel1.add(cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 180, 50));
 
         jButton2.setText("jButton1");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -119,47 +112,9 @@ public class BusquedaHv extends javax.swing.JDialog {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, 30, 40));
 
-        chofer.setBorder(javax.swing.BorderFactory.createTitledBorder("Chofer"));
-        jPanel1.add(chofer, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 50, 180, 50));
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 60, 30, 40));
-
         fechai.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha inicial"));
         fechai.setDateFormatString("yyyy-MM-dd");
         jPanel1.add(fechai, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 60, 180, 40));
-
-        horai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "" }));
-        horai.setBorder(javax.swing.BorderFactory.createTitledBorder("Hora"));
-        horai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                horaiActionPerformed(evt);
-            }
-        });
-        jPanel1.add(horai, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 80, 70));
-
-        minutoi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60" }));
-        minutoi.setBorder(javax.swing.BorderFactory.createTitledBorder("Minuto"));
-        minutoi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                minutoiActionPerformed(evt);
-            }
-        });
-        jPanel1.add(minutoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 80, 70));
-
-        segundoi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60" }));
-        segundoi.setBorder(javax.swing.BorderFactory.createTitledBorder("Segundo"));
-        segundoi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                segundoiActionPerformed(evt);
-            }
-        });
-        jPanel1.add(segundoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 80, 70));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -204,45 +159,18 @@ public class BusquedaHv extends javax.swing.JDialog {
         });
         jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 180, 40));
 
-        valtotal.setBorder(javax.swing.BorderFactory.createTitledBorder("Valor total"));
-        valtotal.setName("valtotal"); // NOI18N
-        valtotal.addCaretListener(new javax.swing.event.CaretListener() {
+        cantidadPrestada.setBorder(javax.swing.BorderFactory.createTitledBorder("Cantidad Prestada"));
+        cantidadPrestada.setName("cantidadPrestada"); // NOI18N
+        cantidadPrestada.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                valtotalCaretUpdate(evt);
+                cantidadPrestadaCaretUpdate(evt);
             }
         });
-        jPanel1.add(valtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 180, 40));
+        jPanel1.add(cantidadPrestada, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 180, 40));
 
         fechaf.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha final"));
         fechaf.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(fechaf, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 120, 180, 40));
-
-        horaf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "" }));
-        horaf.setBorder(javax.swing.BorderFactory.createTitledBorder("Hora"));
-        horaf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                horafActionPerformed(evt);
-            }
-        });
-        jPanel1.add(horaf, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 110, 80, 70));
-
-        minutof.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60" }));
-        minutof.setBorder(javax.swing.BorderFactory.createTitledBorder("Minuto"));
-        minutof.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                minutofActionPerformed(evt);
-            }
-        });
-        jPanel1.add(minutof, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 110, 80, 70));
-
-        segundof.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60" }));
-        segundof.setBorder(javax.swing.BorderFactory.createTitledBorder("Segundo"));
-        segundof.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                segundofActionPerformed(evt);
-            }
-        });
-        jPanel1.add(segundof, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 110, 80, 70));
+        jPanel1.add(fechaf, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, 180, 40));
 
         jCheckBox1.setText("Incluir busqueda de fechas");
         jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, -1, -1));
@@ -254,6 +182,33 @@ public class BusquedaHv extends javax.swing.JDialog {
             }
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, -1, -1));
+
+        apodo1.setBorder(javax.swing.BorderFactory.createTitledBorder("Apodo"));
+        apodo1.setName("Apodo");
+        apodo1.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                apodo1CaretUpdate(evt);
+            }
+        });
+        jPanel1.add(apodo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 180, 40));
+
+        interes1.setBorder(javax.swing.BorderFactory.createTitledBorder("Interes"));
+        interes1.setName("interes"); // NOI18N
+        interes1.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                interes1CaretUpdate(evt);
+            }
+        });
+        jPanel1.add(interes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 180, 40));
+
+        rutai1.setBorder(javax.swing.BorderFactory.createTitledBorder("Orden ruta i"));
+        rutai1.setName("rutai"); // NOI18N
+        rutai1.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                rutai1CaretUpdate(evt);
+            }
+        });
+        jPanel1.add(rutai1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 120, 180, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -271,15 +226,15 @@ public class BusquedaHv extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void valdescCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_valdescCaretUpdate
+    private void rutafCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_rutafCaretUpdate
         // TODO add your handling code here:
         this.busquedaHv();
-    }//GEN-LAST:event_valdescCaretUpdate
+    }//GEN-LAST:event_rutafCaretUpdate
 
-    private void placaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_placaCaretUpdate
+    private void DeudaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_DeudaCaretUpdate
         // TODO add your handling code here:
         this.busquedaHv();
-    }//GEN-LAST:event_placaCaretUpdate
+    }//GEN-LAST:event_DeudaCaretUpdate
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -287,60 +242,20 @@ public class BusquedaHv extends javax.swing.JDialog {
         r.setGrillaClienteVisibility(true, 1);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if (null != this.idCliente) {
-            Principal r = (Principal) super.getParent();
-            r.getGrillaChofer(this.idCliente.toString(), 1);
-        } else {
-            JOptionPane.showMessageDialog(this, "No a seleccionado dueno");
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void nombreCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_nombreCaretUpdate
         // TODO add your handling code here:
         busquedaHv();
     }//GEN-LAST:event_nombreCaretUpdate
 
-    private void valtotalCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_valtotalCaretUpdate
+    private void cantidadPrestadaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_cantidadPrestadaCaretUpdate
         // TODO add your handling code here:
         busquedaHv();
-    }//GEN-LAST:event_valtotalCaretUpdate
+    }//GEN-LAST:event_cantidadPrestadaCaretUpdate
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         this.reiniciarFormulario();
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void horaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horaiActionPerformed
-        // TODO add your handling code here:
-        busquedaHv();
-    }//GEN-LAST:event_horaiActionPerformed
-
-    private void minutoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minutoiActionPerformed
-        // TODO add your handling code here:
-        busquedaHv();
-    }//GEN-LAST:event_minutoiActionPerformed
-
-    private void segundoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_segundoiActionPerformed
-        // TODO add your handling code here:
-        busquedaHv();
-    }//GEN-LAST:event_segundoiActionPerformed
-
-    private void horafActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horafActionPerformed
-        // TODO add your handling code here:
-        busquedaHv();
-    }//GEN-LAST:event_horafActionPerformed
-
-    private void minutofActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minutofActionPerformed
-        // TODO add your handling code here:
-        busquedaHv();
-    }//GEN-LAST:event_minutofActionPerformed
-
-    private void segundofActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_segundofActionPerformed
-        // TODO add your handling code here:
-        busquedaHv();
-    }//GEN-LAST:event_segundofActionPerformed
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // TODO add your handling code here:
@@ -349,18 +264,30 @@ public class BusquedaHv extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jTable2MouseClicked
 
+    private void apodo1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_apodo1CaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_apodo1CaretUpdate
+
+    private void interes1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_interes1CaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_interes1CaretUpdate
+
+    private void rutai1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_rutai1CaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rutai1CaretUpdate
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel chofer;
-    private javax.swing.JLabel dueno;
+    private javax.swing.JTextField Deuda;
+    private javax.swing.JTextField apodo1;
+    private javax.swing.JTextField cantidadPrestada;
+    private javax.swing.JLabel cliente;
     private com.toedter.calendar.JDateChooser fechaf;
     private com.toedter.calendar.JDateChooser fechai;
-    private javax.swing.JComboBox horaf;
-    private javax.swing.JComboBox horai;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField interes1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
@@ -373,14 +300,9 @@ public class BusquedaHv extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JComboBox minutof;
-    private javax.swing.JComboBox minutoi;
     private javax.swing.JTextField nombre;
-    private javax.swing.JTextField placa;
-    private javax.swing.JComboBox segundof;
-    private javax.swing.JComboBox segundoi;
-    private javax.swing.JTextField valdesc;
-    private javax.swing.JTextField valtotal;
+    private javax.swing.JTextField rutaf;
+    private javax.swing.JTextField rutai1;
     // End of variables declaration//GEN-END:variables
 
     private void busquedaHv() {
@@ -391,9 +313,9 @@ public class BusquedaHv extends javax.swing.JDialog {
         try {
             //ResultSet MysqlConsulta = NewMain.o.MysqlConsulta("SELECT * FROM `historiaVehiculo` WHERE `nombre` LIKE '%"+this.nombre.getText()+"%' AND `placa` LIKE '%"+this.placa.getText()+"%' AND `dueno` LIKE '%"+this.dueno.getText()+"%' AND `chofer` LIKE '%"+this.chofer.getText()+"%' AND `fecha` => '" + i + " "+this.horai.getSelectedItem()+":"+this.minutoi.getSelectedItem()+":"+this.segundoi.getSelectedItem()+"' AND `fecha` =< '" + i + " "+this.horai.getSelectedItem()+":"+this.minutoi.getSelectedItem()+":"+this.segundoi.getSelectedItem()+"' AND  `valorTotal` LIKE '%"+this.valtotal.getText()+"%' AND `valorTotalConDescuento` LIKE '%"+this.valdesc.getText()+"'%");
             if (jCheckBox1.isSelected()) {
-                MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `historiaVehiculo` WHERE `nombre` LIKE '%" + this.nombre.getText() + "%' AND `placa` LIKE '%" + this.placa.getText() + "%' AND `dueno` LIKE '%" + this.idCliente + "%' AND `chofer` LIKE '%" + this.idChofer + "%' AND (`fecha` >= '" + i + " " + this.horai.getSelectedItem() + ":" + this.minutoi.getSelectedItem() + ":" + this.segundoi.getSelectedItem() + "' and `fecha` <= '" + f + " " + this.horaf.getSelectedItem() + ":" + this.minutof.getSelectedItem() + ":" + this.segundof.getSelectedItem() + "') AND  `valorTotal` LIKE '%" + this.valtotal.getText() + "%' AND `valorTotalConDescuento` LIKE '%" + this.valdesc.getText() + "%'");
+                MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `historiaVehiculo` WHERE `nombre` LIKE '%" + this.nombre.getText() + "%' AND `placa` LIKE '%" + this.Deuda.getText() + "%' AND `dueno` LIKE '%" + this.idCliente + "%' AND `chofer` LIKE '%" + this.idChofer + "%' AND (`fecha` >= '" + i + " " +"camponuevo" + ":" + "camponuevo"+ ":" + "camponuevo"+ "' and `fecha` <= '" + f + " " + "campo nuevo" + ":" + "campo nuevo" + ":" + "campo nuevo" + "') AND  `valorTotal` LIKE '%" + this.cantidadPrestada.getText() + "%' AND `valorTotalConDescuento` LIKE '%" + this.rutaf.getText() + "%'");
             } else {
-                MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `historiaVehiculo` WHERE `nombre` LIKE '%" + this.nombre.getText() + "%' AND `placa` LIKE '%" + this.placa.getText() + "%' AND `dueno` LIKE '%" + this.idCliente + "%' AND `chofer` LIKE '%" + this.idChofer + "%' AND `valorTotal` LIKE '%" + this.valtotal.getText() + "%' AND `valorTotalConDescuento` LIKE '%" + this.valdesc.getText() + "%'");
+                MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `historiaVehiculo` WHERE `nombre` LIKE '%" + this.nombre.getText() + "%' AND `placa` LIKE '%" + this.Deuda.getText() + "%' AND `dueno` LIKE '%" + this.idCliente + "%' AND `chofer` LIKE '%" + this.idChofer + "%' AND `valorTotal` LIKE '%" + this.cantidadPrestada.getText() + "%' AND `valorTotalConDescuento` LIKE '%" + this.rutaf.getText() + "%'");
             }
             while (MysqlConsulta.next()) {
                 String a[] = {MysqlConsulta.getString("indice"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("placa"), MysqlConsulta.getString("dueno"), MysqlConsulta.getString("chofer"), MysqlConsulta.getString("fecha"), MysqlConsulta.getString("valorTotal"), MysqlConsulta.getString("valorTotalConDescuento")};
@@ -436,30 +358,30 @@ public class BusquedaHv extends javax.swing.JDialog {
     }
 
     void setCliente(Object nombre, Object identificacion) {
-        dueno.setText(nombre + "");
+        cliente.setText(nombre + "");
         this.idCliente = identificacion;
         this.busquedaHv();
     }
 
     void obtenerDChofer(String identificacion, String nombres) {
-        this.chofer.setText(nombres);
+//        this.chofer.setText(nombres);
         this.idChofer = identificacion;
         this.busquedaHv();
     }
 
     private void reiniciarFormulario() {
-        this.chofer.setText("");
-        this.dueno.setText("");
+//        this.chofer.setText("");
+        this.cliente.setText("");
         this.fechaf.setDate(null);
         this.fechai.setDate(null);
-        this.horaf.setSelectedItem("00");
-        this.minutof.setSelectedItem("00");
-        this.segundof.setSelectedItem("00");
-        this.horai.setSelectedItem("00");
+//        this.horaf.setSelectedItem("00");
+//        this.minutof.setSelectedItem("00");
+//        this.segundof.setSelectedItem("00");
+//        this.horai.setSelectedItem("00");
         this.idChofer = "";
         this.idCliente = "";
         this.nombre.setText("");
-        this.placa.setText("");
+        this.Deuda.setText("");
         this.modelot.vaciarTabla();
         this.llenarTabla();
         this.jCheckBox1.setSelected(false);
