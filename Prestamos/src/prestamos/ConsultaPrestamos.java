@@ -5,18 +5,9 @@
  */
 package prestamos;
 
-import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.DefaultCellEditor;
 import javax.swing.JOptionPane;
-import javax.swing.event.TableModelEvent;
-import javax.swing.table.TableColumn;
-import utilities.ValidarCamposVacios;
 
 /**
  *
@@ -25,30 +16,22 @@ import utilities.ValidarCamposVacios;
 public class ConsultaPrestamos extends javax.swing.JDialog {
 
     /**
-     * Creates new form HistoriaVehiculos
+     * Creates new form BusquedaHv
      */
-    private utilities.ModelosTabla modelot;
-    private ValidarCamposVacios objectv;
     private Object idCliente;
+    private utilities.ModelosTablaS modelot;
     private String idChofer;
-    private utilities.ModelosTabla modelotS;
 
     public ConsultaPrestamos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        String n[] = {"Cantidad", "Marca", "Referencia", "Detalle", "Rueda", "Valor unitario", "Valor total", "Valor con descuento"};
-        this.modelot = new utilities.ModelosTabla(n, jTable1);
-        this.jTable1.setModel(this.modelot);
-        TableColumn column = this.jTable1.getColumnModel().getColumn(7);
-        column.setCellEditor(new DefaultCellEditor(new utilities.TexfieldTRC(this)));
-        TableColumn column1 = this.jTable1.getColumnModel().getColumn(5);
-        column1.setCellEditor(new DefaultCellEditor(new utilities.TexfieldCxVu(this)));
-    }
-
-    public void jtable1TableChanged(TableModelEvent e) {
-        this.sumatot();
-        this.sumaDes();
+        String n[] = {"indice", "nombre", "placa", "dueno", "chofer", "Fecha", "valorTotal", "valorTotalConDescuento"};
+        this.modelot = new utilities.ModelosTablaS(n, jTable2);
+        jTable2.setModel(this.modelot);
+        this.llenarTabla();
+        this.idChofer = "";
+        this.idCliente = "";
     }
 
     /**
@@ -60,68 +43,28 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        placa = new javax.swing.JTextField();
-        nombre = new javax.swing.JTextField();
-        dueno = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        fechai = new com.toedter.calendar.JDateChooser();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        Total = new javax.swing.JLabel();
-        Totaldes = new javax.swing.JLabel();
-        fechaf = new com.toedter.calendar.JDateChooser();
-        apodo = new javax.swing.JTextField();
-        cantidadPrestada = new javax.swing.JTextField();
-        placa3 = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        rutaf = new javax.swing.JTextField();
         Deuda = new javax.swing.JTextField();
-        placa5 = new javax.swing.JTextField();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
-
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setText("Consulta de prestamos");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
-
-        placa.setBorder(javax.swing.BorderFactory.createTitledBorder("Orden de ruta f"));
-        placa.setName("Orden de ruta f");
-        placa.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                placaCaretUpdate(evt);
-            }
-        });
-        jPanel1.add(placa, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 110, 180, 40));
-
-        nombre.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
-        nombre.setName("nombre"); // NOI18N
-        jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 180, 40));
-
-        dueno.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
-        jPanel1.add(dueno, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 180, 50));
-
-        jButton2.setText("jButton1");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, 30, 40));
-
-        fechai.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha Inicial"));
-        fechai.setDateFormatString("yyyy/MM/dd");
-        jPanel1.add(fechai, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, 180, 40));
-
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        cliente = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        fechai = new com.toedter.calendar.JDateChooser();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        nombre = new javax.swing.JTextField();
+        cantidadPrestada = new javax.swing.JTextField();
+        fechaf = new com.toedter.calendar.JDateChooser();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jButton3 = new javax.swing.JButton();
+        apodo1 = new javax.swing.JTextField();
+        interes1 = new javax.swing.JTextField();
+        rutai1 = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -136,58 +79,18 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1980, -1));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jScrollPane2.setViewportView(jPanel2);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 1200, 400));
-
-        jButton3.setText("Consultar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 120, -1, -1));
-
-        Total.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        Total.setBorder(javax.swing.BorderFactory.createTitledBorder("Total"));
-        jPanel1.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 590, 240, 50));
-
-        Totaldes.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        Totaldes.setBorder(javax.swing.BorderFactory.createTitledBorder("Total con descuento"));
-        jPanel1.add(Totaldes, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 590, 240, 50));
-
-        fechaf.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha final"));
-        fechaf.setDateFormatString("yyyy/MM/dd");
-        jPanel1.add(fechaf, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 60, 180, 40));
-
-        apodo.setBorder(javax.swing.BorderFactory.createTitledBorder("Apodo"));
-        apodo.setName("Apodo");
-        apodo.addCaretListener(new javax.swing.event.CaretListener() {
+        rutaf.setBorder(javax.swing.BorderFactory.createTitledBorder("Orden ruta f"));
+        rutaf.setName("rutaf"); // NOI18N
+        rutaf.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                apodoCaretUpdate(evt);
+                rutafCaretUpdate(evt);
             }
         });
-        jPanel1.add(apodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 180, 40));
-
-        cantidadPrestada.setBorder(javax.swing.BorderFactory.createTitledBorder("Cantidad prestada"));
-        cantidadPrestada.setName("Cantidad prestada");
-        cantidadPrestada.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                cantidadPrestadaCaretUpdate(evt);
-            }
-        });
-        jPanel1.add(cantidadPrestada, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 180, 40));
-
-        placa3.setBorder(javax.swing.BorderFactory.createTitledBorder("Interes"));
-        placa3.setName("Interes");
-        placa3.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                placa3CaretUpdate(evt);
-            }
-        });
-        jPanel1.add(placa3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 180, 40));
+        jPanel1.add(rutaf, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 120, 180, 40));
 
         Deuda.setBorder(javax.swing.BorderFactory.createTitledBorder("Deuda"));
         Deuda.setName("Deuda");
@@ -196,89 +99,182 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
                 DeudaCaretUpdate(evt);
             }
         });
-        jPanel1.add(Deuda, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 180, 40));
+        jPanel1.add(Deuda, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 180, 40));
 
-        placa5.setBorder(javax.swing.BorderFactory.createTitledBorder("Orden de ruta i"));
-        placa5.setName("Orden de ruta i");
-        placa5.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                placa5CaretUpdate(evt);
+        cliente.setBorder(javax.swing.BorderFactory.createTitledBorder("IdCliente"));
+        jPanel1.add(cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 180, 50));
+
+        jButton2.setText("jButton1");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(placa5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 180, 40));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, 30, 40));
+
+        fechai.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha inicial"));
+        fechai.setDateFormatString("yyyy-MM-dd");
+        jPanel1.add(fechai, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 60, 180, 40));
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        /*
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        */
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTable2);
+
+        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1980, -1));
+
+        jScrollPane2.setViewportView(jPanel4);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 1200, 400));
+
+        nombre.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
+        nombre.setName("nombre"); // NOI18N
+        nombre.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                nombreCaretUpdate(evt);
+            }
+        });
+        jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 180, 40));
+
+        cantidadPrestada.setBorder(javax.swing.BorderFactory.createTitledBorder("Cantidad Prestada"));
+        cantidadPrestada.setName("cantidadPrestada"); // NOI18N
+        cantidadPrestada.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                cantidadPrestadaCaretUpdate(evt);
+            }
+        });
+        jPanel1.add(cantidadPrestada, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 180, 40));
+
+        fechaf.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha final"));
+        fechaf.setDateFormatString("yyyy-MM-dd");
+        jPanel1.add(fechaf, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, 180, 40));
+
+        jCheckBox1.setText("Incluir busqueda de fechas");
+        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, -1, -1));
+
+        jButton3.setText("Reiniciar busqueda");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, -1, -1));
+
+        apodo1.setBorder(javax.swing.BorderFactory.createTitledBorder("Apodo"));
+        apodo1.setName("Apodo");
+        apodo1.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                apodo1CaretUpdate(evt);
+            }
+        });
+        jPanel1.add(apodo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 180, 40));
+
+        interes1.setBorder(javax.swing.BorderFactory.createTitledBorder("Interes"));
+        interes1.setName("interes"); // NOI18N
+        interes1.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                interes1CaretUpdate(evt);
+            }
+        });
+        jPanel1.add(interes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 180, 40));
+
+        rutai1.setBorder(javax.swing.BorderFactory.createTitledBorder("Orden ruta i"));
+        rutai1.setName("rutai"); // NOI18N
+        rutai1.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                rutai1CaretUpdate(evt);
+            }
+        });
+        jPanel1.add(rutai1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 120, 180, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here: Aca voy ha buscar el dueno
-        Principal r = (Principal) super.getParent();
-        r.setGrillaClienteVisibility(true,0);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void rutafCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_rutafCaretUpdate
         // TODO add your handling code here:
-        this.guardar();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void placaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_placaCaretUpdate
-        // TODO add your handling code here:
-    }//GEN-LAST:event_placaCaretUpdate
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
-        this.jTable1.setModel(modelot);
-        this.reiniciarformulario();
-    }//GEN-LAST:event_formWindowClosing
-
-    private void apodoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_apodoCaretUpdate
-        // TODO add your handling code here:
-    }//GEN-LAST:event_apodoCaretUpdate
-
-    private void cantidadPrestadaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_cantidadPrestadaCaretUpdate
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cantidadPrestadaCaretUpdate
-
-    private void placa3CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_placa3CaretUpdate
-        // TODO add your handling code here:
-    }//GEN-LAST:event_placa3CaretUpdate
+        this.busquedaHv();
+    }//GEN-LAST:event_rutafCaretUpdate
 
     private void DeudaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_DeudaCaretUpdate
         // TODO add your handling code here:
+        this.busquedaHv();
     }//GEN-LAST:event_DeudaCaretUpdate
 
-    private void placa5CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_placa5CaretUpdate
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_placa5CaretUpdate
+        Principal r = (Principal) super.getParent();
+        r.setGrillaClienteVisibility(true, 1);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-//     public void sumaDes(int suplemento){
-    public void sumaDes() {
-        int sumTot = 0;
-        for (int i = 0; i < this.jTable1.getRowCount(); i++) {
-            try {
-                int parseInt = Integer.parseInt((String) this.modelot.getValueAt(i, 7));
-                sumTot = sumTot + parseInt;
-            } catch (Exception e) {
-                sumTot = +sumTot;
-            }
-            this.Totaldes.setText(sumTot + "");
+    private void nombreCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_nombreCaretUpdate
+        // TODO add your handling code here:
+        busquedaHv();
+    }//GEN-LAST:event_nombreCaretUpdate
+
+    private void cantidadPrestadaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_cantidadPrestadaCaretUpdate
+        // TODO add your handling code here:
+        busquedaHv();
+    }//GEN-LAST:event_cantidadPrestadaCaretUpdate
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.reiniciarFormulario();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            EnviarConsultarHv();
         }
-    }
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void apodo1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_apodo1CaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_apodo1CaretUpdate
+
+    private void interes1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_interes1CaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_interes1CaretUpdate
+
+    private void rutai1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_rutai1CaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rutai1CaretUpdate
 
     /**
      * @param args the command line arguments
@@ -286,206 +282,115 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Deuda;
-    private javax.swing.JLabel Total;
-    private javax.swing.JLabel Totaldes;
-    private javax.swing.JTextField apodo;
+    private javax.swing.JTextField apodo1;
     private javax.swing.JTextField cantidadPrestada;
-    private javax.swing.JLabel dueno;
+    private javax.swing.JLabel cliente;
     private com.toedter.calendar.JDateChooser fechaf;
     private com.toedter.calendar.JDateChooser fechai;
+    private javax.swing.JTextField interes1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField nombre;
-    private javax.swing.JTextField placa;
-    private javax.swing.JTextField placa3;
-    private javax.swing.JTextField placa5;
+    private javax.swing.JTextField rutaf;
+    private javax.swing.JTextField rutai1;
     // End of variables declaration//GEN-END:variables
 
+    private void busquedaHv() {
+        this.modelot.vaciarTabla();
+        String i = ((javax.swing.JTextField) fechai.getDateEditor().getUiComponent()).getText();
+        String f = ((javax.swing.JTextField) fechaf.getDateEditor().getUiComponent()).getText();
+        ResultSet MysqlConsulta = null;
+        try {
+            //ResultSet MysqlConsulta = NewMain.o.MysqlConsulta("SELECT * FROM `historiaVehiculo` WHERE `nombre` LIKE '%"+this.nombre.getText()+"%' AND `placa` LIKE '%"+this.placa.getText()+"%' AND `dueno` LIKE '%"+this.dueno.getText()+"%' AND `chofer` LIKE '%"+this.chofer.getText()+"%' AND `fecha` => '" + i + " "+this.horai.getSelectedItem()+":"+this.minutoi.getSelectedItem()+":"+this.segundoi.getSelectedItem()+"' AND `fecha` =< '" + i + " "+this.horai.getSelectedItem()+":"+this.minutoi.getSelectedItem()+":"+this.segundoi.getSelectedItem()+"' AND  `valorTotal` LIKE '%"+this.valtotal.getText()+"%' AND `valorTotalConDescuento` LIKE '%"+this.valdesc.getText()+"'%");
+            if (jCheckBox1.isSelected()) {
+                MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `historiaVehiculo` WHERE `nombre` LIKE '%" + this.nombre.getText() + "%' AND `placa` LIKE '%" + this.Deuda.getText() + "%' AND `dueno` LIKE '%" + this.idCliente + "%' AND `chofer` LIKE '%" + this.idChofer + "%' AND (`fecha` >= '" + i + " " +"camponuevo" + ":" + "camponuevo"+ ":" + "camponuevo"+ "' and `fecha` <= '" + f + " " + "campo nuevo" + ":" + "campo nuevo" + ":" + "campo nuevo" + "') AND  `valorTotal` LIKE '%" + this.cantidadPrestada.getText() + "%' AND `valorTotalConDescuento` LIKE '%" + this.rutaf.getText() + "%'");
+            } else {
+                MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `historiaVehiculo` WHERE `nombre` LIKE '%" + this.nombre.getText() + "%' AND `placa` LIKE '%" + this.Deuda.getText() + "%' AND `dueno` LIKE '%" + this.idCliente + "%' AND `chofer` LIKE '%" + this.idChofer + "%' AND `valorTotal` LIKE '%" + this.cantidadPrestada.getText() + "%' AND `valorTotalConDescuento` LIKE '%" + this.rutaf.getText() + "%'");
+            }
+            while (MysqlConsulta.next()) {
+                String a[] = {MysqlConsulta.getString("indice"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("placa"), MysqlConsulta.getString("dueno"), MysqlConsulta.getString("chofer"), MysqlConsulta.getString("fecha"), MysqlConsulta.getString("valorTotal"), MysqlConsulta.getString("valorTotalConDescuento")};
+                this.modelot.ingresarUsuario(a);
+            }
+        } catch (SQLException ex) {
+            try {
+                String a[] = {MysqlConsulta.getString("indice"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("placa"), MysqlConsulta.getString("dueno"), MysqlConsulta.getString("chofer"), "0000-00-00 00:00:00", MysqlConsulta.getString("valorTotal"), MysqlConsulta.getString("valorTotalConDescuento")};
+                this.modelot.ingresarUsuario(a);
+            } catch (SQLException ex1) {
+                JOptionPane.showMessageDialog(rootPane, "A ocurrido un error inexperado");
+            }
+        }
+        this.modelot.reload();
+    }
+
+   void llenarTabla() {
+//        this.modelot.vaciarTabla();
+//        String i = ((javax.swing.JTextField) fechai.getDateEditor().getUiComponent()).getText();
+//        ResultSet MysqlConsulta = null;
+//        try {
+//            MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `historiavehiculo`");
+//            while (MysqlConsulta.next()) {
+//                try {
+//                    String a[] = {MysqlConsulta.getString("indice"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("placa"), MysqlConsulta.getString("dueno"), MysqlConsulta.getString("chofer"), MysqlConsulta.getString("fecha"), MysqlConsulta.getString("valorTotal"), MysqlConsulta.getString("valorTotalConDescuento")};
+//                    this.modelot.ingresarUsuario(a);
+//                } catch (SQLException ex) {
+//                    try {
+//                        String a[] = {MysqlConsulta.getString("indice"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("placa"), MysqlConsulta.getString("dueno"), MysqlConsulta.getString("chofer"), "0000-00-00 00:00:00", MysqlConsulta.getString("valorTotal"), MysqlConsulta.getString("valorTotalConDescuento")};
+//                        this.modelot.ingresarUsuario(a);
+//                    } catch (SQLException ex1) {
+//                        JOptionPane.showMessageDialog(rootPane, "A ocurrido un error inexperado");
+//                    }
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(BusquedaHv.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        this.modelot.reload();
+    }
+
     void setCliente(Object nombre, Object identificacion) {
-        this.dueno.setText(nombre + "");
+        cliente.setText(nombre + "");
         this.idCliente = identificacion;
+        this.busquedaHv();
     }
 
     void obtenerDChofer(String identificacion, String nombres) {
 //        this.chofer.setText(nombres);
         this.idChofer = identificacion;
+        this.busquedaHv();
     }
 
-    public void multiCxVu(String text) {
-        try {
-            int parseInt = Integer.parseInt(text);
-            int parseInt1 = Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
-            int resultado = parseInt * parseInt1;
-            jTable1.setValueAt(resultado + "", jTable1.getSelectedRow(), 6);
-        } catch (Exception r) {
-
-        }
-    }
-
-    private void guardar() {
-        String i = ((javax.swing.JTextField) fechai.getDateEditor().getUiComponent()).getText();
-//        try {
-////            NewMain.o.EjecutarMysql("INSERT INTO `mecanics`.`historiavehiculo` (`nombre`, `placa`, `dueno`, `chofer`, `fecha`, `valorTotal`, `valorTotalConDescuento`, `indice`) VALUES ('" + this.nombre.getText() + "', '" + this.placa.getText() + "', '" + this.idCliente + "', '" + this.idChofer + "', '" + i + " "+this.horai.getSelectedItem()+":"+this.minutoi.getSelectedItem()+":"+this.segundoi.getSelectedItem()+"', '" + this.Total.getText() + "', '" + this.Totaldes.getText() + "','"+this.obtenerUingresado()+"')");
-//            this.guardarDetalles();
-//            JOptionPane.showMessageDialog(this, "Guardado con exito");
-//            this.reiniciarformulario();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(HistoriaVehiculos.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }
-
-    public void sumatot() {
-        int sumTot = 0;
-        for (int i = 0; i < this.jTable1.getRowCount(); i++) {
-            try {
-                int parseInt = Integer.parseInt((String) this.jTable1.getValueAt(i, 6));
-                sumTot = sumTot + parseInt;
-            } catch (Exception e) {
-                sumTot = +sumTot;
-            }
-            this.Total.setText(sumTot + "");
-        }
-    }
-
-    public void pretotaDes(String caretotades) {
-        try {
-            jTable1.setValueAt(caretotades + "", jTable1.getSelectedRow(), 7);
-        } catch (Exception r) {
-
-        }
-    }
-
-    private void reiniciarformulario() {
-        Total.setText("");
-        Totaldes.setText("");
-//        chofer.setText("");
-        dueno.setText("");
-        fechai.setDate(null);
-        this.modelot.vaciarTabla();
-        nombre.setText("");
-        placa.setText("");
-        this.nombre.setEnabled(true);
-        this.placa.setEnabled(true);
-        this.dueno.setEnabled(true);
-//        this.chofer.setEnabled(true);
-//        this.fecha.setEnabled(true);
-//        this.horai.setEnabled(true);
-//        this.minutoi.setEnabled(true);
-//        this.segundoi.setEnabled(true);
-//        this.jButton3.setEnabled(true);
-//        this.agreregistro.setEnabled(true);
-//        this.jButton2.setEnabled(true);
-//        this.jButton1.setEnabled(true);
+    private void reiniciarFormulario() {
+//        this.chofer.setText("");
+        this.cliente.setText("");
+        this.fechaf.setDate(null);
+        this.fechai.setDate(null);
+//        this.horaf.setSelectedItem("00");
+//        this.minutof.setSelectedItem("00");
+//        this.segundof.setSelectedItem("00");
 //        this.horai.setSelectedItem("00");
-//        this.minutoi.setSelectedItem("00");
-//        this.segundoi.setSelectedItem("00");
-//        TableColumn column = this.jTable1.getColumnModel().getColumn(7);
-//        column.setCellEditor(new DefaultCellEditor(new utilities.TexfieldTRC(this)));
-//        TableColumn column1 = this.jTable1.getColumnModel().getColumn(5);
-//        column1.setCellEditor(new DefaultCellEditor(new utilities.TexfieldCxVu(this)));
-        }
-
-    private void guardarDetalles() {
-        for (int i=0;i<this.modelot.getRowCount();i++){
-        try {
-            Prestamos.o.EjecutarMysql("INSERT INTO `mecanics`.`detallehistoriavehiculo` (`codhistori`, `cantidad`, `Marca`, `Referencia`, `Detalle`, `Rueda`, `Valorunitario`, `valorTotal`, `Valordescuento`) VALUES ('"+this.obtenerUingresado1()+"', '"+jTable1.getValueAt(i, 0)+"', '"+jTable1.getValueAt(i, 1)+"', '"+jTable1.getValueAt(i, 2)+"', '"+jTable1.getValueAt(i, 3)+"', '"+jTable1.getValueAt(i, 4)+"', '"+jTable1.getValueAt(i, 5)+"', '"+jTable1.getValueAt(i, 6)+"', '"+jTable1.getValueAt(i, 7)+"')");         
-        } catch (SQLException ex) {
-            Logger.getLogger(ConsultaPrestamos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }
+        this.idChofer = "";
+        this.idCliente = "";
+        this.nombre.setText("");
+        this.Deuda.setText("");
+        this.modelot.vaciarTabla();
+        this.llenarTabla();
+        this.jCheckBox1.setSelected(false);
     }
 
-    private int obtenerUingresado() {
-        return 0;
-//        try {
-////            ResultSet MysqlConsulta = NewMain.o.MysqlConsulta("SELECT indice FROM `historiavehiculo` WHERE `indice`=(SELECT MAX(indice) from `historiavehiculo`) ");
-//            if(MysqlConsulta.next()){
-//                int aInt = MysqlConsulta.getInt("indice");
-//               return (aInt+1);
-//            }
-//        
-//        } catch (SQLException ex) {
-//            Logger.getLogger(HistoriaVehiculos.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return 0;
+    private void EnviarConsultarHv() {
+        int selectedRow = jTable2.getSelectedRow();
+        Principal parent = (Principal) super.getParent();
+        parent.mostrarHv(jTable2.getValueAt(selectedRow, 0) + "", jTable2.getValueAt(selectedRow, 1) + "", jTable2.getValueAt(selectedRow, 2) + "", jTable2.getValueAt(selectedRow, 3) + "", jTable2.getValueAt(selectedRow, 4) + "", jTable2.getValueAt(selectedRow, 5) + "", jTable2.getValueAt(selectedRow, 6) + "", jTable2.getValueAt(selectedRow, 7) + "");
     }
 
-     private String obtenerUingresado1() {
-        try {
-            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT indice FROM `historiavehiculo` WHERE `indice`=(SELECT MAX(indice) from `historiavehiculo`) ");
-            if(MysqlConsulta.next()){               
-               return MysqlConsulta.getString("indice");
-            }
-        
-        } catch (SQLException ex) {
-            Logger.getLogger(ConsultaPrestamos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "";
-    }
-
-    void alimentarHv(String indice, String nombre, String placa, String dueno, String chofer, String fecha, String valorTotal, String valortotaldescuento) {
-        this.desabilitarFormulario();
-        this.nombre.setText(nombre);
-        this.placa.setText(placa);
-        this.dueno.setText(dueno);
-//        this.chofer.setText(chofer);
-        this.ajustarFecha(fecha);
-        this.Total.setText(valorTotal);
-        this.Totaldes.setText(valortotaldescuento);
-        this.alimentarGrilla(indice);
-    }
-
-    private void desabilitarFormulario() {
-        this.nombre.setEnabled(false);
-        this.placa.setEnabled(false);
-        this.dueno.setEnabled(false);
-//        this.chofer.setEnabled(false);
-        this.fechai.setEnabled(false);
-//        this.horai.setEnabled(false);
-//        this.minutoi.setEnabled(false);
-//        this.segundoi.setEnabled(false);
-        this.jButton3.setEnabled(false);
-//        this.agreregistro.setEnabled(false);
-        this.jButton2.setEnabled(false);
-//        this.jButton1.setEnabled(false);
-        String n[] = {"Cantidad", "Marca", "Referencia", "Detalle", "Rueda", "Valor unitario", "Valor total", "Valor con descuento"};
-        this.modelotS = new utilities.ModelosTabla(n, jTable1);
-        this.jTable1.setModel(this.modelotS);
-    }
-
-    private void alimentarGrilla(String indice) {
-        this.modelotS.vaciarTabla();
-        try {
-            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `detallehistoriavehiculo` WHERE `codhistori` LIKE '"+indice+"'");
-            while(MysqlConsulta.next()){
-                //MysqlConsulta.getString("codhistori"),
-                String d[]={ MysqlConsulta.getString("cantidad"),MysqlConsulta.getString("Marca"),MysqlConsulta.getString("Referencia"),MysqlConsulta.getString("Detalle"), MysqlConsulta.getString("Rueda"), MysqlConsulta.getString("Valorunitario"),MysqlConsulta.getString("valorTotal"),MysqlConsulta.getString("Valordescuento")};
-                this.modelotS.ingresarUsuarioM(d);
-            }
-            this.modelotS.reload();
-        } catch (SQLException ex) {
-            Logger.getLogger(GrillaCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }  
-    }
-
-    private void ajustarFecha(String fecha) {
-        String substring = fecha.substring(0, 10);
-        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");     
-        Date dato = null;
-        try { 
-            dato = formatoDelTexto.parse(substring); 
-        } catch (ParseException ex) { ex.printStackTrace(); } 
-        this.fechai.setDate(dato);
-//        this.horai.setSelectedItem(fecha.substring(11, 13));
-//        this.minutoi.setSelectedItem(fecha.substring(14, 16));
-//        this.segundoi.setSelectedItem(fecha.substring(17, 19));
-    }
-
-   
 }

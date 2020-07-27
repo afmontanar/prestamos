@@ -17,7 +17,7 @@ public class Principal extends javax.swing.JFrame {
     private final HacerPrestamo hvehiculo;
     private final GrillaCliente gcliente;
     private final GrillaChofer gchofer;
-    private final BusquedaHv BusqHv;
+    private final ConsultaPrestamos BusqHv;
     private final ConsultaPrestamos consultas;
     /**
      * Creates new form Principal
@@ -29,7 +29,7 @@ public class Principal extends javax.swing.JFrame {
         this.hvehiculo = new HacerPrestamo(this, true);
         this.gcliente = new GrillaCliente(this, true);
         this.gchofer = new GrillaChofer(this, true);
-        this.BusqHv = new BusquedaHv(this, true);
+        this.BusqHv = new ConsultaPrestamos(this, true);
         this.consultas= new ConsultaPrestamos(this, true);
     }
 
