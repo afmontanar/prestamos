@@ -47,10 +47,10 @@ public class GrillaCliente extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
         identificacion = new javax.swing.JTextField();
         Celular = new javax.swing.JTextField();
-        nombre2 = new javax.swing.JTextField();
-        apellido1 = new javax.swing.JTextField();
+        Apellido = new javax.swing.JTextField();
+        Apodo = new javax.swing.JTextField();
         apellido2 = new javax.swing.JTextField();
-        nombre1 = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
         Direccion = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
@@ -99,23 +99,23 @@ public class GrillaCliente extends javax.swing.JDialog {
         });
         jPanel1.add(Celular, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 150, 40));
 
-        nombre2.setBorder(javax.swing.BorderFactory.createTitledBorder("Segundo nombre"));
-        nombre2.setName("Nombre"); // NOI18N
-        nombre2.addCaretListener(new javax.swing.event.CaretListener() {
+        Apellido.setBorder(javax.swing.BorderFactory.createTitledBorder("Apellido"));
+        Apellido.setName("Nombre"); // NOI18N
+        Apellido.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 nombre2CaretUpdate(evt);
             }
         });
-        jPanel1.add(nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 150, 40));
+        jPanel1.add(Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 150, 40));
 
-        apellido1.setBorder(javax.swing.BorderFactory.createTitledBorder("Primer apellido"));
-        apellido1.setName("Nombre"); // NOI18N
-        apellido1.addCaretListener(new javax.swing.event.CaretListener() {
+        Apodo.setBorder(javax.swing.BorderFactory.createTitledBorder("Apodo"));
+        Apodo.setName("Nombre"); // NOI18N
+        Apodo.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 apellido1CaretUpdate(evt);
             }
         });
-        jPanel1.add(apellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, 150, 40));
+        jPanel1.add(Apodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, 150, 40));
 
         apellido2.setBorder(javax.swing.BorderFactory.createTitledBorder("Segundo apellido"));
         apellido2.setName("Nombre"); // NOI18N
@@ -126,14 +126,14 @@ public class GrillaCliente extends javax.swing.JDialog {
         });
         jPanel1.add(apellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, 150, 40));
 
-        nombre1.setBorder(javax.swing.BorderFactory.createTitledBorder("Primer nombre"));
-        nombre1.setName("Nombre"); // NOI18N
-        nombre1.addCaretListener(new javax.swing.event.CaretListener() {
+        nombre.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
+        nombre.setName("Nombre"); // NOI18N
+        nombre.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 nombre1CaretUpdate(evt);
             }
         });
-        jPanel1.add(nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 150, 40));
+        jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 150, 40));
 
         Direccion.setBorder(javax.swing.BorderFactory.createTitledBorder("Direccion"));
         Direccion.setName("Nombre"); // NOI18N
@@ -222,7 +222,7 @@ public class GrillaCliente extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Celular;
     private javax.swing.JTextField Direccion;
-    private javax.swing.JTextField apellido1;
+    private javax.swing.JTextField Apodo;
     private javax.swing.JTextField apellido2;
     private javax.swing.JTextField identificacion;
     private javax.swing.JButton jButton1;
@@ -230,15 +230,15 @@ public class GrillaCliente extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField nombre1;
-    private javax.swing.JTextField nombre2;
+    private javax.swing.JTextField nombre;
+    private javax.swing.JTextField Apellido;
     // End of variables declaration//GEN-END:variables
 
     private void buscar() {
         this.modelot.vaciarTabla();
         try {
-            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `cliente` WHERE `primeroNombre` LIKE '%"+this.nombre1.getText()+"%' AND "
-                    + "`segunNombre` LIKE '%"+this.nombre2.getText()+"%' AND `primeroApellido` LIKE '%"+this.apellido1.getText()+"%' AND `segundoApellido`"
+            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `cliente` WHERE `primeroNombre` LIKE '%"+this.nombre.getText()+"%' AND "
+                    + "`segunNombre` LIKE '%"+this.Apellido.getText()+"%' AND `primeroApellido` LIKE '%"+this.Apodo.getText()+"%' AND `segundoApellido`"
                     + " LIKE '%"+this.apellido2.getText()+"%' AND `numeroId` LIKE '%"+this.identificacion.getText()+"%' AND `direccion` LIKE '%"+this.Direccion.getText()+"%' AND `celular` LIKE '%"+this.Celular.getText()+"%' ");
             while(MysqlConsulta.next()){
                 String d[]={MysqlConsulta.getString("primeroNombre"), MysqlConsulta.getString("segunNombre"),MysqlConsulta.getString("primeroApellido"),MysqlConsulta.getString("segundoApellido"),MysqlConsulta.getString("numeroId"),  MysqlConsulta.getString("direccion"),MysqlConsulta.getString("celular"),MysqlConsulta.getString("detalles")};
