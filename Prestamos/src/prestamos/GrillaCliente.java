@@ -49,7 +49,7 @@ public class GrillaCliente extends javax.swing.JDialog {
         Celular = new javax.swing.JTextField();
         Apellido = new javax.swing.JTextField();
         Apodo = new javax.swing.JTextField();
-        ordenRuta = new javax.swing.JTextField();
+       
         nombre = new javax.swing.JTextField();
         Direccion = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -58,7 +58,7 @@ public class GrillaCliente extends javax.swing.JDialog {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Buscar dueno");
+        jLabel1.setText("Buscar cliente");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 12, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -108,15 +108,7 @@ public class GrillaCliente extends javax.swing.JDialog {
         });
         jPanel1.add(Apodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, 150, 40));
 
-        ordenRuta.setBorder(javax.swing.BorderFactory.createTitledBorder("Orden Ruta"));
-        ordenRuta.setName("Nombre"); // NOI18N
-        ordenRuta.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                apellido2CaretUpdate(evt);
-            }
-        });
-        jPanel1.add(ordenRuta, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, 150, 40));
-
+      
         nombre.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
         nombre.setName("Nombre"); // NOI18N
         nombre.addCaretListener(new javax.swing.event.CaretListener() {
@@ -214,7 +206,7 @@ public class GrillaCliente extends javax.swing.JDialog {
     private javax.swing.JTextField Celular;
     private javax.swing.JTextField Direccion;
     private javax.swing.JTextField Apodo;
-    private javax.swing.JTextField ordenRuta;
+ 
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -229,7 +221,7 @@ public class GrillaCliente extends javax.swing.JDialog {
         try {
             ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `cliente` WHERE `primeroNombre` LIKE '%"+this.nombre.getText()+"%' AND "
                     + "`segunNombre` LIKE '%"+this.Apellido.getText()+"%' AND `primeroApellido` LIKE '%"+this.Apodo.getText()+"%' AND `segundoApellido`"
-                    + " LIKE '%"+this.ordenRuta.getText()+"%' AND `numeroId` LIKE '%"+""+"%' AND `direccion` LIKE '%"+this.Direccion.getText()+"%' AND `celular` LIKE '%"+this.Celular.getText()+"%' ");
+                    + " LIKE '%"+""+"%' AND `numeroId` LIKE '%"+""+"%' AND `direccion` LIKE '%"+this.Direccion.getText()+"%' AND `celular` LIKE '%"+this.Celular.getText()+"%' ");
             while(MysqlConsulta.next()){
                 String d[]={MysqlConsulta.getString("primeroNombre"), MysqlConsulta.getString("segunNombre"),MysqlConsulta.getString("primeroApellido"),MysqlConsulta.getString("segundoApellido"),MysqlConsulta.getString("numeroId"),  MysqlConsulta.getString("direccion"),MysqlConsulta.getString("celular"),MysqlConsulta.getString("detalles")};
                 this.modelot.ingresarUsuarioM(d);
