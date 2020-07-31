@@ -31,8 +31,8 @@ public class Cliente extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        Component[] components = {NumeroId,nombre1,apellido1,Celular,direccion};
-        Component[] componentst = {NumeroId,nombre1,nombre2,apellido1,Celular,direccion,detalles};
+        Component[] components = {NumeroId,nombre1,Celular,direccion};
+        Component[] componentst = {NumeroId,nombre1,nombre2,Celular,direccion,detalles};
         this.objectv = new utilities.ValidarCamposVacios(components,componentst);
         String n[] = {"Identificacion","Nombres","Apellidos","Direccion","Celular","Detalle"};
        
@@ -168,27 +168,14 @@ public class Cliente extends javax.swing.JDialog {
 
     private void guardarC() {      
         try {
-            Prestamos.o.EjecutarMysql("INSERT INTO `prestamos`.`cliente` (`tipoid`, `idcliente`, `nombre`, `apellido`, `apodo`, `direccion`, `detalles`, `celular`, `celular`) VALUES ('"+this.tidentificacion.getSelectedItem()+"', '"+this.NumeroId.getText()+"', '"+this.nombre1.getText()+"', '"+this.nombre2.getText()+"', '', '"+this.apellido1.getText()+"', '"+this.direccion.getText()+"', '"+this.detalles.getText()+"', '"+this.Celular.getText()+"')");            
+            Prestamos.o.EjecutarMysql("INSERT INTO `prestamos`.`cliente` (`tipoid`, `idcliente`, `nombre`, `apellido`, `apodo`, `direccion`, `detalles`, `celular`) VALUES ('"+this.tidentificacion.getSelectedItem()+"', '"+this.NumeroId.getText()+"', '"+this.nombre1.getText()+"', '"+this.nombre2.getText()+"', '"+this.apellido1.getText()+"', '"+this.direccion.getText()+"', '"+this.detalles.getText()+"', '"+this.Celular.getText()+"')");            
         } catch (SQLException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private void guardar() {
-        this.guardarC();
-        this.guardarCC();   
-    }
-
-    private void guardarCC() {
-        List<Object[]> usuarios = this.modelot.getUsuarios();
-        for(int i=0; i<usuarios.size();i++){
-            Object[] get = usuarios.get(i);
-       try {
-            Prestamos.o.EjecutarMysql("INSERT INTO `mecanics`.`chofer` (`Identificacion`, `Nombres`, `Apellidos`, `Direccion`, `Celular`, `Detalle`, `clienteid`) VALUES ('"+get[0]+"', '"+get[1]+"', '"+get[2]+"', '"+get[3]+"', '"+get[4]+"', '"+get[5]+"', '"+this.NumeroId.getText()+"')");            
-        } catch (SQLException ex) {
-            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        }
+        this.guardarC();  
     }
 
     private boolean existeU() {

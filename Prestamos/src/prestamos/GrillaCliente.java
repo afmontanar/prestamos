@@ -242,7 +242,7 @@ public class GrillaCliente extends javax.swing.JDialog {
         try {
             ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `cliente`");
             while(MysqlConsulta.next()){
-                String d[]={MysqlConsulta.getString("primeroNombre"), MysqlConsulta.getString("segunNombre"),MysqlConsulta.getString("primeroApellido"),MysqlConsulta.getString("segundoApellido"),MysqlConsulta.getString("numeroId"),  MysqlConsulta.getString("direccion"),MysqlConsulta.getString("celular"),MysqlConsulta.getString("detalles")};
+                String d[]={MysqlConsulta.getString("tipoid"), MysqlConsulta.getString("idcliente"),MysqlConsulta.getString("nombre"),MysqlConsulta.getString("apellido"),MysqlConsulta.getString("apodo"),  MysqlConsulta.getString("direccion"),MysqlConsulta.getString("detalles"),MysqlConsulta.getString("celular")};
                 this.modelot.ingresarUsuarioM(d);
             }
         this.modelot.reload();
