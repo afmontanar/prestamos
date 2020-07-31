@@ -22,6 +22,7 @@ public class GrillaCliente extends javax.swing.JDialog {
     private utilities.ModelosTablaS modelot;
     private int elquepide;
     
+    
     public GrillaCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();   
@@ -46,6 +47,7 @@ public class GrillaCliente extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         
+        identificacion = new javax.swing.JTextField();
         Celular = new javax.swing.JTextField();
         Apellido = new javax.swing.JTextField();
         Apodo = new javax.swing.JTextField();
@@ -81,6 +83,16 @@ public class GrillaCliente extends javax.swing.JDialog {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 900, 350));
 
+        identificacion.setBorder(javax.swing.BorderFactory.createTitledBorder("Identificacion"));
+        identificacion.setName("Nombre"); // NOI18N
+        identificacion.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                identificacionCaretUpdate(evt);
+            }
+        });
+        jPanel1.add(identificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, 150, 40));
+
+        
         Celular.setBorder(javax.swing.BorderFactory.createTitledBorder("Celular"));
         Celular.setName("Nombre"); // NOI18N
         Celular.addCaretListener(new javax.swing.event.CaretListener() {
@@ -206,7 +218,8 @@ public class GrillaCliente extends javax.swing.JDialog {
     private javax.swing.JTextField Celular;
     private javax.swing.JTextField Direccion;
     private javax.swing.JTextField Apodo;
- 
+    private javax.swing.JTextField identificacion;
+    
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -219,9 +232,9 @@ public class GrillaCliente extends javax.swing.JDialog {
     private void buscar() {
         this.modelot.vaciarTabla();
         try {
-            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `cliente` WHERE `primeroNombre` LIKE '%"+this.nombre.getText()+"%' AND "
-                    + "`segunNombre` LIKE '%"+this.Apellido.getText()+"%' AND `primeroApellido` LIKE '%"+this.Apodo.getText()+"%' AND `segundoApellido`"
-                    + " LIKE '%"+""+"%' AND `numeroId` LIKE '%"+""+"%' AND `direccion` LIKE '%"+this.Direccion.getText()+"%' AND `celular` LIKE '%"+this.Celular.getText()+"%' ");
+            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `cliente` WHERE `idcliente` LIKE '%"+this.identificacion.getText()+"%' AND "
+                    + "`nombre` LIKE '%"+this.nombre.getText()+"%' AND `apellido` LIKE '%"+this.Apellido.getText()+"%' AND `apodo`"
+                    + " LIKE '%"+this.Apodo.getText()+"%' AND `direccion` LIKE '%"+this.Direccion+"%' AND `celular` LIKE '%"+this.Celular.getText()+"%' ");
             while(MysqlConsulta.next()){
                 String d[]={MysqlConsulta.getString("primeroNombre"), MysqlConsulta.getString("segunNombre"),MysqlConsulta.getString("primeroApellido"),MysqlConsulta.getString("segundoApellido"),MysqlConsulta.getString("numeroId"),  MysqlConsulta.getString("direccion"),MysqlConsulta.getString("celular"),MysqlConsulta.getString("detalles")};
                 this.modelot.ingresarUsuarioM(d);
