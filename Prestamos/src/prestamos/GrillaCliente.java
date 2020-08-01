@@ -236,7 +236,7 @@ public class GrillaCliente extends javax.swing.JDialog {
                     + "`nombre` LIKE '%"+this.nombre.getText()+"%' AND `apellido` LIKE '%"+this.Apellido.getText()+"%' AND `apodo`"
                     + " LIKE '%"+this.Apodo.getText()+"%' AND `direccion` LIKE '%"+this.Direccion+"%' AND `celular` LIKE '%"+this.Celular.getText()+"%' ");
             while(MysqlConsulta.next()){
-                String d[]={MysqlConsulta.getString("tipoid"), MysqlConsulta.getString("segunNombre"),MysqlConsulta.getString("primeroApellido"),MysqlConsulta.getString("segundoApellido"),MysqlConsulta.getString("numeroId"),  MysqlConsulta.getString("direccion"),MysqlConsulta.getString("celular"),MysqlConsulta.getString("detalles")};
+                String d[]={MysqlConsulta.getString("tipoid"), MysqlConsulta.getString("idcliente"),MysqlConsulta.getString("nombre"),MysqlConsulta.getString("apellido"),MysqlConsulta.getString("apodo"),  MysqlConsulta.getString("direccion"),MysqlConsulta.getString("detalles"),MysqlConsulta.getString("celular")};
                 this.modelot.ingresarUsuarioM(d);
             }
         this.modelot.reload();
