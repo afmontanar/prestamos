@@ -248,7 +248,7 @@ public class GrillaCliente extends javax.swing.JDialog {
 
     private void enviarHv() {
         Principal r=(Principal) super.getParent();
-        r.setHacerPrestamos(this.modelot.getValueAt(this.jTable1.getSelectedRow(), 0),this.modelot.getValueAt(this.jTable1.getSelectedRow(), 4));
+        r.setHacerPrestamos(this.modelot.getValueAt(this.jTable1.getSelectedRow(), 1),this.modelot.getValueAt(this.jTable1.getSelectedRow(), 2),this.modelot.getValueAt(this.jTable1.getSelectedRow(), 4));
     }
 
     private void llenarTabla() {

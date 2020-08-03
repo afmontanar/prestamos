@@ -235,5 +235,9 @@ public class Principal extends javax.swing.JFrame {
     void setHacerPrestamos(Object nombre, Object identificacion) {
         this.hvehiculo.setCliente(nombre, identificacion);
     }
+
+    void setHacerPrestamos(Object valueAt, Object valueAt0, Object valueAt1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
