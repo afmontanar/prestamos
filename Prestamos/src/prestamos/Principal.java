@@ -14,7 +14,7 @@ public class Principal extends javax.swing.JFrame {
 
     private Object poder;
     private final Cliente cliente;
-    private final HacerPrestamo hvehiculo;
+    private final HacerPrestamo prestamos;
     private final GrillaCliente gcliente;
     private final GrillaChofer gchofer;
     private final ConsultaPrestamos BusqHv;
@@ -26,7 +26,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.cliente = new Cliente(this, true);
-        this.hvehiculo = new HacerPrestamo(this, true);
+        this.prestamos = new HacerPrestamo(this, true);
         this.gcliente = new GrillaCliente(this, true);
         this.gchofer = new GrillaChofer(this, true);
         this.BusqHv = new ConsultaPrestamos(this, true);
@@ -159,13 +159,13 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        this.poder = this.hvehiculo;
-        this.hvehiculo.setVisible(true);
+        this.poder = this.prestamos;
+        this.prestamos.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void BusquedaHvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaHvActionPerformed
         // TODO add your handling code here:
-        this.poder = this.hvehiculo;
+        this.poder = this.prestamos;
         this.BusqHv.setVisible(true);
         this.BusqHv.llenarTabla();
     }//GEN-LAST:event_BusquedaHvActionPerformed
@@ -207,11 +207,11 @@ public class Principal extends javax.swing.JFrame {
     }
 
     void prestamos(Object nombre, Object identificacion) {
-        this.hvehiculo.setCliente(nombre, identificacion);
+        this.prestamos.setCliente(nombre, identificacion);
     }
 
     void gChoferAhv(String identificacion, String nombres) {
-        this.hvehiculo.obtenerDChofer(identificacion,nombres);
+        this.prestamos.obtenerDChofer(identificacion,nombres);
     }
 
     void setGrillaClienteVisibility(boolean b, int i) {
@@ -228,16 +228,12 @@ public class Principal extends javax.swing.JFrame {
     }
 
     void mostrarHv(String indice, String nombre, String placa, String dueno, String chofer, String fecha, String valorTotal, String valortotaldescuento) {
-//        this.hvehiculo.alimentarHv(indice, nombre, placa, dueno, chofer, fecha, valorTotal, valortotaldescuento);
-        this.hvehiculo.setVisible(true);
+//        this.prestamos.alimentarHv(indice, nombre, placa, dueno, chofer, fecha, valorTotal, valortotaldescuento);
+        this.prestamos.setVisible(true);
     }
 
-    void setHacerPrestamos(Object nombre, Object identificacion) {
-        this.hvehiculo.setCliente(nombre, identificacion);
-    }
-
-    void setHacerPrestamos(Object valueAt, Object valueAt0, Object valueAt1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    void setHacerPrestamos(Object identificacion, Object nombre, Object apodo) {
+        this.prestamos.getGrillaCliente(identificacion,nombre,apodo);
     }
     
 }
