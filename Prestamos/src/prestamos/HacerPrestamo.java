@@ -284,8 +284,11 @@ public class HacerPrestamo extends javax.swing.JDialog {
         }
         }
 
-    void getGrillaCliente(Object valueAt, Object valueAt0, Object valueAt1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    void getGrillaCliente(Object identificacion, Object nombre, Object apodo) {
+        this.dueno.setText((String) identificacion);
+        this.nombre1.setText((String) nombre);
+        this.Apodo.setText((String) apodo);
+        
     }
 
 
