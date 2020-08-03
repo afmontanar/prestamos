@@ -232,7 +232,7 @@ public class Principal extends javax.swing.JFrame {
         this.hvehiculo.setVisible(true);
     }
 
-    void setHistoriaVehiculosCliente(Object nombre, Object identificacion) {
+    void setHacerPrestamos(Object nombre, Object identificacion) {
         this.hvehiculo.setCliente(nombre, identificacion);
     }
     
