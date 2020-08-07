@@ -121,6 +121,11 @@ public class HacerPrestamo extends javax.swing.JDialog {
 
         Cantidad1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cantidad"));
         Cantidad1.setName("Cantidad"); // NOI18N
+        Cantidad1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Cantidad1KeyTyped(evt);
+            }
+        });
         jPanel1.add(Cantidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 180, 40));
 
         Intereses1.setBorder(javax.swing.BorderFactory.createTitledBorder("Interes"));
@@ -195,6 +200,16 @@ public class HacerPrestamo extends javax.swing.JDialog {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void Cantidad1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Cantidad1KeyTyped
+        // TODO add your handling code here:
+        char validar=evt.getKeyChar();
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingresar solo numeros");
+        }
+    }//GEN-LAST:event_Cantidad1KeyTyped
     
     private boolean validarG() {
         if(objectv.validacionCamposNulosB()){
