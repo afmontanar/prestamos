@@ -217,7 +217,6 @@ public class HacerPrestamo extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Ingresar solo numeros");
         }
         String cadenaM="";
-        System.out.println(this.Cantidad1.getText().length());
         if(this.Cantidad1.getText().length()>3){
             int incrementar=this.Cantidad1.getText().length();
             do {                
@@ -229,7 +228,6 @@ public class HacerPrestamo extends javax.swing.JDialog {
                 }
             } while (incrementar!=0);
         }
-        System.out.println(cadenaM);
         
     }//GEN-LAST:event_Cantidad1KeyTyped
 
