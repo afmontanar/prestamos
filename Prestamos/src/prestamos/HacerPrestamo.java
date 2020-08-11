@@ -25,14 +25,16 @@ public class HacerPrestamo extends javax.swing.JDialog {
      * Creates new form HistoriaVehiculos
      */
     private utilities.ModelosTabla modelot;
-    private ValidarCamposVacios objectv;
+    private final ValidarCamposVacios objectv;
     private Object idCliente;
     private String idChofer;
     private utilities.ModelosTabla modelotS;
+  
 
     public HacerPrestamo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+       
         Component[] components = {dueno,nombre1,Apodo,fecha1,Cantidad1,Intereses1,Cantidad_cobrar1,Monto_Diario_Pago2,Fecha_limete_Pago,detalles,numeroPrestamo};
         this.objectv = new utilities.ValidarCamposVacios(components);
         setLocationRelativeTo(null); 
@@ -214,6 +216,21 @@ public class HacerPrestamo extends javax.swing.JDialog {
             evt.consume();
             JOptionPane.showMessageDialog(this, "Ingresar solo numeros");
         }
+        String cadenaM="";
+        System.out.println(this.Cantidad1.getText().length());
+        if(this.Cantidad1.getText().length()>3){
+            int incrementar=this.Cantidad1.getText().length();
+            do {                
+                cadenaM="."+this.Cantidad1.getText().substring(incrementar-3, incrementar);
+                incrementar-=3;
+                if(incrementar<3){
+                    cadenaM=this.Cantidad1.getText().substring(0, incrementar)+cadenaM;
+                    break;
+                }
+            } while (incrementar!=0);
+        }
+        System.out.println(cadenaM);
+        
     }//GEN-LAST:event_Cantidad1KeyTyped
 
     private void Intereses1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Intereses1KeyTyped
