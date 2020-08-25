@@ -127,6 +127,9 @@ public class HacerPrestamo extends javax.swing.JDialog {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 Cantidad1KeyTyped(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Cantidad1KeyReleased(evt);
+            }
         });
         jPanel1.add(Cantidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 180, 40));
 
@@ -216,19 +219,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
             evt.consume();
             JOptionPane.showMessageDialog(this, "Ingresar solo numeros");
         }
-        String cadenaM="";
-        if(this.Cantidad1.getText().length()>3){
-            int incrementar=this.Cantidad1.getText().length();
-            do {                
-                cadenaM="."+this.Cantidad1.getText().substring(incrementar-3, incrementar);
-                incrementar-=3;
-                if(incrementar<3){
-                    cadenaM=this.Cantidad1.getText().substring(0, incrementar)+cadenaM;
-                    break;
-                }
-            } while (incrementar!=0);
-        }
-        
+       
     }//GEN-LAST:event_Cantidad1KeyTyped
 
     private void Intereses1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Intereses1KeyTyped
@@ -239,7 +230,27 @@ public class HacerPrestamo extends javax.swing.JDialog {
             evt.consume();
             JOptionPane.showMessageDialog(this, "Ingresar solo numeros");
         }
+        
     }//GEN-LAST:event_Intereses1KeyTyped
+
+    private void Cantidad1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Cantidad1KeyReleased
+        // TODO add your handling code here:
+         String cadenaM="";
+        if(this.Cantidad1.getText().length()>3){
+            int incrementar=this.Cantidad1.getText().length();
+//            System.out.println(incrementar);
+            do {                
+                cadenaM="."+this.Cantidad1.getText().substring(incrementar-3, incrementar)+cadenaM;
+                incrementar-=3;
+                if(incrementar<=3){
+                    cadenaM=this.Cantidad1.getText().substring(0, incrementar)+cadenaM;
+                    break;
+                }
+            } while (incrementar!=0);
+            
+        }
+        System.out.println(cadenaM);
+    }//GEN-LAST:event_Cantidad1KeyReleased
     
     private boolean validarG() {
         if(objectv.validacionCamposNulosB()){
