@@ -249,7 +249,10 @@ public class HacerPrestamo extends javax.swing.JDialog {
             } while (incrementar!=0);
             
         }
+        
         System.out.println(cadenaM);
+        String replaceAll = cadenaM.replaceAll("[.]", "");
+        System.out.println(replaceAll);
     }//GEN-LAST:event_Cantidad1KeyReleased
     
     private boolean validarG() {
