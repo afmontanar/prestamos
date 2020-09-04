@@ -29,13 +29,14 @@ public class HacerPrestamo extends javax.swing.JDialog {
     private Object idCliente;
     private String idChofer;
     private utilities.ModelosTabla modelotS;
+    
   
 
     public HacerPrestamo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-       
-        Component[] components = {dueno,nombre1,Apodo,fecha1,Cantidad1,Intereses1,Cantidad_cobrar1,Monto_Diario_Pago2,Fecha_limete_Pago,detalles,numeroPrestamo};
+        this.Cantidad1.setText("0");
+        Component[] components = {dueno2,nombre1,Apodo,fecha1,Cantidad1,Intereses1,Cantidad_cobrar1,Monto_Diario_Pago2,Fecha_limete_Pago,detalles,numeroPrestamo};
         this.objectv = new utilities.ValidarCamposVacios(components);
         setLocationRelativeTo(null); 
     }
@@ -53,7 +54,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         Apodo = new javax.swing.JTextField();
-        dueno = new javax.swing.JLabel();
+        dueno2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         Fecha_limete_Pago = new com.toedter.calendar.JDateChooser();
         jButton3 = new javax.swing.JButton();
@@ -69,6 +70,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
         numeroPrestamo = new javax.swing.JTextField();
         Monto_Diario_Pago2 = new javax.swing.JTextField();
         numeroPrestamo1 = new javax.swing.JTextField();
+        dueno = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -86,8 +88,8 @@ public class HacerPrestamo extends javax.swing.JDialog {
         Apodo.setName("Apodo");
         jPanel1.add(Apodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, 180, 40));
 
-        dueno.setBorder(javax.swing.BorderFactory.createTitledBorder("IdCliente"));
-        jPanel1.add(dueno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 180, 50));
+        dueno2.setBorder(javax.swing.BorderFactory.createTitledBorder("Cantidad formateada"));
+        jPanel1.add(dueno2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 180, 50));
 
         jButton2.setText("jButton1");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -123,12 +125,14 @@ public class HacerPrestamo extends javax.swing.JDialog {
 
         Cantidad1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cantidad"));
         Cantidad1.setName("Cantidad"); // NOI18N
+        Cantidad1.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                Cantidad1CaretUpdate(evt);
+            }
+        });
         Cantidad1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 Cantidad1KeyTyped(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Cantidad1KeyReleased(evt);
             }
         });
         jPanel1.add(Cantidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 180, 40));
@@ -170,6 +174,9 @@ public class HacerPrestamo extends javax.swing.JDialog {
         numeroPrestamo1.setName("Monto_Diario_Pago"); // NOI18N
         jPanel1.add(numeroPrestamo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 180, 40));
 
+        dueno.setBorder(javax.swing.BorderFactory.createTitledBorder("IdCliente"));
+        jPanel1.add(dueno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 180, 50));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -178,7 +185,9 @@ public class HacerPrestamo extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -211,17 +220,6 @@ public class HacerPrestamo extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_formWindowOpened
 
-    private void Cantidad1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Cantidad1KeyTyped
-        // TODO add your handling code here:
-        char validar=evt.getKeyChar();
-        if(Character.isLetter(validar)){
-            getToolkit().beep();
-            evt.consume();
-            JOptionPane.showMessageDialog(this, "Ingresar solo numeros");
-        }
-       
-    }//GEN-LAST:event_Cantidad1KeyTyped
-
     private void Intereses1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Intereses1KeyTyped
         // TODO add your handling code here:
         char validar=evt.getKeyChar();
@@ -233,27 +231,30 @@ public class HacerPrestamo extends javax.swing.JDialog {
         
     }//GEN-LAST:event_Intereses1KeyTyped
 
-    private void Cantidad1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Cantidad1KeyReleased
+    private void Cantidad1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_Cantidad1CaretUpdate
         // TODO add your handling code here:
-         String cadenaM="";
-        if(this.Cantidad1.getText().length()>3){
-            int incrementar=this.Cantidad1.getText().length();
-//            System.out.println(incrementar);
-            do {                
-                cadenaM="."+this.Cantidad1.getText().substring(incrementar-3, incrementar)+cadenaM;
-                incrementar-=3;
-                if(incrementar<=3){
-                    cadenaM=this.Cantidad1.getText().substring(0, incrementar)+cadenaM;
-                    break;
-                }
-            } while (incrementar!=0);
+//        try {
+           
+            String text = this.Cantidad1.getText();    
             
+            String replaceAll = text.replaceAll("[.]", "");   
+            
+            String darFormatoALaCantidad = this.darFormatoALaCantidad(replaceAll);
+            
+            
+                this.dueno2.setText(darFormatoALaCantidad);
+         
+    }//GEN-LAST:event_Cantidad1CaretUpdate
+
+    private void Cantidad1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Cantidad1KeyTyped
+        // TODO add your handling code here:
+         char validar=evt.getKeyChar();
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingresar solo numeros");
         }
-        
-        System.out.println(cadenaM);
-        String replaceAll = cadenaM.replaceAll("[.]", "");
-        System.out.println(replaceAll);
-    }//GEN-LAST:event_Cantidad1KeyReleased
+    }//GEN-LAST:event_Cantidad1KeyTyped
     
     private boolean validarG() {
         if(objectv.validacionCamposNulosB()){
@@ -266,7 +267,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
         }
     }
      void setCliente(Object nombre, Object identificacion) {
-        this.dueno.setText(nombre + "");
+        this.dueno2.setText(nombre + "");
         this.idCliente = identificacion;
     }
      
@@ -294,6 +295,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
     private javax.swing.JLabel Totaldes;
     private javax.swing.JTextArea detalles;
     private javax.swing.JLabel dueno;
+    private javax.swing.JLabel dueno2;
     private com.toedter.calendar.JDateChooser fecha1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -307,7 +309,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
 
     private boolean tienePrestamosVigentes() {
         try {
-            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `prestamo` WHERE `idcliente`='"+dueno.getText()+"' and `cancelado`=1");
+            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `prestamo` WHERE `idcliente`='"+dueno2.getText()+"' and `cancelado`=1");
             while(MysqlConsulta.next()){
                  return (JOptionPane.showConfirmDialog(this, "Ya tiene un prestamo, deseas hacerle otro?")==0);
                       
@@ -325,7 +327,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
             int cantidadconintereses=(((Integer.parseInt(Cantidad1.getText()))*(Integer.parseInt(Intereses1.getText())))/100)+Integer.parseInt(Cantidad1.getText());
             int montopagodiario=cantidadconintereses/f.diasHabiles();
             String d[]=f.obtenerFechaFormatStringB();
-            Prestamos.o.EjecutarMysql("INSERT INTO `prestamo`(`idcliente`, `nombre`, `apodo`, `fecha`, `cantidad`, `interes`, `cantidadcobrar`, `montodiariodepago`, `fechalimetepago`, `detalles`, `numeroprestamo`, `cancelado`) VALUES ('"+dueno.getText()+"','"+nombre1.getText()+"','"+Apodo.getText()+"','"+d[0]+"','"+Cantidad1.getText()+"','"+Intereses1.getText()+"','"+cantidadconintereses+"','"+montopagodiario+"','"+d[1]+"','"+detalles.getText()+"',[value-11],[value-12])");            
+            Prestamos.o.EjecutarMysql("INSERT INTO `prestamo`(`idcliente`, `nombre`, `apodo`, `fecha`, `cantidad`, `interes`, `cantidadcobrar`, `montodiariodepago`, `fechalimetepago`, `detalles`, `numeroprestamo`, `cancelado`) VALUES ('"+dueno2.getText()+"','"+nombre1.getText()+"','"+Apodo.getText()+"','"+d[0]+"','"+Cantidad1.getText()+"','"+Intereses1.getText()+"','"+cantidadconintereses+"','"+montopagodiario+"','"+d[1]+"','"+detalles.getText()+"',[value-11],[value-12])");            
         } catch (SQLException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -344,10 +346,27 @@ public class HacerPrestamo extends javax.swing.JDialog {
         }
 
     void getGrillaCliente(Object identificacion, Object nombre, Object apodo) {
-        this.dueno.setText((String) identificacion);
+        this.dueno2.setText((String) identificacion);
         this.nombre1.setText((String) nombre);
         this.Apodo.setText((String) apodo);
         
+    }
+
+    private String darFormatoALaCantidad(String text) {
+        int length = text.length();       
+        String cantidad="";
+        if(length>3){
+            int incrementar=length;
+            do {                
+                cantidad="."+text.substring(incrementar-3, incrementar)+cantidad;
+                incrementar-=3;
+                if(incrementar<=3){
+                    cantidad=text.substring(0, incrementar)+cantidad;
+                    break;
+                }
+            } while (incrementar!=0);        
+        } 
+      return cantidad;
     }
 
 
