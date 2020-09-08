@@ -9,9 +9,14 @@ package prestamos;
 import java.awt.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import utilities.ValidarCamposVacios;
 import utilities.OperacionesFechas;
 
@@ -36,7 +41,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.Cantidad1.setText("0");
-        Component[] components = {cantidadFormateada,nombre1,Apodo,fecha1,Cantidad1,Intereses1,cantidadFormateada,pagoDiario,Fecha_limete_Pago,detalles,numeroPrestamo};
+        Component[] components = {cantidadFormateada,nombre1,Apodo,fecha1,Cantidad1,Intereses1,cantidadFormateada,pagoDiario,FechaInicioPago,detalles,numeroPrestamo};
         this.objectv = new utilities.ValidarCamposVacios(components);
         setLocationRelativeTo(null); 
     }
@@ -56,7 +61,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
         Apodo = new javax.swing.JTextField();
         cantidadFormateada = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        Fecha_limete_Pago = new com.toedter.calendar.JDateChooser();
+        FechaInicioPago = new com.toedter.calendar.JDateChooser();
         jButton3 = new javax.swing.JButton();
         Total = new javax.swing.JLabel();
         Totaldes = new javax.swing.JLabel();
@@ -69,7 +74,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
         numeroPrestamo = new javax.swing.JTextField();
         dueno = new javax.swing.JLabel();
         cantidadCobrar = new javax.swing.JLabel();
-        Fecha_limete_Pago1 = new com.toedter.calendar.JDateChooser();
+        FechaLimitePago = new com.toedter.calendar.JDateChooser();
         pagoDiario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -99,9 +104,14 @@ public class HacerPrestamo extends javax.swing.JDialog {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 30, 40));
 
-        Fecha_limete_Pago.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha inicio pago"));
-        Fecha_limete_Pago.setDateFormatString("yyyy/MM/dd");
-        jPanel1.add(Fecha_limete_Pago, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 180, 40));
+        FechaInicioPago.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha inicio pago"));
+        FechaInicioPago.setDateFormatString("yyyy/MM/dd");
+        FechaInicioPago.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                FechaInicioPagoPropertyChange(evt);
+            }
+        });
+        jPanel1.add(FechaInicioPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 180, 40));
 
         jButton3.setText("Guardar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -173,9 +183,14 @@ public class HacerPrestamo extends javax.swing.JDialog {
         cantidadCobrar.setBorder(javax.swing.BorderFactory.createTitledBorder("Cantidad formateada"));
         jPanel1.add(cantidadCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 180, 50));
 
-        Fecha_limete_Pago1.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha limite pago"));
-        Fecha_limete_Pago1.setDateFormatString("yyyy/MM/dd");
-        jPanel1.add(Fecha_limete_Pago1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 180, 40));
+        FechaLimitePago.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha limite pago"));
+        FechaLimitePago.setDateFormatString("yyyy/MM/dd");
+        FechaLimitePago.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                FechaLimitePagoPropertyChange(evt);
+            }
+        });
+        jPanel1.add(FechaLimitePago, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 180, 40));
 
         pagoDiario.setBorder(javax.swing.BorderFactory.createTitledBorder("Pago Diario"));
         jPanel1.add(pagoDiario, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 180, 50));
@@ -279,6 +294,116 @@ public class HacerPrestamo extends javax.swing.JDialog {
         int cantidadAcobrar=calculo+cantidad;      
         this.cantidadCobrar.setText(this.darFormatoALaCantidad(""+cantidadAcobrar));
     }//GEN-LAST:event_Intereses1CaretUpdate
+
+    private void FechaInicioPagoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_FechaInicioPagoPropertyChange
+        // TODO add your handling code here:
+       
+     
+              if(!this.obtenerFechaFormatString().equals("")){
+                try{
+                    System.out.println("hola1");
+                    String[] obtenerFechaFormatStringB = this.obtenerFechaFormatStringB();
+                    System.out.println("hola2");
+                    if(this.compararfechas(obtenerFechaFormatStringB[0], obtenerFechaFormatStringB[1])){
+                        System.out.println(this.diasHabiles());
+                    } 
+                }catch(ArrayIndexOutOfBoundsException e){
+                    System.out.println("ocurrio un error");
+                    return;}
+                }
+        
+    }//GEN-LAST:event_FechaInicioPagoPropertyChange
+
+    private void FechaLimitePagoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_FechaLimitePagoPropertyChange
+        // TODO add your handling code here:
+       
+            
+            if(!this.obtenerFechaFormatString().equals("")){
+                try{
+                    System.out.println("hola1");
+                    String[] obtenerFechaFormatStringB = this.obtenerFechaFormatStringB();
+                    System.out.println("hola2");
+                    if(this.compararfechas(obtenerFechaFormatStringB[0], obtenerFechaFormatStringB[1])){
+                        System.out.println(this.diasHabiles());
+                    } 
+                }catch(NullPointerException e){
+                    
+                    System.out.println("no se puede calcular por falt de datos");
+                    return;}
+                }
+       
+    }//GEN-LAST:event_FechaLimitePagoPropertyChange
+    
+    public String obtenerFechaFormatString(){
+        String i = ((JTextField)FechaInicioPago.getDateEditor().getUiComponent()).getText();
+        return i;
+    }
+    
+    public String[] obtenerFechaFormatStringB(){
+         String z[]= new String[2];
+         z[0] = ((JTextField)FechaInicioPago.getDateEditor().getUiComponent()).getText();
+         z[1] = ((JTextField)FechaLimitePago.getDateEditor().getUiComponent()).getText();
+        
+        return z;
+    }
+    
+    public boolean compararfechas(String fecha11, String fecha12) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date fechai = sdf.parse(fecha11, new ParsePosition(0));
+        java.util.Date fecha2 = sdf.parse(fecha12, new ParsePosition(0));
+        try{
+        boolean before = fechai.before(fecha2);
+        return before;
+        }catch(NullPointerException e){ System.out.println("no existe un dato");}
+        return false;
+    }
+    
+    public int diasHabiles() {
+        String[] obtenerFechaFormatStringB = this.obtenerFechaFormatStringB();
+        
+        int mes1, dia1, año1;
+        int mes2, dia2, año2;
+        if(this.compararfechas(obtenerFechaFormatStringB[0], obtenerFechaFormatStringB[1])){
+            año1 = Integer.parseInt((obtenerFechaFormatStringB[0]).substring(0, 4));
+            mes1 = Integer.parseInt((obtenerFechaFormatStringB[0]).substring(5, 7));
+            dia1 = Integer.parseInt((obtenerFechaFormatStringB[0]).substring(8, 10));
+            mes1 -= 1;
+            año2 = Integer.parseInt((obtenerFechaFormatStringB[1]).substring(0, 4));
+            mes2 = Integer.parseInt((obtenerFechaFormatStringB[1]).substring(5, 7));
+            dia2 = Integer.parseInt((obtenerFechaFormatStringB[1]).substring(8, 10));
+            mes2 -= 1;
+        }else{
+            año1 = Integer.parseInt((obtenerFechaFormatStringB[1]).substring(0, 4));
+            mes1 = Integer.parseInt((obtenerFechaFormatStringB[1]).substring(5, 7));
+            dia1 = Integer.parseInt((obtenerFechaFormatStringB[1]).substring(8, 10));
+            mes1 -= 1;
+            año2 = Integer.parseInt((obtenerFechaFormatStringB[0]).substring(0, 4));
+            mes2 = Integer.parseInt((obtenerFechaFormatStringB[0]).substring(5, 7));
+            dia2 = Integer.parseInt((obtenerFechaFormatStringB[0]).substring(8, 10));
+            mes2 -= 1;  
+        }
+
+        Calendar fechaInicio = new GregorianCalendar();
+        fechaInicio.set(año1, mes1, dia1);
+        Calendar fechaFin = new GregorianCalendar();
+        fechaFin.set(año2, mes2, dia2);
+        String ff = "" + fechaFin.getTime();
+
+        int diashabiles = 0;
+        int añoc = fechaInicio.get(Calendar.YEAR);
+        while (true) {
+            if (fechaInicio.get(Calendar.YEAR) > añoc) {
+                añoc += 1;
+            }
+            String fechai = "" + fechaInicio.getTime();
+            if (ff.equals(fechai)) {
+                break;
+            }
+            fechaInicio.add(Calendar.DAY_OF_YEAR, 1);
+            diashabiles++;
+        }
+        return (diashabiles);
+    }
     
     private boolean validarG() {
         if(objectv.validacionCamposNulosB()){
@@ -311,8 +436,8 @@ public class HacerPrestamo extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Apodo;
     private javax.swing.JTextField Cantidad1;
-    private com.toedter.calendar.JDateChooser Fecha_limete_Pago;
-    private com.toedter.calendar.JDateChooser Fecha_limete_Pago1;
+    private com.toedter.calendar.JDateChooser FechaInicioPago;
+    private com.toedter.calendar.JDateChooser FechaLimitePago;
     private javax.swing.JTextField Intereses1;
     private javax.swing.JLabel Total;
     private javax.swing.JLabel Totaldes;
@@ -347,7 +472,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
 
     private void guardar() {
         try {
-            OperacionesFechas f = new OperacionesFechas(fecha1, Fecha_limete_Pago, null, null);
+            OperacionesFechas f = new OperacionesFechas(fecha1, FechaInicioPago, null, null);
             int cantidadconintereses=(((Integer.parseInt(Cantidad1.getText()))*(Integer.parseInt(Intereses1.getText())))/100)+Integer.parseInt(Cantidad1.getText());
             int montopagodiario=cantidadconintereses/f.diasHabiles();
             String d[]=f.obtenerFechaFormatStringB();

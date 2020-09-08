@@ -37,7 +37,7 @@ public class OperacionesFechas {
     }
     
     public String[] obtenerFechaFormatStringB(){
-         String z[]= new String[1];
+         String z[]= new String[2];
          z[0] = ((JTextField)a.getDateEditor().getUiComponent()).getText();
          z[1] = ((JTextField)b.getDateEditor().getUiComponent()).getText();
         
@@ -98,7 +98,7 @@ public class OperacionesFechas {
     //Metodo para saber si una fecha es mayor que otra
     //Explicacion: si el parametro fecha11 es menor que el parametro fecha12 devuelve true si no false 
   
-private boolean compararfechas(String fecha11, String fecha12) {
+public boolean compararfechas(String fecha11, String fecha12) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         java.util.Date fecha1 = sdf.parse(fecha11, new ParsePosition(0));
         java.util.Date fecha2 = sdf.parse(fecha12, new ParsePosition(0));
