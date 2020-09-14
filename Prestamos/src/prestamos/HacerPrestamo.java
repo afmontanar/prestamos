@@ -342,8 +342,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
     public String[] obtenerFechaFormatStringB(){
          String z[]= new String[2];
          z[0] = ((JTextField)FechaInicioPago.getDateEditor().getUiComponent()).getText();
-         z[1] = ((JTextField)FechaLimitePago.getDateEditor().getUiComponent()).getText();
-        
+         z[1] = ((JTextField)FechaLimitePago.getDateEditor().getUiComponent()).getText();       
         return z;
     }
     
@@ -495,10 +494,9 @@ public class HacerPrestamo extends javax.swing.JDialog {
         }
 
     void getGrillaCliente(Object identificacion, Object nombre, Object apodo) {
-        this.cantidadFormateada.setText((String) identificacion);
+        this.dueno.setText((String) identificacion);
         this.nombre1.setText((String) nombre);
-        this.Apodo.setText((String) apodo);
-        
+        this.Apodo.setText((String) apodo);    
     }
 
     private String darFormatoALaCantidad(String text) {

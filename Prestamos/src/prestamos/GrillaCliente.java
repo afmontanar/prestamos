@@ -27,7 +27,7 @@ public class GrillaCliente extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();   
         setLocationRelativeTo(null);
-        String n[] = {"tipoid","idcliente","nombre","Apodo","Direccion","Detalles","Celular"};
+        String n[] = {"tipoid","idcliente","nombre","Apellido","Apodo","Direccion","Detalles","Celular"};
         this.modelot = new utilities.ModelosTablaS(n, jTable1);
         jTable1.setModel(this.modelot);
         this.llenarTabla();

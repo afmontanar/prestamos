@@ -30,8 +30,8 @@ public class Cliente extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        Component[] components = {NumeroId,nombre1,Celular,direccion};
-        Component[] componentst = {NumeroId,nombre1,nombre2,Celular,direccion,detalles};
+        Component[] components = {NumeroId,nombre1,apellido1,Celular,direccion};
+        Component[] componentst = {NumeroId,nombre1,nombre2,apellido1,Celular,direccion,detalles};
         this.objectv = new utilities.ValidarCamposVacios(components,componentst);
         String n[] = {"Identificacion","Nombres","Apellidos","Direccion","Celular","Detalle"};
        
@@ -192,7 +192,7 @@ public class Cliente extends javax.swing.JDialog {
 
     private void limpiar() {
         this.objectv.reiniciarFormularior();
-        this.modelot.vaciarTabla();
+//        this.modelot.vaciarTabla();
     }
     
 }

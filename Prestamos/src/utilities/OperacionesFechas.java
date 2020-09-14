@@ -100,10 +100,13 @@ public class OperacionesFechas {
   
 public boolean compararfechas(String fecha11, String fecha12) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date fecha1 = sdf.parse(fecha11, new ParsePosition(0));
+        java.util.Date fechai = sdf.parse(fecha11, new ParsePosition(0));
         java.util.Date fecha2 = sdf.parse(fecha12, new ParsePosition(0));
-        return fecha1.before(fecha2);
+        try{
+        boolean before = fechai.before(fecha2);
+        return before;
+        }catch(NullPointerException e){ System.out.println("no existe un dato");}
+        return false;
     }
-
   
 }
