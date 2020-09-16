@@ -75,7 +75,8 @@ public class HacerPrestamo extends javax.swing.JDialog {
         cantidadCobrar = new javax.swing.JLabel();
         FechaLimitePago = new com.toedter.calendar.JDateChooser();
         pagoDiario = new javax.swing.JLabel();
-        Intereses2 = new javax.swing.JTextField();
+        cuotas = new javax.swing.JTextField();
+        pagoDiarioConIntereses = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -195,19 +196,22 @@ public class HacerPrestamo extends javax.swing.JDialog {
         pagoDiario.setBorder(javax.swing.BorderFactory.createTitledBorder("Pago Diario"));
         jPanel1.add(pagoDiario, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 180, 50));
 
-        Intereses2.setBorder(javax.swing.BorderFactory.createTitledBorder("Numero de Cuotas"));
-        Intereses2.setName("Intereses"); // NOI18N
-        Intereses2.addCaretListener(new javax.swing.event.CaretListener() {
+        cuotas.setBorder(javax.swing.BorderFactory.createTitledBorder("Numero de Cuotas"));
+        cuotas.setName("Intereses"); // NOI18N
+        cuotas.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                Intereses2CaretUpdate(evt);
+                cuotasCaretUpdate(evt);
             }
         });
-        Intereses2.addKeyListener(new java.awt.event.KeyAdapter() {
+        cuotas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                Intereses2KeyTyped(evt);
+                cuotasKeyTyped(evt);
             }
         });
-        jPanel1.add(Intereses2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 180, 40));
+        jPanel1.add(cuotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 180, 40));
+
+        pagoDiarioConIntereses.setBorder(javax.swing.BorderFactory.createTitledBorder("Pago Diario Intereses"));
+        jPanel1.add(pagoDiarioConIntereses, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, 180, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -262,13 +266,9 @@ public class HacerPrestamo extends javax.swing.JDialog {
     }//GEN-LAST:event_Intereses1KeyTyped
 
     private void Cantidad1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_Cantidad1CaretUpdate
-        // TODO add your handling code here:
-           
-            String text = this.Cantidad1.getText();    
+        // TODO add your handling code here:  
             
-            String replaceAll = text.replaceAll("[.]", "");   
-            
-            String darFormatoALaCantidad = this.darFormatoALaCantidad(replaceAll);
+            String darFormatoALaCantidad = this.darFormatoALaCantidad(this.Cantidad1.getText());
             
             this.cantidadFormateada.setText(darFormatoALaCantidad);
          
@@ -298,9 +298,9 @@ public class HacerPrestamo extends javax.swing.JDialog {
      
               if(!this.obtenerFechaFormatString().equals("")){
                 try{
-                    System.out.println("hola1");
+                    
                     String[] obtenerFechaFormatStringB = this.obtenerFechaFormatStringB();
-                    System.out.println("hola2");
+                    
                     if(this.compararfechas(obtenerFechaFormatStringB[0], obtenerFechaFormatStringB[1])){
                         System.out.println(this.diasHabiles());
                     } 
@@ -331,7 +331,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
        
     }//GEN-LAST:event_FechaLimitePagoPropertyChange
 
-    private void Intereses2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Intereses2KeyTyped
+    private void cuotasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cuotasKeyTyped
         // TODO add your handling code here:
         char validar=evt.getKeyChar();
         if(Character.isLetter(validar)){
@@ -339,12 +339,30 @@ public class HacerPrestamo extends javax.swing.JDialog {
             evt.consume();
             JOptionPane.showMessageDialog(this, "Ingresar solo numeros");
         }
-    }//GEN-LAST:event_Intereses2KeyTyped
+    }//GEN-LAST:event_cuotasKeyTyped
 
-    private void Intereses2CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_Intereses2CaretUpdate
+    private void cuotasCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_cuotasCaretUpdate
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_Intereses2CaretUpdate
+        String cantidad = this.Cantidad1.getText(); 
+        String text = this.cuotas.getText();
+        try{
+        int valorCuotas = Integer.parseInt(cantidad)/Integer.parseInt(text);
+        String darFormatoALaCantidadDePagoCuotas = this.darFormatoALaCantidad(valorCuotas+"");
+        
+        this.pagoDiario.setText(darFormatoALaCantidadDePagoCuotas+"");
+        
+        String text1 = this.cantidadCobrar.getText();        
+        String replaceAll = text1.replaceAll("[.]", "");
+        int valorCuotasInt = Integer.parseInt(replaceAll)/Integer.parseInt(text);
+        
+        String darFormatoALaCantidadDePago = this.darFormatoALaCantidad(valorCuotasInt+"");
+        this.pagoDiarioConIntereses.setText(darFormatoALaCantidadDePago);
+         
+        }catch(NumberFormatException e){
+            
+        }
+    }//GEN-LAST:event_cuotasCaretUpdate
     
     public String obtenerFechaFormatString(){
         String i = ((JTextField)FechaInicioPago.getDateEditor().getUiComponent()).getText();
@@ -450,11 +468,11 @@ public class HacerPrestamo extends javax.swing.JDialog {
     private com.toedter.calendar.JDateChooser FechaInicioPago;
     private com.toedter.calendar.JDateChooser FechaLimitePago;
     private javax.swing.JTextField Intereses1;
-    private javax.swing.JTextField Intereses2;
     private javax.swing.JLabel Total;
     private javax.swing.JLabel Totaldes;
     private javax.swing.JLabel cantidadCobrar;
     private javax.swing.JLabel cantidadFormateada;
+    private javax.swing.JTextField cuotas;
     private javax.swing.JTextArea detalles;
     private javax.swing.JLabel dueno;
     private com.toedter.calendar.JDateChooser fecha1;
@@ -466,6 +484,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
     private javax.swing.JTextField nombre1;
     private javax.swing.JTextField numeroPrestamo;
     private javax.swing.JLabel pagoDiario;
+    private javax.swing.JLabel pagoDiarioConIntereses;
     // End of variables declaration//GEN-END:variables
 
     private boolean tienePrestamosVigentes() {
