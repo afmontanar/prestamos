@@ -44,6 +44,15 @@ public class OperacionesFechas {
         return z;
     }
     
+     public String[] obtenerFechaFormatStringC(){
+         String z[]= new String[3];
+         z[0] = ((JTextField)a.getDateEditor().getUiComponent()).getText();
+         z[1] = ((JTextField)b.getDateEditor().getUiComponent()).getText();
+         z[2] = ((JTextField)c.getDateEditor().getUiComponent()).getText();
+        
+        return z;
+    }
+    
 //Metodo para saber cuantos dias hay de una fecha a otra...
 //El metodo esta probado es infalible no como otros que buscas por hay... te fallan cuando les pones fechas de diferentes años
 //el primer parametro que recibe debe ser la fecha menor

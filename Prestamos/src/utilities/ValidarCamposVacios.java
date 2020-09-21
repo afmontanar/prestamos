@@ -4,6 +4,7 @@
  */
 package utilities;
 
+import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
 import javax.swing.*;
 
@@ -26,6 +27,7 @@ public class ValidarCamposVacios {
         this.j = components;
     }
     public boolean validacionCamposNulosB() {
+        
         for (int i = 0; i < j.length; i++) {//5,6,7,
             try {
                 JTextField c = (JTextField) j[i];
@@ -43,14 +45,23 @@ public class ValidarCamposVacios {
                         return false;
                     }
 
-                } catch (Exception a) {                  
+                } catch (Exception a) {
+                    try{
                     JLabel c = (JLabel) j[i];
                     if ( c.getText().equals("") || c.getText().equals("null")) {
                         JOptionPane.showMessageDialog(null, "Campo " + c.getName() + " No Puede ir Vacio");
                         return false;
                     }
+                    }catch(Exception o){
+//                        String i = ((JTextField)fecha1.getDateEditor().getUiComponent()).getText();
+                        JDateChooser c = (JDateChooser) j[i];
+                        String ic = ((JTextField)c.getDateEditor().getUiComponent()).getText();
+                        if ( ic.equals("") || ic.equals("null")) {
+                        JOptionPane.showMessageDialog(null, "Fecha " + c.getName() + " No Puede ir Vacio");
+                        return false;
                     }
-                }
+                    }
+                }}
             }
         
         return true;

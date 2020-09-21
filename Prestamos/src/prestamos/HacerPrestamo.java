@@ -40,9 +40,11 @@ public class HacerPrestamo extends javax.swing.JDialog {
     public HacerPrestamo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        Component[] components = {cantidadFormateada,nombre1,Apodo,fecha1,Cantidad1,Intereses1,cantidadFormateada,pagoDiario,FechaInicioPago,detalles,numeroPrestamo};
+        Component[] components = {cantidadFormateada,nombre1,fecha1,Cantidad1,Intereses1,cantidadFormateada,pagoDiario,numeroPrestamo};
         this.objectv = new utilities.ValidarCamposVacios(components);
         setLocationRelativeTo(null); 
+        String i = ((JTextField)fecha1.getDateEditor().getUiComponent()).getText();
+        
     }
 
     
@@ -503,11 +505,13 @@ public class HacerPrestamo extends javax.swing.JDialog {
 
     private void guardar() {
         try {
-            OperacionesFechas f = new OperacionesFechas(fecha1, FechaInicioPago, null, null);
+            OperacionesFechas f = new OperacionesFechas(fecha1, FechaLimitePago, FechaInicioPago, null);
             int cantidadconintereses=(((Integer.parseInt(Cantidad1.getText()))*(Integer.parseInt(Intereses1.getText())))/100)+Integer.parseInt(Cantidad1.getText());
-            int montopagodiario=cantidadconintereses/f.diasHabiles();
-            String d[]=f.obtenerFechaFormatStringB();
-            Prestamos.o.EjecutarMysql("INSERT INTO `prestamo`(`idcliente`, `nombre`, `apodo`, `fecha`, `cantidad`, `interes`, `cantidadcobrar`, `montodiariodepago`, `fechalimetepago`, `detalles`, `numeroprestamo`, `cancelado`) VALUES ('"+cantidadFormateada.getText()+"','"+nombre1.getText()+"','"+Apodo.getText()+"','"+d[0]+"','"+Cantidad1.getText()+"','"+Intereses1.getText()+"','"+cantidadconintereses+"','"+montopagodiario+"','"+d[1]+"','"+detalles.getText()+"',[value-11],[value-12])");            
+            int montopagodiario=cantidadconintereses/Integer.parseInt(this.cuotas.getText());
+            String d[]=f.obtenerFechaFormatStringC();
+            System.out.println("INSERT INTO `prestamo`(`idcliente`, `nombre`, `apodo`, `fecha`, `cantidad`, `interes`, `cantidadcobrar`, `montodiariodepago`, `fechalimetepago`, `detalles`, `numeroprestamo`, `cancelado`, `numeroCuotas`,`fechainiciopago`) VALUES ('"+Cantidad1.getText()+"','"+nombre1.getText()+"','"+Apodo.getText()+"','"+d[0]+"','"+Cantidad1.getText()+"','"+Intereses1.getText()+"','"+cantidadconintereses+"','"+montopagodiario+"','"+d[1]+"','"+detalles.getText()+"','','false','"+this.cuotas.getText()+"','"+d[2]+"')");
+            Prestamos.o.EjecutarMysql("INSERT INTO `prestamo`(`idcliente`, `nombre`, `apodo`, `fecha`, `cantidad`, `interes`, `cantidadcobrar`, `montodiariodepago`, `fechalimetepago`, `detalles`, `numeroprestamo`, `cancelado`, `numeroCuotas`,`fechainiciopago`) VALUES ('"+Cantidad1.getText()+"','"+nombre1.getText()+"','"+Apodo.getText()+"','"+d[0]+"','"+Cantidad1.getText()+"','"+Intereses1.getText()+"','"+cantidadconintereses+"','"+montopagodiario+"','"+d[1]+"','"+detalles.getText()+"','','false','"+this.cuotas.getText()+"','"+d[2]+"')");            
+            
         } catch (SQLException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
