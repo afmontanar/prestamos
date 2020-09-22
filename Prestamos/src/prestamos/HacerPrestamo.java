@@ -31,6 +31,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
      */
     private utilities.ModelosTabla modelot;
     private final ValidarCamposVacios objectv;
+    private boolean desactivar;
     private Object idCliente;
     private String idChofer;
     private utilities.ModelosTabla modelotS;
@@ -40,11 +41,14 @@ public class HacerPrestamo extends javax.swing.JDialog {
     public HacerPrestamo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        Component[] components = {cantidadFormateada,nombre1,fecha1,Cantidad1,Intereses1,cantidadFormateada,pagoDiario,numeroPrestamo};
-        this.objectv = new utilities.ValidarCamposVacios(components);
+        Component[] componentsall = {cantidadFormateada,dueno,FechaInicioPago,FechaLimitePago,Apodo,nombre1,fecha1,Cantidad1,Intereses1,pagoDiario,ordenruta,detalles,pagoDiario,pagoDiarioConIntereses,cuotas};
+        
+        Component[] components = {dueno,cantidadFormateada,nombre1,fecha1,Cantidad1,Intereses1,cantidadFormateada,pagoDiario,ordenruta};
+        this.objectv = new utilities.ValidarCamposVacios(components,componentsall);
+//        this.objectr = new utilities.ValidarCamposVacios(components);
         setLocationRelativeTo(null); 
         String i = ((JTextField)fecha1.getDateEditor().getUiComponent()).getText();
-        
+        desactivar=false;
     }
 
     
@@ -72,7 +76,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
         fecha1 = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         detalles = new javax.swing.JTextArea();
-        numeroPrestamo = new javax.swing.JTextField();
+        ordenruta = new javax.swing.JTextField();
         dueno = new javax.swing.JLabel();
         cantidadCobrar = new javax.swing.JLabel();
         FechaLimitePago = new com.toedter.calendar.JDateChooser();
@@ -81,11 +85,6 @@ public class HacerPrestamo extends javax.swing.JDialog {
         pagoDiarioConIntereses = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -176,9 +175,9 @@ public class HacerPrestamo extends javax.swing.JDialog {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 180, 90));
 
-        numeroPrestamo.setBorder(javax.swing.BorderFactory.createTitledBorder("Orden de ruta"));
-        numeroPrestamo.setName("Orden de ruta");
-        jPanel1.add(numeroPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 180, 40));
+        ordenruta.setBorder(javax.swing.BorderFactory.createTitledBorder("Orden de ruta"));
+        ordenruta.setName("Orden de ruta");
+        jPanel1.add(ordenruta, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 180, 40));
 
         dueno.setBorder(javax.swing.BorderFactory.createTitledBorder("IdCliente"));
         jPanel1.add(dueno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 180, 50));
@@ -237,24 +236,14 @@ public class HacerPrestamo extends javax.swing.JDialog {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-         if(this.validarG()){
+        this.desactivar=true; 
+        if(this.validarG()){
             this.guardar();
             this.limpiar();
             JOptionPane.showMessageDialog(this, "Se a guardado con exito");
         }
+        this.desactivar=false;
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-        try {
-            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT max(numeroprestamo) FROM `prestamo`"); 
-             while(MysqlConsulta.next()){
-                this.numeroPrestamo.setText(""+MysqlConsulta.getInt("max(numeroprestamo)"));
-             }
-        } catch (SQLException ex) {
-            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_formWindowOpened
 
     private void Intereses1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Intereses1KeyTyped
         // TODO add your handling code here:
@@ -269,14 +258,12 @@ public class HacerPrestamo extends javax.swing.JDialog {
 
     private void Cantidad1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_Cantidad1CaretUpdate
         // TODO add your handling code here:  
-            
-            String darFormatoALaCantidad = this.darFormatoALaCantidad(this.Cantidad1.getText());
-            
-            this.cantidadFormateada.setText(darFormatoALaCantidad);
-         
+        if(!desactivar){
+            String darFormatoALaCantidad = this.darFormatoALaCantidad(this.Cantidad1.getText());            
+            this.cantidadFormateada.setText(darFormatoALaCantidad);       
             if(!Intereses1.getText().equals("")){
                 this.cantidadConIntereses();
-            }
+            }}
     }//GEN-LAST:event_Cantidad1CaretUpdate
 
     private void Cantidad1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Cantidad1KeyTyped
@@ -291,7 +278,9 @@ public class HacerPrestamo extends javax.swing.JDialog {
 
     private void Intereses1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_Intereses1CaretUpdate
         // TODO add your handling code here:
+        if(!desactivar){
         this.cantidadConIntereses();
+        }
     }//GEN-LAST:event_Intereses1CaretUpdate
 
     private void FechaInicioPagoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_FechaInicioPagoPropertyChange
@@ -484,7 +473,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nombre1;
-    private javax.swing.JTextField numeroPrestamo;
+    private javax.swing.JTextField ordenruta;
     private javax.swing.JLabel pagoDiario;
     private javax.swing.JLabel pagoDiarioConIntereses;
     // End of variables declaration//GEN-END:variables
@@ -502,6 +491,22 @@ public class HacerPrestamo extends javax.swing.JDialog {
         }
         return true;
     }
+    
+    private int obtenerMaximoNumeroPrestamo() {
+        try {
+            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("select MAX(`numeroprestamo`) from prestamo");
+            while(MysqlConsulta.next()){
+                 return MysqlConsulta.getInt("MAX(`numeroprestamo`)");
+                      
+            }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(GrillaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+   
+ 
 
     private void guardar() {
         try {
@@ -509,8 +514,8 @@ public class HacerPrestamo extends javax.swing.JDialog {
             int cantidadconintereses=(((Integer.parseInt(Cantidad1.getText()))*(Integer.parseInt(Intereses1.getText())))/100)+Integer.parseInt(Cantidad1.getText());
             int montopagodiario=cantidadconintereses/Integer.parseInt(this.cuotas.getText());
             String d[]=f.obtenerFechaFormatStringC();
-            System.out.println("INSERT INTO `prestamo`(`idcliente`, `nombre`, `apodo`, `fecha`, `cantidad`, `interes`, `cantidadcobrar`, `montodiariodepago`, `fechalimetepago`, `detalles`, `numeroprestamo`, `cancelado`, `numeroCuotas`,`fechainiciopago`) VALUES ('"+Cantidad1.getText()+"','"+nombre1.getText()+"','"+Apodo.getText()+"','"+d[0]+"','"+Cantidad1.getText()+"','"+Intereses1.getText()+"','"+cantidadconintereses+"','"+montopagodiario+"','"+d[1]+"','"+detalles.getText()+"','','false','"+this.cuotas.getText()+"','"+d[2]+"')");
-            Prestamos.o.EjecutarMysql("INSERT INTO `prestamo`(`idcliente`, `nombre`, `apodo`, `fecha`, `cantidad`, `interes`, `cantidadcobrar`, `montodiariodepago`, `fechalimetepago`, `detalles`, `numeroprestamo`, `cancelado`, `numeroCuotas`,`fechainiciopago`) VALUES ('"+Cantidad1.getText()+"','"+nombre1.getText()+"','"+Apodo.getText()+"','"+d[0]+"','"+Cantidad1.getText()+"','"+Intereses1.getText()+"','"+cantidadconintereses+"','"+montopagodiario+"','"+d[1]+"','"+detalles.getText()+"','','false','"+this.cuotas.getText()+"','"+d[2]+"')");            
+//            System.out.println("INSERT INTO `prestamo`(`idcliente`, `nombre`, `apodo`, `fecha`, `cantidad`, `interes`, `cantidadcobrar`, `montodiariodepago`, `fechalimetepago`, `detalles`, `numeroprestamo`, `cancelado`, `numeroCuotas`,`fechainiciopago`) VALUES ('"+Cantidad1.getText()+"','"+nombre1.getText()+"','"+Apodo.getText()+"','"+d[0]+"','"+Cantidad1.getText()+"','"+Intereses1.getText()+"','"+cantidadconintereses+"','"+montopagodiario+"','"+d[1]+"','"+detalles.getText()+"','','false','"+this.cuotas.getText()+"','"+d[2]+"')");
+            Prestamos.o.EjecutarMysql("INSERT INTO `prestamo`(`idcliente`, `nombre`, `apodo`, `fecha`, `cantidad`, `interes`, `cantidadcobrar`, `montodiariodepago`, `fechalimetepago`, `detalles`, `numeroprestamo`, `cancelado`, `numeroCuotas`,`fechainiciopago`) VALUES ('"+dueno.getText()+"','"+nombre1.getText()+"','"+Apodo.getText()+"','"+d[0]+"','"+Cantidad1.getText()+"','"+Intereses1.getText()+"','"+cantidadconintereses+"','"+montopagodiario+"','"+d[1]+"','"+detalles.getText()+"','"+(this.obtenerMaximoNumeroPrestamo()+1)+"','0','"+this.cuotas.getText()+"','"+d[2]+"')");            
             
         } catch (SQLException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -519,14 +524,6 @@ public class HacerPrestamo extends javax.swing.JDialog {
 
     private void limpiar() {
         this.objectv.reiniciarFormularior();
-            try {
-            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT max(numeroprestamo) FROM `prestamo`"); 
-                while(MysqlConsulta.next()){
-                this.numeroPrestamo.setText(""+MysqlConsulta.getInt("max(numeroprestamo)"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
         }
 
     void getGrillaCliente(Object identificacion, Object nombre, Object apodo) {

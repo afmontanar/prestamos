@@ -82,13 +82,20 @@ public class ValidarCamposVacios {
                     c.setText("");
                     
                     }catch(ClassCastException e){
-                    JCheckBox u = (JCheckBox)j[i];
+                    
+                    try{
+                     JCheckBox u = (JCheckBox)j[i];
                      u.setSelected(false);
+                   
+                    }catch(Exception o){
+//                        String i = ((JTextField)fecha1.getDateEditor().getUiComponent()).getText();
+                        JDateChooser c = (JDateChooser) j[i];
+                        c.setCalendar(null);                  
                     }
                 }
             }
         }
-    }
+    }}
     
     public void reiniciarFormularior(){
         for(int i=0; i<r.length; i++){
@@ -108,8 +115,15 @@ public class ValidarCamposVacios {
                     JCheckBox u = (JCheckBox)r[i];
                      u.setSelected(false);
                         }catch(ClassCastException c){
+                            
+                             try{
                             JTextArea p = (JTextArea)r[i];
                             p.setText("");
+                    }catch(Exception o){
+//                        String i = ((JTextField)fecha1.getDateEditor().getUiComponent()).getText();
+                        JDateChooser kk = (JDateChooser) r[i];
+                        kk.setCalendar(null);                  
+                    }
                         }
                     }
                 }
