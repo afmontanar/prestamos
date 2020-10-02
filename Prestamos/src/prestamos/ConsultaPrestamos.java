@@ -7,7 +7,10 @@ package prestamos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+;
 
 /**
  *
@@ -26,7 +29,7 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        String n[] = {"indice", "nombre", "placa", "dueno", "chofer", "Fecha", "valorTotal", "valorTotalConDescuento"};
+        String n[] = {"idCliente", "nombre", "apodo", "Fecha", "interes", "cantidadcobrar"};
         this.modelot = new utilities.ModelosTablaS(n, jTable2);
         jTable2.setModel(this.modelot);
         this.llenarTabla();
@@ -65,6 +68,9 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         apodo1 = new javax.swing.JTextField();
         interes1 = new javax.swing.JTextField();
         rutai1 = new javax.swing.JTextField();
+        totalDeuda = new javax.swing.JTextField();
+        fechaprestamo = new com.toedter.calendar.JDateChooser();
+        totalDeuda2 = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,7 +96,7 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
                 rutafCaretUpdate(evt);
             }
         });
-        jPanel1.add(rutaf, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 120, 180, 40));
+        jPanel1.add(rutaf, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 180, 40));
 
         Deuda.setBorder(javax.swing.BorderFactory.createTitledBorder("Deuda"));
         Deuda.setName("Deuda");
@@ -112,9 +118,9 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, 30, 40));
 
-        fechai.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha inicial"));
+        fechai.setBorder(javax.swing.BorderFactory.createTitledBorder(" Fecha Inicial de pago"));
         fechai.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(fechai, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 60, 180, 40));
+        jPanel1.add(fechai, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 180, 40));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -144,11 +150,11 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         });
         jScrollPane3.setViewportView(jTable2);
 
-        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1980, -1));
+        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 430));
 
         jScrollPane2.setViewportView(jPanel4);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 1200, 400));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 870, 230));
 
         nombre.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
         nombre.setName("nombre"); // NOI18N
@@ -168,9 +174,9 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         });
         jPanel1.add(cantidadPrestada, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 180, 40));
 
-        fechaf.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha final"));
+        fechaf.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha final pago"));
         fechaf.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(fechaf, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, 180, 40));
+        jPanel1.add(fechaf, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, 180, 40));
 
         jCheckBox1.setText("Incluir busqueda de fechas");
         jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, -1, -1));
@@ -181,7 +187,7 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
 
         apodo1.setBorder(javax.swing.BorderFactory.createTitledBorder("Apodo"));
         apodo1.setName("Apodo");
@@ -208,7 +214,29 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
                 rutai1CaretUpdate(evt);
             }
         });
-        jPanel1.add(rutai1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 120, 180, 40));
+        jPanel1.add(rutai1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 180, 40));
+
+        totalDeuda.setBorder(javax.swing.BorderFactory.createTitledBorder("Total deuda"));
+        totalDeuda.setName("rutaf"); // NOI18N
+        totalDeuda.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                totalDeudaCaretUpdate(evt);
+            }
+        });
+        jPanel1.add(totalDeuda, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 490, 180, 40));
+
+        fechaprestamo.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha del prestamo"));
+        fechaprestamo.setDateFormatString("yyyy-MM-dd");
+        jPanel1.add(fechaprestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 180, 40));
+
+        totalDeuda2.setBorder(javax.swing.BorderFactory.createTitledBorder("Total en intereses"));
+        totalDeuda2.setName("rutaf"); // NOI18N
+        totalDeuda2.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                totalDeuda2CaretUpdate(evt);
+            }
+        });
+        jPanel1.add(totalDeuda2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 490, 200, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -219,7 +247,7 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -276,6 +304,14 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_rutai1CaretUpdate
 
+    private void totalDeudaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_totalDeudaCaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalDeudaCaretUpdate
+
+    private void totalDeuda2CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_totalDeuda2CaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalDeuda2CaretUpdate
+
     /**
      * @param args the command line arguments
      */
@@ -287,6 +323,7 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
     private javax.swing.JLabel cliente;
     private com.toedter.calendar.JDateChooser fechaf;
     private com.toedter.calendar.JDateChooser fechai;
+    private com.toedter.calendar.JDateChooser fechaprestamo;
     private javax.swing.JTextField interes1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -303,6 +340,8 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField rutaf;
     private javax.swing.JTextField rutai1;
+    private javax.swing.JTextField totalDeuda;
+    private javax.swing.JTextField totalDeuda2;
     // End of variables declaration//GEN-END:variables
 
     private void busquedaHv() {
@@ -333,28 +372,35 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
     }
 
    void llenarTabla() {
-//        this.modelot.vaciarTabla();
+        this.modelot.vaciarTabla();
 //        String i = ((javax.swing.JTextField) fechai.getDateEditor().getUiComponent()).getText();
-//        ResultSet MysqlConsulta = null;
-//        try {
-//            MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `historiavehiculo`");
-//            while (MysqlConsulta.next()) {
-//                try {
-//                    String a[] = {MysqlConsulta.getString("indice"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("placa"), MysqlConsulta.getString("dueno"), MysqlConsulta.getString("chofer"), MysqlConsulta.getString("fecha"), MysqlConsulta.getString("valorTotal"), MysqlConsulta.getString("valorTotalConDescuento")};
-//                    this.modelot.ingresarUsuario(a);
-//                } catch (SQLException ex) {
+        int valorTotalDeudas=0;
+        ResultSet MysqlConsulta = null;
+        try {
+            MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `prestamo`");
+            while (MysqlConsulta.next()) {
+                try {
+                    valorTotalDeudas =+Integer.parseInt(MysqlConsulta.getString("cantidadcobrar"));
+                    String darFormatoALaCantidad = this.darFormatoALaCantidad(MysqlConsulta.getString("cantidadcobrar"));
+//                    {"idCliente", "nombre", "apodo", "Fecha", "interes", "cantidadcobrar"};
+                    String a[] = {MysqlConsulta.getString("idCliente"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("apodo"), MysqlConsulta.getString("Fecha"), MysqlConsulta.getString("interes"), darFormatoALaCantidad};
+                    this.modelot.ingresarUsuario(a);
+                } catch (SQLException ex) {
 //                    try {
-//                        String a[] = {MysqlConsulta.getString("indice"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("placa"), MysqlConsulta.getString("dueno"), MysqlConsulta.getString("chofer"), "0000-00-00 00:00:00", MysqlConsulta.getString("valorTotal"), MysqlConsulta.getString("valorTotalConDescuento")};
+//                        String darFormatoALaCantidad = this.darFormatoALaCantidad(MysqlConsulta.getString("cantidadcobrar"));
+//                        String a[] = {MysqlConsulta.getString("idCliente"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("apodo"), MysqlConsulta.getString("Fecha"), MysqlConsulta.getString("interes"),darFormatoALaCantidad};
 //                        this.modelot.ingresarUsuario(a);
 //                    } catch (SQLException ex1) {
-//                        JOptionPane.showMessageDialog(rootPane, "A ocurrido un error inexperado");
+                        JOptionPane.showMessageDialog(rootPane, "A ocurrido un error inexperado");
 //                    }
-//                }
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(BusquedaHv.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        this.modelot.reload();
+                }
+            }
+            this.darFormatoALaCantidad(valorTotalDeudas+"");
+            totalDeuda.setText(valorTotalDeudas+"");
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaPrestamos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.modelot.reload();
     }
 
     void setCliente(Object nombre, Object identificacion) {
@@ -391,6 +437,44 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         int selectedRow = jTable2.getSelectedRow();
         Principal parent = (Principal) super.getParent();
         parent.mostrarHv(jTable2.getValueAt(selectedRow, 0) + "", jTable2.getValueAt(selectedRow, 1) + "", jTable2.getValueAt(selectedRow, 2) + "", jTable2.getValueAt(selectedRow, 3) + "", jTable2.getValueAt(selectedRow, 4) + "", jTable2.getValueAt(selectedRow, 5) + "", jTable2.getValueAt(selectedRow, 6) + "", jTable2.getValueAt(selectedRow, 7) + "");
+    }
+    
+     private String darFormatoALaCantidad(String num) {
+        String x1 = "0";
+        long x;
+        int neg = 0;
+        num = num.replaceAll("[.]", "");
+        if (!num.equals("0")) {
+            try {
+                x = Long.parseLong(num);
+                if (x < 0) {
+                    x = x * (-1);
+                    neg = 1;
+                }
+                if (x < 1000) {
+                    x1 = "" + x;
+                }
+                if (x >= 1000 && x <= 999999) {
+                    long miles;
+                    miles = x / 1000;
+                    x1 = "" + miles + "." + num.substring(num.length() - 3, num.length());
+                } else if (x >= 1000000 && x <= 999999999) {
+                    long millon;
+                    millon = x / 1000000;
+                    x1 = "" + millon + "." + num.substring(num.length() - 6, num.length() - 3) + "." + num.substring(num.length() - 3, num.length());
+                } else if (x >= 1000000000 && x <= 999999999999.0) {
+                    long milmillon;
+                    milmillon = x / 1000000000;
+                    x1 = "" + milmillon + "." + num.substring(num.length() - 9, num.length() - 6) + "." + num.substring(num.length() - 6, num.length() - 3) + "." + num.substring(num.length() - 3, num.length());
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "ERROR AL CONVERTIR A ENTERO 2" + e);
+            }
+        }
+        if (neg == 1) {
+            x1 = "-" + x1;
+        }
+        return x1;
     }
 
 }

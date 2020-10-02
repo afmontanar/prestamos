@@ -97,7 +97,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem1);
 
-        BusquedaHv.setText("Busqueda Hv");
+        BusquedaHv.setText("Deudores");
         BusquedaHv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BusquedaHvActionPerformed(evt);

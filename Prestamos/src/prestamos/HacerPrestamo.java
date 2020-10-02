@@ -550,7 +550,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
     }
     
     private void cantidadConIntereses(){
-         int cantidad=0;
+        int cantidad=0;
         try {
             cantidad=Integer.parseInt(this.Cantidad1.getText());
         } catch (NumberFormatException e) {

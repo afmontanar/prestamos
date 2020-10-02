@@ -135,11 +135,9 @@ public class ValidarCamposVacios {
         String x1 = "0";
         long x;
         int neg = 0;
-        num = "" + QuitarFormateoEntero(num);
+        num = num.replaceAll("[.]", "");
         if (!num.equals("0")) {
-
             try {
-
                 x = Long.parseLong(num);
                 if (x < 0) {
                     x = x * (-1);
@@ -152,55 +150,24 @@ public class ValidarCamposVacios {
                     long miles;
                     miles = x / 1000;
                     x1 = "" + miles + "." + num.substring(num.length() - 3, num.length());
-
                 } else if (x >= 1000000 && x <= 999999999) {
                     long millon;
-
                     millon = x / 1000000;
-
                     x1 = "" + millon + "." + num.substring(num.length() - 6, num.length() - 3) + "." + num.substring(num.length() - 3, num.length());
-
-
                 } else if (x >= 1000000000 && x <= 999999999999.0) {
                     long milmillon;
-
                     milmillon = x / 1000000000;
-
                     x1 = "" + milmillon + "." + num.substring(num.length() - 9, num.length() - 6) + "." + num.substring(num.length() - 6, num.length() - 3) + "." + num.substring(num.length() - 3, num.length());
                 }
-
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR AL CONVERTIR A ENTERO 2" + e);
             }
-
         }
-
-
         if (neg == 1) {
             x1 = "-" + x1;
         }
-
         return x1;
-
     }
 
-   public long QuitarFormateoEntero(String x)
-   {
-    long x1=0;
-    if(!x.equals(""))
-    {
-    x=x.replace(".","");
-     x=x.replace("$","");
-    try
-    {
-    x1=Long.parseLong(x);
-     return x1;
-     } catch (Exception e) {
-           // JOptionPane.showMessageDialog(null, "ERROR AL CONVERTIR A ENTERO1 " + e);
-        }
-    }
-
-    return x1;
-
-   }
+   
 }
