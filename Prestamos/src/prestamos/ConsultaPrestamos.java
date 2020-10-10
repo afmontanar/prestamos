@@ -9,8 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
-;
+
 
 /**
  *
@@ -29,7 +30,7 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        String n[] = {"idCliente", "nombre", "apodo", "Fecha", "interes", "cantidadcobrar"};
+        String n[] = {"idCliente", "nombre", "apodo", "Fecha", "interes", "cantidadcobrar", "abonar"};
         this.modelot = new utilities.ModelosTablaS(n, jTable2);
         jTable2.setModel(this.modelot);
         this.llenarTabla();
@@ -64,13 +65,14 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         cantidadPrestada = new javax.swing.JTextField();
         fechaf = new com.toedter.calendar.JDateChooser();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jButton3 = new javax.swing.JButton();
+        AbonarSeleccionados = new javax.swing.JButton();
         apodo1 = new javax.swing.JTextField();
         interes1 = new javax.swing.JTextField();
         rutai1 = new javax.swing.JTextField();
         totalDeuda = new javax.swing.JTextField();
         fechaprestamo = new com.toedter.calendar.JDateChooser();
-        totalDeuda2 = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
+        AbonarSeleccionados1 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -181,13 +183,13 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         jCheckBox1.setText("Incluir busqueda de fechas");
         jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, -1, -1));
 
-        jButton3.setText("Reiniciar busqueda");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        AbonarSeleccionados.setText("Abonar todos");
+        AbonarSeleccionados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                AbonarSeleccionadosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
+        jPanel1.add(AbonarSeleccionados, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 500, -1, -1));
 
         apodo1.setBorder(javax.swing.BorderFactory.createTitledBorder("Apodo"));
         apodo1.setName("Apodo");
@@ -229,14 +231,21 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         fechaprestamo.setDateFormatString("yyyy-MM-dd");
         jPanel1.add(fechaprestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 180, 40));
 
-        totalDeuda2.setBorder(javax.swing.BorderFactory.createTitledBorder("Total en intereses"));
-        totalDeuda2.setName("rutaf"); // NOI18N
-        totalDeuda2.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                totalDeuda2CaretUpdate(evt);
+        jButton4.setText("Reiniciar busqueda");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(totalDeuda2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 490, 200, 40));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
+
+        AbonarSeleccionados1.setText("Abonar seleccionados");
+        AbonarSeleccionados1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AbonarSeleccionados1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(AbonarSeleccionados1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 500, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -280,10 +289,10 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         busquedaHv();
     }//GEN-LAST:event_cantidadPrestadaCaretUpdate
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void AbonarSeleccionadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbonarSeleccionadosActionPerformed
         // TODO add your handling code here:
         this.reiniciarFormulario();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_AbonarSeleccionadosActionPerformed
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // TODO add your handling code here:
@@ -308,15 +317,21 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_totalDeudaCaretUpdate
 
-    private void totalDeuda2CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_totalDeuda2CaretUpdate
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_totalDeuda2CaretUpdate
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void AbonarSeleccionados1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbonarSeleccionados1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AbonarSeleccionados1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AbonarSeleccionados;
+    private javax.swing.JButton AbonarSeleccionados1;
     private javax.swing.JTextField Deuda;
     private javax.swing.JTextField apodo1;
     private javax.swing.JTextField cantidadPrestada;
@@ -326,7 +341,7 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
     private com.toedter.calendar.JDateChooser fechaprestamo;
     private javax.swing.JTextField interes1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -341,7 +356,6 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
     private javax.swing.JTextField rutaf;
     private javax.swing.JTextField rutai1;
     private javax.swing.JTextField totalDeuda;
-    private javax.swing.JTextField totalDeuda2;
     // End of variables declaration//GEN-END:variables
 
     private void busquedaHv() {
@@ -377,14 +391,15 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         int valorTotalDeudas=0;
         ResultSet MysqlConsulta = null;
         try {
-            MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `prestamo`");
+            MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `prestamo` WHERE `cancelado` = 0");
             while (MysqlConsulta.next()) {
                 try {
                     valorTotalDeudas =+Integer.parseInt(MysqlConsulta.getString("cantidadcobrar"));
                     String darFormatoALaCantidad = this.darFormatoALaCantidad(MysqlConsulta.getString("cantidadcobrar"));
 //                    {"idCliente", "nombre", "apodo", "Fecha", "interes", "cantidadcobrar"};
-                    String a[] = {MysqlConsulta.getString("idCliente"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("apodo"), MysqlConsulta.getString("Fecha"), MysqlConsulta.getString("interes"), darFormatoALaCantidad};
+                    Object a[] = {MysqlConsulta.getString("idCliente"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("apodo"), MysqlConsulta.getString("Fecha"), MysqlConsulta.getString("interes")+"%", darFormatoALaCantidad, false};
                     this.modelot.ingresarUsuario(a);
+                   
                 } catch (SQLException ex) {
 //                    try {
 //                        String darFormatoALaCantidad = this.darFormatoALaCantidad(MysqlConsulta.getString("cantidadcobrar"));
@@ -395,8 +410,8 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
 //                    }
                 }
             }
-            this.darFormatoALaCantidad(valorTotalDeudas+"");
-            totalDeuda.setText(valorTotalDeudas+"");
+            String darFormatoALaCantidad = this.darFormatoALaCantidad(valorTotalDeudas+"");
+            totalDeuda.setText(darFormatoALaCantidad+"");
         } catch (SQLException ex) {
             Logger.getLogger(ConsultaPrestamos.class.getName()).log(Level.SEVERE, null, ex);
         }

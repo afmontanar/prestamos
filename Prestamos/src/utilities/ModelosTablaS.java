@@ -103,8 +103,9 @@ import javax.swing.table.AbstractTableModel;
      
      }
      
+    @Override
      public boolean isCellEditable(int row, int col) {
-                return false;
+                return col==6;
         }
 
         
