@@ -18,7 +18,7 @@ public class Principal extends javax.swing.JFrame {
     private final GrillaCliente gcliente;
     private final GrillaChofer gchofer;
     private final ConsultaPrestamos BusqHv;
-    private final ConsultaPrestamos consultas;
+//    private final ConsultaPrestamos consultas;
     /**
      * Creates new form Principal
      */
@@ -30,7 +30,7 @@ public class Principal extends javax.swing.JFrame {
         this.gcliente = new GrillaCliente(this, true);
         this.gchofer = new GrillaChofer(this, true);
         this.BusqHv = new ConsultaPrestamos(this, true);
-        this.consultas= new ConsultaPrestamos(this, true);
+//        this.consultas= new ConsultaPrestamos(this, true);
     }
 
    
@@ -172,8 +172,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void BusquedaHv1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaHv1ActionPerformed
         // TODO add your handling code here:
-        this.poder = this.consultas;
-        this.consultas.setVisible(true);
+        this.poder = this.BusqHv;
+        this.BusqHv.setVisible(true);
     }//GEN-LAST:event_BusquedaHv1ActionPerformed
 
     private void BusquedaHv2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaHv2ActionPerformed
@@ -219,8 +219,8 @@ public class Principal extends javax.swing.JFrame {
         this.gcliente.setVisible(b);
     }
 
-    void setGrillaHistoriaVCli(Object nombre, Object identificacion) {
-        this.BusqHv.setCliente(nombre, identificacion);
+    void setGrillaHistoriaVCli(Object identificacion, Object nombre, Object apodo) {
+        this.BusqHv.setCliente(nombre, identificacion,apodo);
     }
 
     void gChoferABhv(String identificacion, String nombres) {

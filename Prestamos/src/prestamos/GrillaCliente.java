@@ -230,8 +230,7 @@ public class GrillaCliente extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void buscar() {
-        this.modelot.vaciarTabla();
-        
+        this.modelot.vaciarTabla();       
         try {
             ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `cliente` WHERE `idcliente` LIKE '%"+this.identificacion.getText()+"%' AND "
                     + "`nombre` LIKE '%"+this.nombre.getText()+"%' AND `apellido` LIKE '%"+this.Apellido.getText()+"%' AND `apodo`"
@@ -266,6 +265,7 @@ public class GrillaCliente extends javax.swing.JDialog {
     }
 
     void quienPide(int i) {
+        System.out.println("el que pide:"+i);
         this.elquepide=i;
         this.llenarTabla();
     }
@@ -274,14 +274,16 @@ public class GrillaCliente extends javax.swing.JDialog {
         if(this.elquepide==0){
             enviarHv();
         }
-        if(this.elquepide==1){
+        System.out.println("este es el que pide: "+this.elquepide);
+        if(this.elquepide==2){
             enviarHv1();
         }
     }
 
     private void enviarHv1() {
         Principal r=(Principal) super.getParent();
-        r.setGrillaHistoriaVCli(this.modelot.getValueAt(this.jTable1.getSelectedRow(), 0),this.modelot.getValueAt(this.jTable1.getSelectedRow(), 4));  
+        System.out.println("mira este valor: "+this.modelot.getValueAt(this.jTable1.getSelectedRow(), 1));
+        r.setGrillaHistoriaVCli(this.modelot.getValueAt(this.jTable1.getSelectedRow(), 1),this.modelot.getValueAt(this.jTable1.getSelectedRow(), 2),this.modelot.getValueAt(this.jTable1.getSelectedRow(), 4));  
     }
     
 }
