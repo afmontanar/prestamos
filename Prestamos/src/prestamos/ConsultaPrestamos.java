@@ -302,10 +302,12 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
 
     private void apodo1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_apodo1CaretUpdate
         // TODO add your handling code here:
+        busquedaHv();
     }//GEN-LAST:event_apodo1CaretUpdate
 
     private void interes1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_interes1CaretUpdate
         // TODO add your handling code here:
+        busquedaHv();
     }//GEN-LAST:event_interes1CaretUpdate
 
     private void rutai1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_rutai1CaretUpdate
@@ -361,26 +363,34 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         this.modelot.vaciarTabla();
         String i = ((javax.swing.JTextField) fechai.getDateEditor().getUiComponent()).getText();
         String f = ((javax.swing.JTextField) fechaf.getDateEditor().getUiComponent()).getText();
+        String fp = ((javax.swing.JTextField) fechaprestamo.getDateEditor().getUiComponent()).getText();
         ResultSet MysqlConsulta = null;
         System.out.println("fecha inicial:"+i);
         try {
             //ResultSet MysqlConsulta = NewMain.o.MysqlConsulta("SELECT * FROM `historiaVehiculo` WHERE `nombre` LIKE '%"+this.nombre.getText()+"%' AND `placa` LIKE '%"+this.placa.getText()+"%' AND `dueno` LIKE '%"+this.dueno.getText()+"%' AND `chofer` LIKE '%"+this.chofer.getText()+"%' AND `fecha` => '" + i + " "+this.horai.getSelectedItem()+":"+this.minutoi.getSelectedItem()+":"+this.segundoi.getSelectedItem()+"' AND `fecha` =< '" + i + " "+this.horai.getSelectedItem()+":"+this.minutoi.getSelectedItem()+":"+this.segundoi.getSelectedItem()+"' AND  `valorTotal` LIKE '%"+this.valtotal.getText()+"%' AND `valorTotalConDescuento` LIKE '%"+this.valdesc.getText()+"'%");
             if (jCheckBox1.isSelected()) {
-                MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `prestamo` WHERE `nombre` LIKE '%" + this.nombre.getText() + "%' AND `idcliente` LIKE '%" + this.cliente.getText() + "%' AND `apodo` LIKE '%" + this.apodo1+ "%' AND `cantidad` LIKE '%" + this.cantidadPrestada + "%' AND (`fecha` >= '" + i + "' and `fecha` <= '" + f + "')'");
+                MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `prestamo` WHERE `nombre` LIKE '%" + this.nombre.getText() + "%' AND `idcliente` LIKE '%" + this.cliente.getText() + "%' AND `apodo` LIKE '%" + this.apodo1+ "%' AND `cantidad` LIKE '%" + this.cantidadPrestada + "%' AND (`fechainiciopago` >= '" + i + "' and `fechalimetepago` <= '" + f + "') AND (`fecha` = '" + fp + "')");
             } else {
                 MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `prestamo` WHERE `nombre` LIKE '%" + this.nombre.getText() + "%' AND `idcliente` LIKE '%" + this.cliente.getText() + "%' AND `apodo` LIKE '%" + this.apodo1 + "%' AND `cantidad` LIKE '%" + this.cantidadPrestada + "%' AND `interes` LIKE '%" + this.interes1.getText() + "%'");
             }
             int valorTotalDeudas=0;
             while (MysqlConsulta.next()) {
-                valorTotalDeudas =+Integer.parseInt(MysqlConsulta.getString("cantidadcobrar"));
+                    valorTotalDeudas =+Integer.parseInt(MysqlConsulta.getString("cantidadcobrar"));
                     String darFormatoALaCantidad = this.darFormatoALaCantidad(MysqlConsulta.getString("cantidadcobrar"));
                     Object a[] = {MysqlConsulta.getString("idCliente"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("apodo"), MysqlConsulta.getString("Fecha"), MysqlConsulta.getString("interes")+"%", darFormatoALaCantidad, false};
                 this.modelot.ingresarUsuario(a);
             }
         } catch (SQLException ex) {
             try {
-                String a[] = {MysqlConsulta.getString("indice"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("placa"), MysqlConsulta.getString("dueno"), MysqlConsulta.getString("chofer"), "0000-00-00 00:00:00", MysqlConsulta.getString("valorTotal"), MysqlConsulta.getString("valorTotalConDescuento")};
-                this.modelot.ingresarUsuario(a);
+                int valorTotalDeudas=0;
+                while (MysqlConsulta.next()) {
+                    valorTotalDeudas =+Integer.parseInt(MysqlConsulta.getString("cantidadcobrar"));
+                        String darFormatoALaCantidad = this.darFormatoALaCantidad(MysqlConsulta.getString("cantidadcobrar"));
+                        Object a[] = {MysqlConsulta.getString("idCliente"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("apodo"), MysqlConsulta.getString("Fecha"), MysqlConsulta.getString("interes")+"%", darFormatoALaCantidad, false};
+                    this.modelot.ingresarUsuario(a);
+                }
+//                String a[] = {MysqlConsulta.getString("indice"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("placa"), MysqlConsulta.getString("dueno"), MysqlConsulta.getString("chofer"), "0000-00-00 00:00:00", MysqlConsulta.getString("valorTotal"), MysqlConsulta.getString("valorTotalConDescuento")};
+//                this.modelot.ingresarUsuario(a);
             } catch (SQLException ex1) {
                 JOptionPane.showMessageDialog(rootPane, "A ocurrido un error inexperado");
             }

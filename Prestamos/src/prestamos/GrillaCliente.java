@@ -265,7 +265,6 @@ public class GrillaCliente extends javax.swing.JDialog {
     }
 
     void quienPide(int i) {
-        System.out.println("el que pide:"+i);
         this.elquepide=i;
         this.llenarTabla();
     }
@@ -274,7 +273,6 @@ public class GrillaCliente extends javax.swing.JDialog {
         if(this.elquepide==0){
             enviarHv();
         }
-        System.out.println("este es el que pide: "+this.elquepide);
         if(this.elquepide==2){
             enviarHv1();
         }
@@ -282,7 +280,6 @@ public class GrillaCliente extends javax.swing.JDialog {
 
     private void enviarHv1() {
         Principal r=(Principal) super.getParent();
-        System.out.println("mira este valor: "+this.modelot.getValueAt(this.jTable1.getSelectedRow(), 1));
         r.setGrillaHistoriaVCli(this.modelot.getValueAt(this.jTable1.getSelectedRow(), 1),this.modelot.getValueAt(this.jTable1.getSelectedRow(), 2),this.modelot.getValueAt(this.jTable1.getSelectedRow(), 4));  
     }
     
