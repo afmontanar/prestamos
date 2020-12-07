@@ -120,7 +120,7 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, 30, 40));
 
         fechai.setBorder(javax.swing.BorderFactory.createTitledBorder(" Fecha Inicial de pago"));
-        fechai.setDateFormatString("yyyy-MM-dd");
+        fechai.setDateFormatString("yyyy/MM/dd");
         jPanel1.add(fechai, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 180, 40));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -358,30 +358,34 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void busquedaHv() {
-//        this.modelot.vaciarTabla();
-//        String i = ((javax.swing.JTextField) fechai.getDateEditor().getUiComponent()).getText();
-//        String f = ((javax.swing.JTextField) fechaf.getDateEditor().getUiComponent()).getText();
-//        ResultSet MysqlConsulta = null;
-//        try {
-//            //ResultSet MysqlConsulta = NewMain.o.MysqlConsulta("SELECT * FROM `historiaVehiculo` WHERE `nombre` LIKE '%"+this.nombre.getText()+"%' AND `placa` LIKE '%"+this.placa.getText()+"%' AND `dueno` LIKE '%"+this.dueno.getText()+"%' AND `chofer` LIKE '%"+this.chofer.getText()+"%' AND `fecha` => '" + i + " "+this.horai.getSelectedItem()+":"+this.minutoi.getSelectedItem()+":"+this.segundoi.getSelectedItem()+"' AND `fecha` =< '" + i + " "+this.horai.getSelectedItem()+":"+this.minutoi.getSelectedItem()+":"+this.segundoi.getSelectedItem()+"' AND  `valorTotal` LIKE '%"+this.valtotal.getText()+"%' AND `valorTotalConDescuento` LIKE '%"+this.valdesc.getText()+"'%");
-//            if (jCheckBox1.isSelected()) {
-//                MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `prestamo` WHERE `nombre` LIKE '%" + this.nombre.getText() + "%' AND `placa` LIKE '%" + this.Deuda.getText() + "%' AND `dueno` LIKE '%" + this.idCliente + "%' AND `chofer` LIKE '%" + this.idChofer + "%' AND (`fecha` >= '" + i + " " +"camponuevo" + ":" + "camponuevo"+ ":" + "camponuevo"+ "' and `fecha` <= '" + f + " " + "campo nuevo" + ":" + "campo nuevo" + ":" + "campo nuevo" + "') AND  `valorTotal` LIKE '%" + this.cantidadPrestada.getText() + "%' AND `valorTotalConDescuento` LIKE '%" + this.rutaf.getText() + "%'");
-//            } else {
-//                MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `prestamo` WHERE `nombre` LIKE '%" + this.nombre.getText() + "%' AND `placa` LIKE '%" + this.Deuda.getText() + "%' AND `dueno` LIKE '%" + this.idCliente + "%' AND `chofer` LIKE '%" + this.idChofer + "%' AND `valorTotal` LIKE '%" + this.cantidadPrestada.getText() + "%' AND `valorTotalConDescuento` LIKE '%" + this.rutaf.getText() + "%'");
-//            }
-//            while (MysqlConsulta.next()) {
-//                String a[] = {MysqlConsulta.getString("indice"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("placa"), MysqlConsulta.getString("dueno"), MysqlConsulta.getString("chofer"), MysqlConsulta.getString("fecha"), MysqlConsulta.getString("valorTotal"), MysqlConsulta.getString("valorTotalConDescuento")};
-//                this.modelot.ingresarUsuario(a);
-//            }
-//        } catch (SQLException ex) {
-//            try {
-//                String a[] = {MysqlConsulta.getString("indice"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("placa"), MysqlConsulta.getString("dueno"), MysqlConsulta.getString("chofer"), "0000-00-00 00:00:00", MysqlConsulta.getString("valorTotal"), MysqlConsulta.getString("valorTotalConDescuento")};
-//                this.modelot.ingresarUsuario(a);
-//            } catch (SQLException ex1) {
-//                JOptionPane.showMessageDialog(rootPane, "A ocurrido un error inexperado");
-//            }
-//        }
-//        this.modelot.reload();
+        this.modelot.vaciarTabla();
+        String i = ((javax.swing.JTextField) fechai.getDateEditor().getUiComponent()).getText();
+        String f = ((javax.swing.JTextField) fechaf.getDateEditor().getUiComponent()).getText();
+        ResultSet MysqlConsulta = null;
+        System.out.println("fecha inicial:"+i);
+        try {
+            //ResultSet MysqlConsulta = NewMain.o.MysqlConsulta("SELECT * FROM `historiaVehiculo` WHERE `nombre` LIKE '%"+this.nombre.getText()+"%' AND `placa` LIKE '%"+this.placa.getText()+"%' AND `dueno` LIKE '%"+this.dueno.getText()+"%' AND `chofer` LIKE '%"+this.chofer.getText()+"%' AND `fecha` => '" + i + " "+this.horai.getSelectedItem()+":"+this.minutoi.getSelectedItem()+":"+this.segundoi.getSelectedItem()+"' AND `fecha` =< '" + i + " "+this.horai.getSelectedItem()+":"+this.minutoi.getSelectedItem()+":"+this.segundoi.getSelectedItem()+"' AND  `valorTotal` LIKE '%"+this.valtotal.getText()+"%' AND `valorTotalConDescuento` LIKE '%"+this.valdesc.getText()+"'%");
+            if (jCheckBox1.isSelected()) {
+                MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `prestamo` WHERE `nombre` LIKE '%" + this.nombre.getText() + "%' AND `idcliente` LIKE '%" + this.cliente.getText() + "%' AND `apodo` LIKE '%" + this.apodo1+ "%' AND `cantidad` LIKE '%" + this.cantidadPrestada + "%' AND (`fecha` >= '" + i + "' and `fecha` <= '" + f + "')'");
+            } else {
+                MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `prestamo` WHERE `nombre` LIKE '%" + this.nombre.getText() + "%' AND `idcliente` LIKE '%" + this.cliente.getText() + "%' AND `apodo` LIKE '%" + this.apodo1 + "%' AND `cantidad` LIKE '%" + this.cantidadPrestada + "%' AND `interes` LIKE '%" + this.interes1.getText() + "%'");
+            }
+            int valorTotalDeudas=0;
+            while (MysqlConsulta.next()) {
+                valorTotalDeudas =+Integer.parseInt(MysqlConsulta.getString("cantidadcobrar"));
+                    String darFormatoALaCantidad = this.darFormatoALaCantidad(MysqlConsulta.getString("cantidadcobrar"));
+                    Object a[] = {MysqlConsulta.getString("idCliente"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("apodo"), MysqlConsulta.getString("Fecha"), MysqlConsulta.getString("interes")+"%", darFormatoALaCantidad, false};
+                this.modelot.ingresarUsuario(a);
+            }
+        } catch (SQLException ex) {
+            try {
+                String a[] = {MysqlConsulta.getString("indice"), MysqlConsulta.getString("nombre"), MysqlConsulta.getString("placa"), MysqlConsulta.getString("dueno"), MysqlConsulta.getString("chofer"), "0000-00-00 00:00:00", MysqlConsulta.getString("valorTotal"), MysqlConsulta.getString("valorTotalConDescuento")};
+                this.modelot.ingresarUsuario(a);
+            } catch (SQLException ex1) {
+                JOptionPane.showMessageDialog(rootPane, "A ocurrido un error inexperado");
+            }
+        }
+        this.modelot.reload();
     }
 
    void llenarTabla() {
@@ -418,10 +422,10 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
     }
 
     void setCliente(Object nombre, Object identificacion, Object apodo) {
-        cliente.setText((String)identificacion );
+        this.cliente.setText((String)identificacion );
         this.nombre.setText((String)""+nombre);
         this.apodo1.setText((String)apodo);
-//        this.busquedaHv();
+        this.busquedaHv();
     }
 
     void obtenerDChofer(String identificacion, String nombres) {
