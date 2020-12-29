@@ -121,6 +121,11 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
 
         fechai.setBorder(javax.swing.BorderFactory.createTitledBorder(" Fecha Inicial de pago"));
         fechai.setDateFormatString("yyyy/MM/dd");
+        fechai.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                fechaiPropertyChange(evt);
+            }
+        });
         jPanel1.add(fechai, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 180, 40));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -177,6 +182,11 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
 
         fechaf.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha final pago"));
         fechaf.setDateFormatString("yyyy-MM-dd");
+        fechaf.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                fechafPropertyChange(evt);
+            }
+        });
         jPanel1.add(fechaf, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, 180, 40));
 
         jCheckBox1.setText("Incluir busqueda de fechas");
@@ -228,6 +238,11 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
 
         fechaprestamo.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha del prestamo"));
         fechaprestamo.setDateFormatString("yyyy-MM-dd");
+        fechaprestamo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                fechaprestamoPropertyChange(evt);
+            }
+        });
         jPanel1.add(fechaprestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 180, 40));
 
         jButton4.setText("Reiniciar busqueda");
@@ -325,6 +340,28 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
     private void AbonarSeleccionados1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbonarSeleccionados1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_AbonarSeleccionados1ActionPerformed
+
+    private void fechaiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_fechaiPropertyChange
+        // TODO add your handling code here:
+        if (jCheckBox1.isSelected()) {
+                this.busquedaHv();
+            }
+        
+    }//GEN-LAST:event_fechaiPropertyChange
+
+    private void fechafPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_fechafPropertyChange
+        // TODO add your handling code here:
+        if (jCheckBox1.isSelected()) {
+                this.busquedaHv();
+            }
+    }//GEN-LAST:event_fechafPropertyChange
+
+    private void fechaprestamoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_fechaprestamoPropertyChange
+        // TODO add your handling code here:
+        if (jCheckBox1.isSelected()) {
+                this.busquedaHv();
+            }
+    }//GEN-LAST:event_fechaprestamoPropertyChange
 
     /**
      * @param args the command line arguments
