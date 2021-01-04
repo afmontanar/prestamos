@@ -339,6 +339,8 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
 
     private void AbonarSeleccionados1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbonarSeleccionados1ActionPerformed
         // TODO add your handling code here:
+        boolean valueAt = (boolean) this.modelot.getValueAt(0, 6);
+        System.out.println(valueAt);
     }//GEN-LAST:event_AbonarSeleccionados1ActionPerformed
 
     private void fechaiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_fechaiPropertyChange
