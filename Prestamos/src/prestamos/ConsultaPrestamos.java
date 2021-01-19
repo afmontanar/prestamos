@@ -339,8 +339,20 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
 
     private void AbonarSeleccionados1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbonarSeleccionados1ActionPerformed
         // TODO add your handling code here:
-        boolean valueAt = (boolean) this.modelot.getValueAt(0, 6);
-        System.out.println(valueAt);
+        System.out.println(this.modelot.getRowCount());
+        if(this.modelot.getRowCount()>0){
+            for (int i = 0; i < this.modelot.getRowCount(); i++) {
+                boolean valueAt = (boolean) this.modelot.getValueAt(i, 6);
+                if(valueAt){
+                    try {
+                        Prestamos.o.EjecutarMysql("INSERT INTO `prestamos`.`cliente` (`tipoid`, `idcliente`, `nombre`, `apellido`, `apodo`, `direccion`, `detalles`, `celular`) VALUES ('"+this.tidentificacion.getSelectedItem()+"', '"+this.NumeroId.getText()+"', '"+this.nombre1.getText()+"', '"+this.nombre2.getText()+"', '"+this.apellido1.getText()+"', '"+this.direccion.getText()+"', '"+this.detalles.getText()+"', '"+this.Celular.getText()+"')");            
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+//                System.out.println(valueAt);
+            }      
+        }
     }//GEN-LAST:event_AbonarSeleccionados1ActionPerformed
 
     private void fechaiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_fechaiPropertyChange
