@@ -345,7 +345,7 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
                 boolean valueAt = (boolean) this.modelot.getValueAt(i, 6);
                 if(valueAt){
                     try {
-                        Prestamos.o.EjecutarMysql("INSERT INTO `prestamos`.`cliente` (`tipoid`, `idcliente`, `nombre`, `apellido`, `apodo`, `direccion`, `detalles`, `celular`) VALUES ('"+this.tidentificacion.getSelectedItem()+"', '"+this.NumeroId.getText()+"', '"+this.nombre1.getText()+"', '"+this.nombre2.getText()+"', '"+this.apellido1.getText()+"', '"+this.direccion.getText()+"', '"+this.detalles.getText()+"', '"+this.Celular.getText()+"')");            
+                        Prestamos.o.EjecutarMysql("INSERT INTO `pagos`(`numeroPrestamo`, `pagodelDia`, `fecha`, `detalle`, `numeroPago`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5])");            
                     } catch (SQLException ex) {
                         Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
                     }
