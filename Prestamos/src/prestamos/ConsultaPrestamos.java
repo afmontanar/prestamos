@@ -344,13 +344,20 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
             for (int i = 0; i < this.modelot.getRowCount(); i++) {
                 boolean valueAt = (boolean) this.modelot.getValueAt(i, 6);
                 if(valueAt){
+                    ResultSet MysqlConsulta = null;
                     try {
+                        MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT `montodiariodepago` FROM `prestamo` WHERE `numeroprestamo`");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ConsultaPrestamos.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            
+                    try {
+                        //tiene que saber primero cuanto es el pago consultando en la tablade prestamo
                         Prestamos.o.EjecutarMysql("INSERT INTO `pagos`(`numeroPrestamo`, `pagodelDia`, `fecha`, `detalle`, `numeroPago`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5])");            
                     } catch (SQLException ex) {
                         Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-//                System.out.println(valueAt);
             }      
         }
     }//GEN-LAST:event_AbonarSeleccionados1ActionPerformed
