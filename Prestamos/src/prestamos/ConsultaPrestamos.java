@@ -346,13 +346,13 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
                 if(valueAt){
                     ResultSet MysqlConsulta2 = null;
                     try {
-                        MysqlConsulta2 = Prestamos.o.MysqlConsulta("SELECT `numeroprestamo` FROM `prestamo` WHERE `idcliente`=='' and `cancelado` = 0");
+                        MysqlConsulta2 = Prestamos.o.MysqlConsulta("SELECT `numeroprestamo` FROM `prestamo` WHERE `idcliente`='"+this.modelot.getValueAt(i, 0)+"' and `cancelado` = 0");
                     } catch (SQLException ex) {
                         Logger.getLogger(ConsultaPrestamos.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     ResultSet MysqlConsulta = null;
                     try {
-                        MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT `montodiariodepago` FROM `prestamo` WHERE `numeroprestamo`");
+                        MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT `montodiariodepago` FROM `prestamo` WHERE `numeroprestamo`='"+MysqlConsulta2.getString("numeroprestamo")+"'");
                     } catch (SQLException ex) {
                         Logger.getLogger(ConsultaPrestamos.class.getName()).log(Level.SEVERE, null, ex);
                     }
