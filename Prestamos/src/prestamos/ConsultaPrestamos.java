@@ -359,7 +359,12 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
             
                     try {
                         //tiene que saber primero cuanto es el pago consultando en la tablade prestamo
-                        Prestamos.o.EjecutarMysql("INSERT INTO `pagos`(`numeroPrestamo`, `pagodelDia`, `fecha`, `detalle`, `numeroPago`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5])");            
+                        java.util.Calendar c1 = java.util.Calendar.getInstance();
+                        java.util.Calendar c = new java.util.GregorianCalendar();
+                        String dia = Integer.toString(c.get(java.util.Calendar.DATE));
+                        String mes = Integer.toString(c.get(java.util.Calendar.MONTH));
+                        String annio = Integer.toString(c.get(java.util.Calendar.YEAR));
+                        Prestamos.o.EjecutarMysql("INSERT INTO `pagos`(`numeroPrestamo`, `pagodelDia`, `fecha`, `detalle`, `numeroPago`) VALUES ('"+MysqlConsulta2.getString("numeroprestamo")+"','"+MysqlConsulta2.getString("montodiariodepago")+"','"+annio+"/"+mes+"/"+dia+"',[value-4],[value-5])");            
                     } catch (SQLException ex) {
                         Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
                     }
