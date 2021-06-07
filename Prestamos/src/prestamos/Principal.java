@@ -227,7 +227,7 @@ public class Principal extends javax.swing.JFrame {
         this.BusqHv.obtenerDChofer(identificacion,nombres);
     }
 
-    void mostrarHv(String indice, String nombre, String placa, String dueno, String chofer, String fecha, String valorTotal, String valortotaldescuento) {
+    void mostrarHv(String idCliente) {
 //        this.prestamos.alimentarHv(indice, nombre, placa, dueno, chofer, fecha, valorTotal, valortotaldescuento);
         this.prestamos.setVisible(true);
     }
