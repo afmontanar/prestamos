@@ -18,6 +18,7 @@ public class Principal extends javax.swing.JFrame {
     private final GrillaCliente gcliente;
     private final GrillaChofer gchofer;
     private final ConsultaPrestamos BusqHv;
+    private final DetallePagos depagos;
 //    private final ConsultaPrestamos consultas;
     /**
      * Creates new form Principal
@@ -30,6 +31,7 @@ public class Principal extends javax.swing.JFrame {
         this.gcliente = new GrillaCliente(this, true);
         this.gchofer = new GrillaChofer(this, true);
         this.BusqHv = new ConsultaPrestamos(this, true);
+        this.depagos = new DetallePagos(this, true);
 //        this.consultas= new ConsultaPrestamos(this, true);
     }
 
@@ -228,8 +230,8 @@ public class Principal extends javax.swing.JFrame {
     }
 
     void mostrarHv(String idCliente) {
-//        this.prestamos.alimentarHv(indice, nombre, placa, dueno, chofer, fecha, valorTotal, valortotaldescuento);
-        this.prestamos.setVisible(true);
+        this.depagos.alimentarHv(idCliente);
+        this.depagos.setVisible(true);
     }
 
     void setHacerPrestamos(Object identificacion, Object nombre, Object apodo) {
