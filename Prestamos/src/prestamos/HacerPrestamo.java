@@ -492,20 +492,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
         return true;
     }
     
-    private int obtenerMaximoNumeroPrestamo() {
-        try {
-            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("select MAX(`numeroprestamo`) from prestamo");
-            while(MysqlConsulta.next()){
-                 return MysqlConsulta.getInt("MAX(`numeroprestamo`)");
-                      
-            }
-        
-        } catch (SQLException ex) {
-            Logger.getLogger(GrillaCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return 0;
-    }
-   
+    
  
 
     private void guardar() {
@@ -515,7 +502,7 @@ public class HacerPrestamo extends javax.swing.JDialog {
             int montopagodiario=cantidadconintereses/Integer.parseInt(this.cuotas.getText());
             String d[]=f.obtenerFechaFormatStringC();
 //            System.out.println("INSERT INTO `prestamo`(`idcliente`, `nombre`, `apodo`, `fecha`, `cantidad`, `interes`, `cantidadcobrar`, `montodiariodepago`, `fechalimetepago`, `detalles`, `numeroprestamo`, `cancelado`, `numeroCuotas`,`fechainiciopago`) VALUES ('"+Cantidad1.getText()+"','"+nombre1.getText()+"','"+Apodo.getText()+"','"+d[0]+"','"+Cantidad1.getText()+"','"+Intereses1.getText()+"','"+cantidadconintereses+"','"+montopagodiario+"','"+d[1]+"','"+detalles.getText()+"','','false','"+this.cuotas.getText()+"','"+d[2]+"')");
-            Prestamos.o.EjecutarMysql("INSERT INTO `prestamo`(`idcliente`, `nombre`, `apodo`, `fecha`, `cantidad`, `interes`, `cantidadcobrar`, `montodiariodepago`, `fechalimetepago`, `detalles`, `numeroprestamo`, `cancelado`, `numeroCuotas`,`fechainiciopago`) VALUES ('"+dueno.getText()+"','"+nombre1.getText()+"','"+Apodo.getText()+"','"+d[0]+"','"+Cantidad1.getText()+"','"+Intereses1.getText()+"','"+cantidadconintereses+"','"+montopagodiario+"','"+d[1]+"','"+detalles.getText()+"','"+(this.obtenerMaximoNumeroPrestamo()+1)+"','0','"+this.cuotas.getText()+"','"+d[2]+"')");            
+            Prestamos.o.EjecutarMysql("INSERT INTO `prestamo`(`idcliente`, `nombre`, `apodo`, `fecha`, `cantidad`, `interes`, `cantidadcobrar`, `montodiariodepago`, `fechalimetepago`, `detalles`, `cancelado`, `numeroCuotas`,`fechainiciopago`) VALUES ('"+dueno.getText()+"','"+nombre1.getText()+"','"+Apodo.getText()+"','"+d[0]+"','"+Cantidad1.getText()+"','"+Intereses1.getText()+"','"+cantidadconintereses+"','"+montopagodiario+"','"+d[1]+"','"+detalles.getText()+"','0','"+this.cuotas.getText()+"','"+d[2]+"')");            
             
         } catch (SQLException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);

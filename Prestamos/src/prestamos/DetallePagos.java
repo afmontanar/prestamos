@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class DetallePagos extends javax.swing.JDialog {
 
-     private utilities.ModelosTablaS modelot;
+    private utilities.ModelosTablaS modelot;
     private int s;
     /**
      * Creates new form GrillaChofer
@@ -151,6 +151,17 @@ public class DetallePagos extends javax.swing.JDialog {
     }
 
     void alimentarHv(String idCliente) {
-        
+        this.modelot.vaciarTabla();
+        try {
+            ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `pagos` where idCliente = '"+idCliente+"'");
+            while(MysqlConsulta.next()){
+                String d[]={MysqlConsulta.getString("pagodelDia"), MysqlConsulta.getString("fecha"),MysqlConsulta.getString("detalle"),MysqlConsulta.getString("numeroPago")};
+                this.modelot.ingresarUsuarioM(d);
+            }
+        this.modelot.reload();
+        } catch (SQLException ex) {
+            Logger.getLogger(GrillaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+    
 }
