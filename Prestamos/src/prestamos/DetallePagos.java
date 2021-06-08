@@ -43,6 +43,10 @@ public class DetallePagos extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        nombre1 = new javax.swing.JTextField();
+        nombre2 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -68,6 +72,25 @@ public class DetallePagos extends javax.swing.JDialog {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 108, 840, 340));
 
+        jLabel1.setText("Pagos");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, -1, -1));
+
+        nombre1.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
+        nombre1.setName("nombre"); // NOI18N
+        jPanel1.add(nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 180, 40));
+
+        nombre2.setBorder(javax.swing.BorderFactory.createTitledBorder("Id Cliente"));
+        nombre2.setName("nombre"); // NOI18N
+        jPanel1.add(nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 180, 40));
+
+        jButton1.setText("Ver abono a realizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,23 +113,32 @@ public class DetallePagos extends javax.swing.JDialog {
         // TODO add your handling code here:
         if(evt.getClickCount()==2){
             if(this.s==0){
-            this.mandarDatosHv();
-            this.setVisible(false);
+                this.mandarDatosHv();
+                this.setVisible(false);
             }else if(this.s==1){
-               this.mandarDatosBhv();
-               this.setVisible(false);
+                this.mandarDatosBhv();
+                this.setVisible(false);
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        verDetalleAbonoRealizar();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField nombre1;
+    private javax.swing.JTextField nombre2;
     // End of variables declaration//GEN-END:variables
 
     void alimentarGrillaChofer(String toString, int s) {
@@ -162,6 +194,11 @@ public class DetallePagos extends javax.swing.JDialog {
         } catch (SQLException ex) {
             Logger.getLogger(GrillaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void verDetalleAbonoRealizar() {
+        Principal parent = (Principal) super.getParent();
+        parent.();
     }
     
 }
