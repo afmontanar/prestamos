@@ -25,7 +25,7 @@ public class DetallePagos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        String n[] = {"Identificacion","Nombres","Apellidos","Direccion","Celular","Detalle","clienteid"};
+        String n[] = {"pagodelDia","fecha","detalle","numeroPago"};
         this.modelot = new utilities.ModelosTablaS(n, jTable1);
         jTable1.setModel(this.modelot);
         this.llenarTabla();
@@ -44,9 +44,9 @@ public class DetallePagos extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        nombre1 = new javax.swing.JTextField();
-        nombre2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        cliente = new javax.swing.JLabel();
+        cliente1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -75,14 +75,6 @@ public class DetallePagos extends javax.swing.JDialog {
         jLabel1.setText("Pagos");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, -1, -1));
 
-        nombre1.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
-        nombre1.setName("nombre"); // NOI18N
-        jPanel1.add(nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 180, 40));
-
-        nombre2.setBorder(javax.swing.BorderFactory.createTitledBorder("Id Cliente"));
-        nombre2.setName("nombre"); // NOI18N
-        jPanel1.add(nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 180, 40));
-
         jButton1.setText("Ver abono a realizar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +82,12 @@ public class DetallePagos extends javax.swing.JDialog {
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, -1, -1));
+
+        cliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
+        jPanel1.add(cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 180, 50));
+
+        cliente1.setBorder(javax.swing.BorderFactory.createTitledBorder("IdCliente"));
+        jPanel1.add(cliente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 180, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,7 +100,7 @@ public class DetallePagos extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -132,13 +130,13 @@ public class DetallePagos extends javax.swing.JDialog {
      */
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel cliente;
+    private javax.swing.JLabel cliente1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField nombre1;
-    private javax.swing.JTextField nombre2;
     // End of variables declaration//GEN-END:variables
 
     void alimentarGrillaChofer(String toString, int s) {
@@ -182,7 +180,9 @@ public class DetallePagos extends javax.swing.JDialog {
          parent.gChoferABhv(jTable1.getValueAt(selectedRow, 0)+"",jTable1.getValueAt(selectedRow, 1)+"");
     }
 
-    void alimentarHv(String idCliente) {
+    void alimentarHv(String idCliente, String Nombre) {
+        cliente1.setText("idCliente");
+        cliente.setText("nombre");
         this.modelot.vaciarTabla();
         try {
             ResultSet MysqlConsulta = Prestamos.o.MysqlConsulta("SELECT * FROM `pagos` where idCliente = '"+idCliente+"'");
@@ -198,7 +198,7 @@ public class DetallePagos extends javax.swing.JDialog {
 
     private void verDetalleAbonoRealizar() {
         Principal parent = (Principal) super.getParent();
-        parent.();
+        parent.mostrarAbono();
     }
     
 }

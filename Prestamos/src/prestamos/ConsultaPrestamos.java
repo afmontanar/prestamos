@@ -534,7 +534,7 @@ public class ConsultaPrestamos extends javax.swing.JDialog {
     private void EnviarConsultarHv() {
         int selectedRow = jTable2.getSelectedRow();
         Principal parent = (Principal) super.getParent();
-        parent.mostrarHv(jTable2.getValueAt(selectedRow, 0) + "");
+        parent.mostrarHv(jTable2.getValueAt(selectedRow, 0) + "",jTable2.getValueAt(selectedRow, 1) + "");
     }
     
      private String darFormatoALaCantidad(String num) {

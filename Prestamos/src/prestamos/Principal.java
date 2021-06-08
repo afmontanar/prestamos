@@ -229,8 +229,8 @@ public class Principal extends javax.swing.JFrame {
         this.BusqHv.obtenerDChofer(identificacion,nombres);
     }
 
-    void mostrarHv(String idCliente) {
-        this.depagos.alimentarHv(idCliente);
+    void mostrarHv(String idCliente, String nombre) {
+        this.depagos.alimentarHv(idCliente, nombre);
         this.depagos.setVisible(true);
     }
 
